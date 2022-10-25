@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,30 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('accueil');
 });
+
+Route::get('/dashboard', function () {
+    $role = Auth::user()->role;
+
+    switch ($role) {
+        case 'SuperAdmin':
+            return view('administrator.dashboardSup');
+            break;
+        case 'SimpleAdmin':
+            return view('administrator.dashboardSim');
+            break;
+        case 'Employer':
+            return view('employer.dashboard');
+            break;
+        case 'Debtor':
+            return view('debtor.dashboard');
+        default:
+            return view('accueil');
+    }
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__ . '/auth.php';
+require __DIR__ . '/admin.php';
+require __DIR__ . '/employer.php';
+require __DIR__ . '/debtor.php';
