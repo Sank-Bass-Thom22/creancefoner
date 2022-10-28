@@ -6,80 +6,67 @@ use App\Http\Controllers\Controller;
 use App\Models\Debtor\Debtor;
 use App\Http\Requests\StoreDebtorRequest;
 use App\Http\Requests\UpdateDebtorRequest;
+use Illuminate\Support\Facades\Hash;
 
 class DebtorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $allDebtor = Debtor::where('role', 'Debtor')->select('id', 'firstname', 'lastname')
+            ->orderBy('id', 'DESC')->get();
+
+        return view('administrator.allDebtor', compact('allDebtor'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        return view('administrator.registerDebtor');
+        $allService = Debtor::select('servicename', 'serviceindex')->orderBy('servicename', 'ASC')->get();
+
+        return view('administrator.registerDebtor', compact('allService'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreDebtorRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreDebtorRequest $request)
     {
-        //
+        $credentialsValidated = $request->validated();
+
+        Debtor::create([
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'email' => $request->email,
+            'telephone' => $request->telephone,
+            'matricule' => $request->matricule,
+            'debtorindex' => $request->debtorindex,
+            'password' => Hash::make('12345678'),
+            'role' => 'Debtor',
+        ]);
+
+        return redirect()->route('registerdebtor')->with('success', 'Redevable enregistré avec succès! :-)');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Debtor\Debtor  $debtor
-     * @return \Illuminate\Http\Response
-     */
     public function show(Debtor $debtor)
     {
-        //
+        $showDebtor = Debtor::findOrFail($debtor);
+
+        return view('', compact('showDebtor'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Debtor\Debtor  $debtor
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Debtor $debtor)
     {
-        //
+        $editDebtor = Debtor::findOrFail($debtor);
+        $allService = Debtor::select('servicename', 'serviceindex')->orderBy('servicename', 'ASC')->get();
+
+        return view('', compact(['editDebtor', 'allService']));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateDebtorRequest  $request
-     * @param  \App\Models\Debtor\Debtor  $debtor
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateDebtorRequest $request, Debtor $debtor)
     {
-        //
+        $credentialsValidated = $request->validated();
+
+        Debtor::whereId($debtor)->update($credentialsValidated);
+
+        return redirect()->route('editdebtor', $debtor)->with('success', 'Redevable modifié avec succès!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Debtor\Debtor  $debtor
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Debtor $debtor)
     {
         //

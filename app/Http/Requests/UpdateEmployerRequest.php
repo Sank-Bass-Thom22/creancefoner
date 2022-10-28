@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules;
 
 class UpdateEmployerRequest extends FormRequest
 {
@@ -24,11 +25,11 @@ class UpdateEmployerRequest extends FormRequest
     public function rules()
     {
         return [
-            'servicename' => ['required', 'string', 'max:25'],
+            'servicename' => ['required', 'string', 'max:50'],
             'email' => ['required', 'string', 'email', 'max:50', 'unique:debtors'],
             'telephone' => ['required', 'string', 'max:25', 'unique:debtors'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'role' => ['required', 'string', 'max:11'],
+            'role' => ['nullable', 'string', 'max:11'],
         ];
     }
 }

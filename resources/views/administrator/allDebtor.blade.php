@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Créance FONER dashboard</title>
+    <title>Liste des redevables</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -16,23 +16,31 @@
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition dashboard-page">
-    <div class="dashboard-box">
+<body class="hold-transition debtorlist-page">
+    <div class="debtorlist-box">
         <div class="card">
-            <div class="card-body dashboard-card-body">
-                <p class="dashboard-box-msg">
-                <div class="">
-                    {{ Auth::user()->servicename }}
-                </div>
-                <div class="dashboard-box-close">
-                    <form action="{{ route('logout') }}" method="POST">
-                        @csrf
-
-                        <button type="submit">Se déconnecter</button>
-                    </form>
-                </div>
+            <div class="card-body debtorlist-card-body">
+                <p class="debtorlist-box-msg">
+                <h1 class="">Liste des redevables</h1>
                 </p>
 
+                <ul class="">
+                    @forelse ($allDebtor as $debtors)
+                    <li><a href="" class="" return="false">{{ $debtors->firstname }} {{ $debtors->lastname }}</a></li>
+                    @empty
+                    <p class="debtorlist-box-msg">Aucun redevable enregistré! :-) </p>
+                    @endforelse
+                </ul>
+
+                <hr>
+
+                <div class="debtorlist-box-close">
+                    <form action="{{ route('dashboard') }}" method="GET">
+                        @csrf
+
+                        <button type="submit">Fermer</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

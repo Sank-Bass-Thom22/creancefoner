@@ -24,11 +24,21 @@
                 <h1>Création d'un compte redevable</h1>
                 </p>
 
-                <div class="register-box-error">
-                    @if ($errors->has('email'))
-                    <strong class="btn btn-danger">{{ $errors->first('email') }}</strong>
-                    @endif
-                </div>
+                <p class="register-box-error">
+                    @if ($errors->any())
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li><strong class="alert alert-danger">{{ $error }}</strong></li>
+                    @endforeach
+                </ul>
+                @endif
+                </p>
+
+                <p class="register-box-success">
+                    @if (session()->get('success'))
+                <div class="alert alert-success">{{ session()->get('success') }}</div>
+                @endif
+                </p>
 
                 <form action="{{ route ('registerdebtor') }}" method="POST">
                     @csrf
@@ -53,12 +63,33 @@
                         <input type="text" class="form-control" id="Matricule" name="matricule" required />
                     </div>
 
+                    <div class="input-group mb-3">
+                        <label for="Debtorindex">Lieu de travail : </label>
+                        <select id="Debtorindex" name="debtorindex">
+                            @forelse($allService as $services)
+                            <option value="{{ $services->serviceindex }}">{{ $services->servicename }}</option>
+                            @empty
+                            <p class="register-box-msg">Aucune structure enregistrée. :-)</p>
+                            @endforelse
+                        </select>
+                    </div>
+
                     <!-- /.col -->
                     <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">Valider</button>
+                        <button type="submit" class="btn btn-primary btn-block">VALIDER</button>
                     </div>
                     <!-- /.col -->
                 </form>
+
+                <hr>
+
+                <div class="adminlist-box-close">
+                    <form action="{{ route('dashboard') }}" method="GET">
+                        @csrf
+
+                        <button type="submit">Fermer</button>
+                    </form>
+                </div>
             </div>
             <!-- /.form-box -->
         </div>
