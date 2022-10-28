@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class Employer
 {
@@ -16,7 +17,7 @@ class Employer
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::debtor()->role != 'Employer') {
+        if (Auth::user()->role != 'Employer') {
             abort(403);
         }
         return $next($request);

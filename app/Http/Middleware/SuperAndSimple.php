@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class Debtor
+class SuperAndSimple
 {
     /**
      * Handle an incoming request.
@@ -17,9 +17,9 @@ class Debtor
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->role != 'Debtor') {
-            abort(403);
+        if (Auth::user()->role === 'SuperAdmin' || Auth::user()->role === 'SimpleAdmin') {
+            return $next($request);
         }
-        return $next($request);
+        abort(403);
     }
 }

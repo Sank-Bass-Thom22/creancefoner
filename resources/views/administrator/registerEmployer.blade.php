@@ -24,11 +24,21 @@
                 <h1>Création d'un compte employeur</h1>
                 </p>
 
-                <div class="register-box-error">
-                    @if ($errors->has('email'))
-                    <strong class="btn btn-danger">{{ $errors->first('email') }}</strong>
-                    @endif
-                </div>
+                <p class="register-box-error">
+                    @if ($errors->any())
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li><strong class="alert alert-danger">{{ $error }}</strong></li>
+                    @endforeach
+                </ul>
+                @endif
+                </p>
+
+                <p class="register-box-success">
+                    @if (session()->get('success'))
+                <div class="alert alert-success">{{ session()->get('success') }}</div>
+                @endif
+                </p>
 
                 <form action="{{ route ('registeremployer') }}" method="POST">
                     @csrf
@@ -46,19 +56,29 @@
                     </div>
                     <div class="input-group mb-3">
                         <label for="Password">Mot de passe : </label>
-                        <input type="password" class="form-control" id="Password" name="password" required />
+                        <input type="password" class="form-control" id="Password" name="password" required autocomplete="new-password" />
                     </div>
                     <div class="input-group mb-3">
-                        <label for="ConfirmPassword">Confirmer le mot de passe : </label>
-                        <input type="password" class="form-control" id="ConfirmPassword" name="confirmpassword" required />
+                        <label for="Password_confirmation">Confirmer le mot de passe : </label>
+                        <input type="password" class="form-control" id="Password_confirmation" name="password_confirmation" required />
                     </div>
 
                     <!-- /.col -->
                     <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">Valider</button>
+                        <button type="submit" class="btn btn-primary btn-block">VALIDER</button>
                     </div>
                     <!-- /.col -->
                 </form>
+
+                <hr>
+
+                <div class="adminlist-box-close">
+                    <form action="{{ route('dashboard') }}" method="GET">
+                        @csrf
+
+                        <button type="submit">Fermer</button>
+                    </form>
+                </div>
             </div>
             <!-- /.form-box -->
         </div>

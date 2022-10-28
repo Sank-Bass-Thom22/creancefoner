@@ -33,22 +33,26 @@
             @endif
             </p>
 
-            <form action="{{ route ('logindebtor') }}" method="POST">
+            <form action="{{ route('loginother') }}" method="POST">
                 @csrf
+
                 <div class="input-group mb-3">
                     <label for="Email">Adresse E-mail : </label>
                     <input type="email" class="form-control" id="Email" name="email" required />
                 </div>
+
                 <div class="input-group mb-3">
-                    <label for="Matricule">Numéro matricule : </label>
-                    <input type="text" class="form-control" id="Matricule" name="matricule" required />
+                    <label for="Password">Mot de passe : </label>
+                    <input type="password" class="form-control" id="Password" name="password" required />
                 </div>
+
                 <div class="row">
                     <input type="checkbox" id="Remember" name="remember" />
                     <label for="Remember">
                         Se souvenir de moi
                     </label>
                 </div>
+
                 <!-- /.col -->
                 <div class="col-4">
                     <button type="submit" class="btn btn-primary btn-block">Se Connecter</button>
@@ -57,6 +61,9 @@
         </div>
         </form>
 
+        <p class="mb-1">
+            <a href="">Mot de passe oublié ?</a>
+        </p>
     </div>
     </div>
 

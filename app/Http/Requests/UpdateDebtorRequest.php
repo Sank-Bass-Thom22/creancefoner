@@ -29,7 +29,7 @@ class UpdateDebtorRequest extends FormRequest
             'email' => ['required', 'string', 'email', 'max:50', 'unique:debtors'],
             'telephone' => ['required', 'string', 'max:25', 'unique:debtors'],
             'matricule' => ['required', 'string', 'max:10', 'unique:debtors'],
-            'role' => ['required', 'string', 'max:11'],
+            'role' => ['nullable', 'string', 'max:11'],
         ];
     }
 }

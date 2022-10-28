@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SuperAdmin
 {
@@ -16,7 +17,7 @@ class SuperAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::debtor()->role != 'SuperAdmin') {
+        if (Auth::user()->role != 'SuperAdmin') {
             abort(403);
         }
         return $next($request);
