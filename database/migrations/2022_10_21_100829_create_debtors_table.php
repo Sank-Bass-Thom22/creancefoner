@@ -15,6 +15,7 @@ class CreateDebtorsTable extends Migration
     {
         Schema::create('debtors', function (Blueprint $table) {
             $table->id();
+            $table->index('id')->unsigned();
             $table->string('firstname', 50)->nullable();
             $table->string('lastname', 25)->nullable();
             $table->string('servicename', 50)->nullable();

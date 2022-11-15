@@ -20,7 +20,7 @@ class DebtorController extends Controller
 
     public function create()
     {
-        $allService = Debtor::select('servicename', 'serviceindex')->orderBy('servicename', 'ASC')->get();
+        $allService = Debtor::select('servicename', 'serviceindex')->orderBy('servicename', 'asc')->get();
 
         return view('administrator.registerDebtor', compact('allService'));
     }

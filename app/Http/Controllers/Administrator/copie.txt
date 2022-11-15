@@ -1,0 +1,50 @@
+/* Loan
+
+$table->id();
+$table->index('id')->unsigned();
+$table->integer('amount');
+$table->date('startline');
+$table->date('deadline');
+$table->unsignedBigInteger('id_rate');
+$table->foreign('id_rate')
+->references('id')->on('rates')
+->onDelete('restrict')->onUpdate('restrict');
+$table->unsignedBigInteger('id_debtor');
+$table->foreign('id_debtor')
+->references('id')->on('debtors')
+->onDelete('restrict')->onUpdate('restrict');
+$table->timestamps();
+*/
+
+/* Repayment
+
+$table->id();
+$table->index('id')->unsigned();
+$table->integer('repaymentamount')->default(0);
+$table->date('repaymentdate');
+$table->string('repaymentway');
+$table->unsignedBigInteger('id_loan');
+$table->foreign('id_loan')
+->references('id')->on('loans')
+->onDelete('restrict')->onUpdate('restrict');
+$table->timestamps();
+*/
+
+/* Repayment-Amount
+
+$table->id();
+$table->index('id')->unsigned();
+$table->integer('minamount')->default(0);
+$table->integer('maxamount')->default(0);
+$table->text('description')->nullable();
+$table->timestamps();
+*/
+
+/* Repayment-Procedure
+
+$table->id();
+$table->index('id')->unsigned();
+$table->string('procedurefile', 100);
+$table->text('description')->nullable();
+$table->timestamps();
+*/

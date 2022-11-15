@@ -14,7 +14,7 @@ class EmployerController extends Controller
     public function index()
     {
         $allEmployer = Debtor::where('role', 'Employer')->select('id', 'servicename')
-        ->orderBy('id', 'DESC')->get();
+            ->orderBy('id', 'DESC')->get();
 
         return view('administrator.allEmployer', compact('allEmployer'));
     }
@@ -38,5 +38,34 @@ class EmployerController extends Controller
         ]);
 
         return redirect()->route('registeremployer')->with('success', 'Structure enregistrée avec succès! :-)');
+    }
+
+    public function show($id)
+    {
+        $showEmployer = Debtor::find($id);
+        $countDebtor = Debtor::where('debtorindex', $showEmployer->serviceindex)->count();
+
+        return view('administrator.showEmployer', compact(['showEmployer', 'countDebtor']));
+    }
+
+    public function edit($id)
+    {
+        $editEmployer = Debtor::find($id);
+
+        return view('administrator.editEmployer', compact('editEmployer'));
+    }
+
+    public function update(UpdateEmployerRequest $request, $id)
+    {
+        $credentialsValidated = $request->validated();
+
+        Debtor::whereId($id)->update([
+            'servicename' => $request->servicename,
+            'email' => $request->email,
+            'telephone' => $request->telephone,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect()->route('showemployer', $id)->with('success', 'Structure modifiée avec succès! :-)');
     }
 }

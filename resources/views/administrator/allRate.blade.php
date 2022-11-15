@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Liste des redevables</title>
+    <title>Liste des taux applicables</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -16,26 +16,36 @@
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition debtorlist-page">
-    <div class="debtorlist-box">
+<body class="hold-transition ratelist-page">
+    <div class="ratelist-box">
         <div class="card">
-            <div class="card-body debtorlist-card-body">
-                <p class="debtorlist-box-msg">
-                <h1 class="">Liste des redevables</h1>
+            <div class="card-body ratelist-card-body">
+                <p class="ratelist-box-msg">
+                <h1 class="">Liste des taux</h1>
                 </p>
 
-                <ul class="">
-                    @forelse ($allDebtor as $debtors)
-                    <li><a href="" class="" return="false">{{ $debtors->firstname }} {{ $debtors->lastname }}</a></li>
+                <table class="">
+                    <tr>
+                        <th>TAUX</th>
+                        <th>VALIDITÉ</th>
+                        <th>OPTION SUPPLÉMENTAIRE</th>
+                    </tr>
+                    @forelse ($allRate as $rates)
+                    <tr>
+                        <td>{{ $rates->value }}%</td>
+                        <td>{{ $rates->validity }}</td>
+                        <td><a href="{{ route('showrate', $rates->id) }}" class="">VOIR PLUS</a></td>
+                    </tr>
                     @empty
-                    <p class="debtorlist-box-msg">Aucun redevable enregistré!</p>
-                    @endforelse
-                </ul>
+                </table><br />
+                <p class="ratelist-box-msg">Aucun taux enregistré! 😞</p>
+                @endforelse
+                </table>
 
                 <hr>
 
-                <div class="debtorlist-box-close">
-                    <form action="{{ route('dashboard') }}" method="POST">
+                <div class="ratelist-box-close">
+                    <form action="{{ route('dashboard') }}" method="GET">
                         @csrf
 
                         <button type="submit">Fermer</button>

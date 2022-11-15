@@ -54,6 +54,28 @@
           </ul>
           </p>
 
+          <p class="menu-item-2">
+          <h1>Informations Générales</h1>
+
+          <h2>Documents utils</h2>
+
+          <ul>
+            <li><a href="{{ route ('alldocument') }}" class="">Liste des documents</a></li>
+            <li><a href="{{ route('createdocument') }}" class="">Importer un document</a></li>
+          </ul>
+
+          <h2>Taux de remboursement</h2>
+
+          <ul>
+            <li><a href="{{ route('allrate') }}" class="">Liste des taux</a></li>
+          </ul>
+
+          <h2>Grille de remboursement</h2>
+
+          <ul>
+            <li><a href="{{ route ('allrepaymentamount') }}" class="">Voir la grille</a></li>
+          </ul>
+          </p>
         </section>
       </div>
     </div>
