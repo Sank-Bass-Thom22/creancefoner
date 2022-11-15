@@ -26,7 +26,7 @@
 
                 <ul class="">
                     @forelse ($allAdministrator as $administrators)
-                    <li><a href="" class="" return="false">{{ $administrators->firstname }} {{ $administrators->lastname }}</a></li>
+                    <li><a href="{{ route ('showadminsup', $administrators->id) }}" class="">{{ $administrators->firstname }} {{ $administrators->lastname }}</a></li>
                     @empty
                     <p class="adminlist-box-msg">Aucun administrateur enregistré! :-) </p>
                     @endforelse

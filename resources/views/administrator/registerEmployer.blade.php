@@ -52,7 +52,7 @@
                     </div>
                     <div class="input-group mb-3">
                         <label for="Telephone">Numéro de téléphone : </label>
-                        <input type="text" class="form-control" placeholder="226 " id="Telephone" name="telephone" required />
+                        <input type="telephone" class="form-control" placeholder="226 " id="Telephone" name="telephone" required />
                     </div>
                     <div class="input-group mb-3">
                         <label for="Password">Mot de passe : </label>

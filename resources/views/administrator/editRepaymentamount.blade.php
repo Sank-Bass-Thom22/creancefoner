@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Inscription redevable</title>
+    <title>Modification grille</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -16,15 +16,15 @@
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition register-page">
-    <div class="register-box">
+<body class="hold-transition update-page">
+    <div class="update-box">
         <div class="card">
-            <div class="card-body register-card-body">
-                <p class="register-box-msg">
-                <h1>Création d'un compte redevable</h1>
+            <div class="card-body update-card-body">
+                <p class="update-box-msg">
+                <h1>Modification d'une grille</h1>
                 </p>
 
-                <p class="register-box-error">
+                <p class="update-box-error">
                     @if ($errors->any())
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -34,44 +34,27 @@
                 @endif
                 </p>
 
-                <p class="register-box-success">
+                <p class="update-box-success">
                     @if (session()->get('success'))
                 <div class="alert alert-success">{{ session()->get('success') }}</div>
                 @endif
                 </p>
 
-                <form action="{{ route ('registerdebtor') }}" method="POST">
+                <form action="{{ route ('updaterepaymentamountsup', $editRepaymentamount->id) }}" method="POST">
                     @csrf
                     <div class="input-group mb-3">
-                        <label for="Firstname">Prénom : </label>
-                        <input type="text" class="form-control" id="Firstname" name="firstname" required />
+                        <label for="Minamount">Montant minimal : </label>
+                        <input type="number" class="form-control" id="Minamount" name="minamount" value="{{ $editRepaymentamount->minamount }}" required />
                     </div>
                     <div class="input-group mb-3">
-                        <label for="Lastname">Nom : </label>
-                        <input type="text" class="form-control" id="Lastname" name="lastname" required />
+                        <label for="Maxamount">Montant maximal : </label>
+                        <input type="number" class="form-control" id="Maxamount" name="maxamount" value="{{ $editRepaymentamount->maxamount }}" required />
                     </div>
                     <div class="input-group mb-3">
-                        <label for="Email">Adresse E-mail : </label>
-                        <input type="email" class="form-control" id="Email" name="email" required />
-                    </div>
-                    <div class="input-group mb-3">
-                        <label for="Telephone">Numéro de téléphone : </label>
-                        <input type="telephone" class="form-control" placeholder="226 " id="Telephone" name="telephone" required />
-                    </div>
-                    <div class="input-group mb-3">
-                        <label for="Matricule">Numéro matricule : </label>
-                        <input type="text" class="form-control" id="Matricule" name="matricule" required />
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <label for="Debtorindex">Lieu de travail : </label>
-                        <select id="Debtorindex" name="debtorindex">
-                            @forelse($allService as $services)
-                            <option value="{{ $services->serviceindex }}">{{ $services->servicename }}</option>
-                            @empty
-                            <p class="register-box-msg">Aucune structure enregistrée. :-)</p>
-                            @endforelse
-                        </select>
+                        <label for="Description">Description : </label>
+                        <textarea class="form-control" id="Description" name="description" rows="5" cols="50">
+                        {{ $editRepaymentamount->description }}
+                        </textarea>
                     </div>
 
                     <!-- /.col -->
@@ -84,7 +67,7 @@
                 <hr>
 
                 <div class="adminlist-box-close">
-                    <form action="{{ route('dashboard') }}" method="GET">
+                    <form action="{{ route('showrepaymentamount', $editRepaymentamount->id) }}" method="GET">
                         @csrf
 
                         <button type="submit">Fermer</button>
@@ -95,7 +78,7 @@
         </div>
         <!-- /.card -->
     </div>
-    <!-- /.register-box -->
+    <!-- /.update-box -->
 
     <!-- jQuery -->
     <script src="../../plugins/jquery/jquery.min.js"></script>

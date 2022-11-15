@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Liste des employeurs</title>
+    <title>Grille</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -16,25 +16,35 @@
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition employerlist-page">
-    <div class="employerlist-box">
+<body class="hold-transition repaymentamountlist-page">
+    <div class="repaymentamountlist-box">
         <div class="card">
-            <div class="card-body employerlist-card-body">
-                <p class="employerlist-box-msg">
-                <h1 class="">Liste des employeurs</h1>
+            <div class="card-body repaymentamountlist-card-body">
+                <p class="repaymentamountlist-box-msg">
+                <h1 class="">Grille</h1>
                 </p>
 
-                <ul class="">
-                    @forelse ($allEmployer as $employers)
-                    <li><a href="{{ route('showemployer', $employers->id) }}" class="">{{ $employers->servicename }}</a></li>
+                <table class="">
+                    <tr>
+                        <th>MONTANT MINIMAL</th>
+                        <th>MONTANT MAXIMAL</th>
+                        <th>OPTION SUPPLÉMENTAIRE</th>
+                    </tr>
+                    @forelse ($allRepaymentamount as $repaymentamounts)
+                    <tr>
+                        <td>{{ $repaymentamounts->minamount }} Francs CFA</td>
+                        <td>{{ $repaymentamounts->maxamount }} Francs CFA</td>
+                        <td><a href="{{ route('showrepaymentamount', $repaymentamounts->id) }}" class="">VOIR PLUS</a></td>
+                    </tr>
                     @empty
-                    <p class="employerlist-box-msg">Aucun employeur enregistré! :-) </p>
-                    @endforelse
-                </ul>
+                </table><br />
+                <p class="repaymentamountlist-box-msg">Aucune grille enregistrée! 😞</p>
+                @endforelse
+                </table>
 
                 <hr>
 
-                <div class="employerlist-box-close">
+                <div class="repaymentamountlist-box-close">
                     <form action="{{ route('dashboard') }}" method="GET">
                         @csrf
 

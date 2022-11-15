@@ -1,0 +1,6 @@
+            $table->id();
+            $table->index('id')->unsigned();
+            $table->integer('minamount')->default(0);
+            $table->integer('maxamount')->default(0);
+            $table->text('description')->nullable();
+            $table->timestamps();

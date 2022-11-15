@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Inscription administrateur</title>
+    <title>Importation de documents</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -16,15 +16,15 @@
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition register-page">
-    <div class="register-box">
+<body class="hold-transition create-page">
+    <div class="create-box">
         <div class="card">
-            <div class="card-body register-card-body">
-                <p class="register-box-msg">
-                <h1>Création d'un compte administrateur</h1>
+            <div class="card-body create-card-body">
+                <p class="create-box-msg">
+                <h1>Importation d'un document</h1>
                 </p>
 
-                <p class="register-box-error">
+                <p class="create-box-error">
                     @if ($errors->any())
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -34,44 +34,25 @@
                 @endif
                 </p>
 
-                <p class="register-box-success">
+                <p class="create-box-success">
                     @if (session()->get('success'))
                 <div class="alert alert-success">{{ session()->get('success') }}</div>
                 @endif
                 </p>
 
-                <form action="{{ route ('registeradminsup') }}" method="POST">
+                <form action="{{ route ('storedocument') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="input-group mb-3">
-                        <label for="Firstname">Prénom : </label>
-                        <input type="text" class="form-control" id="Firstname" name="firstname" required />
+                        <label for="Title">Titre du document : </label>
+                        <input type="text" class="form-control" id="Title" name="title" required />
                     </div>
                     <div class="input-group mb-3">
-                        <label for="Lastname">Nom : </label>
-                        <input type="text" class="form-control" id="Lastname" name="lastname" required />
+                        <label for="Document">Selectionner le document : </label>
+                        <input type="file" class="form-control" id="Document" name="document" required />
                     </div>
                     <div class="input-group mb-3">
-                        <label for="Email">Adresse E-mail : </label>
-                        <input type="email" class="form-control" id="Email" name="email" required />
-                    </div>
-                    <div class="input-group mb-3">
-                        <label for="Telephone">Numéro de téléphone : </label>
-                        <input type="telephone" class="form-control" placeholder="226 " id="Telephone" name="telephone" required />
-                    </div>
-                    <div class="input-group mb-3">
-                        <label for="Password">Mot de passe : </label>
-                        <input type="password" class="form-control" id="Password" name="password" required autocomplete="new-password" />
-                    </div>
-                    <div class="input-group mb-3">
-                        <label for="Password_confirmation">Confirmer le mot de passe : </label>
-                        <input type="password" class="form-control" id="Password_confirmation" name="password_confirmation" required />
-                    </div>
-                    <div class="input-group mb-3">
-                        <label for="Role">Niveau d'administration : </label>
-                        <select class="form-control" id="Role" name="role">
-                            <option value="SimpleAdmin" selected>Simple</option>
-                            <option value="SuperAdmin">Super</option>
-                        </select>
+                        <label for="Description">Description : </label>
+                        <textarea class="form-control" id="Description" name="description" rows.="5" cols="50"></textarea>
                     </div>
 
                     <!-- /.col -->
@@ -95,7 +76,7 @@
         </div>
         <!-- /.card -->
     </div>
-    <!-- /.register-box -->
+    <!-- /.create-box -->
 
     <!-- jQuery -->
     <script src="../../plugins/jquery/jquery.min.js"></script>

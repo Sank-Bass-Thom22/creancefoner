@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Liste des employeurs</title>
+    <title>Documents utils</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -16,25 +16,39 @@
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition employerlist-page">
-    <div class="employerlist-box">
+<body class="hold-transition documentlist-page">
+    <div class="documentlist-box">
         <div class="card">
-            <div class="card-body employerlist-card-body">
-                <p class="employerlist-box-msg">
-                <h1 class="">Liste des employeurs</h1>
+            <div class="card-body documentlist-card-body">
+                <p class="documentlist-box-msg">
+                <h1 class="">Documents utils</h1>
                 </p>
 
-                <ul class="">
-                    @forelse ($allEmployer as $employers)
-                    <li><a href="{{ route('showemployer', $employers->id) }}" class="">{{ $employers->servicename }}</a></li>
+                <table class="">
+                    <tr>
+                        <th>TITRE</th>
+                        <th>FICHIER</th>
+                        <th>OPTION SUPPLÉMENTAIRE</th>
+                    </tr>
+                    @forelse ($allDocument as $documents)
+                    <tr>
+                        <td>{{ $documents->title }}</td>
+                        <td>
+                            <a href="/storage/{{ $documents->filelink }}" class="" download="">Télécharger</a>
+                        </td>
+                        <td>
+                            <a href="{{ route('showdocument', $documents->id) }}" class="">VOIR PLUS</a>
+                        </td>
+                    </tr>
                     @empty
-                    <p class="employerlist-box-msg">Aucun employeur enregistré! :-) </p>
-                    @endforelse
-                </ul>
+                </table><br />
+                <p class="documentlist-box-msg">Aucun document enregistré! 😞</p>
+                @endforelse
+                </table>
 
                 <hr>
 
-                <div class="employerlist-box-close">
+                <div class="documentlist-box-close">
                     <form action="{{ route('dashboard') }}" method="GET">
                         @csrf
 
