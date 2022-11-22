@@ -24,13 +24,13 @@
                 <h1 class="">Liste des redevables</h1>
                 </p>
 
-                <ul class="">
+                <ol class="">
                     @forelse ($allDebtor as $debtors)
-                    <li><a href="" class="" return="false">{{ $debtors->firstname }} {{ $debtors->lastname }}</a></li>
+                    <li><a href="{{ route('showdebtor', $debtors->id) }}" class="">{{ $debtors->firstname }} {{ $debtors->lastname }}</a></li>
                     @empty
                     <p class="debtorlist-box-msg">Aucun redevable enregistré! :-) </p>
                     @endforelse
-                </ul>
+                </ol>
 
                 <hr>
 
@@ -38,7 +38,7 @@
                     <form action="{{ route('dashboard') }}" method="GET">
                         @csrf
 
-                        <button type="submit">Fermer</button>
+                        <button type="submit">FERMER</button>
                     </form>
                 </div>
             </div>

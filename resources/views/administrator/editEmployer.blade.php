@@ -76,7 +76,7 @@
                     <form action="{{ route('showemployer', $editEmployer->id) }}" method="GET">
                         @csrf
 
-                        <button type="submit">Fermer</button>
+                        <button type="submit">FERMER</button>
                     </form>
                 </div>
             </div>

@@ -5,15 +5,12 @@ namespace App\Models\Loan;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Loan extends Model
+class Schedule extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'amount',
-        'startline',
-        'deadline',
-        'id_rate',
         'id_debtor',
     ];
 }

@@ -70,7 +70,7 @@
                     <form action="{{ route('showdocument', $editDocument->id) }}" method="GET">
                         @csrf
 
-                        <button type="submit">Fermer</button>
+                        <button type="submit">FERMER</button>
                     </form>
                 </div>
             </div>

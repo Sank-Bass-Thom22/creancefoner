@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Importation de documents</title>
+    <title>Enregistrement d'un prêt</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -21,7 +21,7 @@
         <div class="card">
             <div class="card-body create-card-body">
                 <p class="create-box-msg">
-                <h1>Importation d'un document</h1>
+                <h1>Enregistrement d'un prêt</h1>
                 </p>
 
                 <p class="create-box-error">
@@ -35,24 +35,40 @@
                 </p>
 
                 <p class="create-box-success">
-                    @if (session()->get('success'))
+                    @if (session()->has('success'))
                 <div class="alert alert-success">{{ session()->get('success') }}</div>
                 @endif
                 </p>
 
-                <form action="{{ route ('storedocument') }}" method="POST" enctype="multipart/form-data">
+                <p class="create-box-fullname">
+                    @if (session()->has('fullname'))
+                <div class="alert alert-success">{{ session()->get('fullname') }}</div>
+                @endif
+                </p>
+
+                <form action="{{ route ('storeloan') }}" method="POST">
                     @csrf
                     <div class="input-group mb-3">
-                        <label for="Title">Titre du document : </label>
-                        <input type="text" class="form-control" id="Title" name="title" required />
+                        <label for="Amount">Montant du prêt : </label>
+                        <input type="number" class="form-control" id="Amount" name="amount" required />
                     </div>
                     <div class="input-group mb-3">
-                        <label for="Document">Selectionner le document : </label>
-                        <input type="file" class="form-control" id="Document" name="document" required />
+                        <label for="Startline">Date de contraction du prêt : </label>
+                        <input type="date" class="form-control" id="Startline" name="startline" required />
                     </div>
                     <div class="input-group mb-3">
-                        <label for="Description">Description : </label>
-                        <textarea class="form-control" id="Description" name="description" rows.="5" cols="50"></textarea>
+                        <label for="Deadline">Date de cloture du prêt : </label>
+                        <input type="date" class="form-control" id="Deadline" name="deadline" required />
+                    </div>
+                    <div class="input-group mb-3">
+                        <label for="Rate">Taux applicable : </label>
+                        <select id="Rate" name="rate" required>
+                            @forelse($allRate as $rates)
+                            <option value="{{ $rates->id }}">{{ $rates->value }}</option>
+                            @empty
+                            <option>Aucun taux enregistré. 😞 </option>
+                            @endforelse.
+                        </select>
                     </div>
 
                     <!-- /.col -->
@@ -65,11 +81,23 @@
                 <hr>
 
                 <div class="adminlist-box-close">
-                    <form action="{{ route('dashboard') }}" method="GET">
+                    @if (session()->has('now'))
+
+                    <form action="{{ route('createloannow', session()->get('id_debtor')) }}" method="GET">
                         @csrf
 
                         <button type="submit">FERMER</button>
                     </form>
+
+                    @else
+
+                    <form action="{{ route('registerdebtor') }}" method="GET">
+                        @csrf
+
+                        <button type="submit">FERMER</button>
+                    </form>
+
+                    @endif
                 </div>
             </div>
             <!-- /.form-box -->

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Importation de documents</title>
+    <title>Enregistrement d'un remboursement</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -21,7 +21,7 @@
         <div class="card">
             <div class="card-body create-card-body">
                 <p class="create-box-msg">
-                <h1>Importation d'un document</h1>
+                <h1>Enregistrement d'un remboursement</h1>
                 </p>
 
                 <p class="create-box-error">
@@ -40,19 +40,30 @@
                 @endif
                 </p>
 
-                <form action="{{ route ('storedocument') }}" method="POST" enctype="multipart/form-data">
+                <p class="create-box-fullname">
+                    @if (session()->has('fullname'))
+                <div class="alert alert-success">{{ session()->get('fullname') }}</div>
+                @endif
+                </p>
+
+                <form action="{{ route ('storerepayment') }}" method="POST">
                     @csrf
                     <div class="input-group mb-3">
-                        <label for="Title">Titre du document : </label>
-                        <input type="text" class="form-control" id="Title" name="title" required />
+                        <label for="Amount">Montant du remboursement : </label>
+                        <input type="number" class="form-control" id="Amount" name="amount" required />
                     </div>
                     <div class="input-group mb-3">
-                        <label for="Document">Selectionner le document : </label>
-                        <input type="file" class="form-control" id="Document" name="document" required />
+                        <label for="Repaymentdate">Date du remboursement : </label>
+                        <input type="date" class="form-control" id="Repaymentdate" name="repaymentdate" required />
                     </div>
                     <div class="input-group mb-3">
-                        <label for="Description">Description : </label>
-                        <textarea class="form-control" id="Description" name="description" rows.="5" cols="50"></textarea>
+                        <label for="Repaymentway">Méthode de remboursement : </label>
+                        <select id="Repaymentway" name="repaymentway" required>
+                            <option value=""></option>
+                            <option value="En espèces">En espèces</option>
+                            <option value="Virement banquaire">Par virement banquaire</option>
+                            <option value="Par checque">Par checque</option>
+                        </select>
                     </div>
 
                     <!-- /.col -->
@@ -65,7 +76,7 @@
                 <hr>
 
                 <div class="adminlist-box-close">
-                    <form action="{{ route('dashboard') }}" method="GET">
+                    <form action="{{ route('showrepayment', session()->get('id_debtor')) }}" method="GET">
                         @csrf
 
                         <button type="submit">FERMER</button>

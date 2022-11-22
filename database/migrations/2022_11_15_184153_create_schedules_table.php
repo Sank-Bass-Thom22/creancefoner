@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRepaymentsTable extends Migration
+class CreateSchedulesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateRepaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('repayments', function (Blueprint $table) {
+        Schema::create('schedules', function (Blueprint $table) {
             $table->id();
             $table->index('id')->unsigned();
             $table->float('amount');
-            $table->date('repaymentdate');
-            $table->string('repaymentway', 255)->nullable();
+            $table->boolean('visibility')->default(true);
             $table->unsignedBigInteger('id_debtor');
             $table->foreign('id_debtor')
                 ->references('id')->on('debtors')
@@ -34,6 +33,6 @@ class CreateRepaymentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('repayments');
+        Schema::dropIfExists('schedules');
     }
 }

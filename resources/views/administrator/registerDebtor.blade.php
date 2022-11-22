@@ -66,10 +66,11 @@
                     <div class="input-group mb-3">
                         <label for="Debtorindex">Lieu de travail : </label>
                         <select id="Debtorindex" name="debtorindex">
+                            <option></option>
                             @forelse($allService as $services)
                             <option value="{{ $services->serviceindex }}">{{ $services->servicename }}</option>
                             @empty
-                            <p class="register-box-msg">Aucune structure enregistrée. :-)</p>
+                            <option>Aucune structure enregistrée! 😞 </option>
                             @endforelse
                         </select>
                     </div>
@@ -87,7 +88,7 @@
                     <form action="{{ route('dashboard') }}" method="GET">
                         @csrf
 
-                        <button type="submit">Fermer</button>
+                        <button type="submit">FERMER</button>
                     </form>
                 </div>
             </div>
