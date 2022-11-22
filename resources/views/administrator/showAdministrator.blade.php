@@ -31,11 +31,11 @@
                 </p>
 
                 <ul class="">
-<li>Prénom : {{ $showAdministrator->firstname }}</li>
-<li>Nom : {{ $showAdministrator->lastname }}</li>
-<li>Adresse E-mail : {{ $showAdministrator->email }}</li>
-<li>Numéro de téléphone : +226 {{ $showAdministrator->telephone }}</li>
-<li>Niveau de responsabilité : {{ $showAdministrator->role }}</li>
+                    <li>Prénom : {{ $showAdministrator->firstname }}</li>
+                    <li>Nom : {{ $showAdministrator->lastname }}</li>
+                    <li>Adresse E-mail : {{ $showAdministrator->email }}</li>
+                    <li>Numéro de téléphone : +226 {{ $showAdministrator->telephone }}</li>
+                    <li>Niveau de responsabilité : {{ $showAdministrator->role }}</li>
                 </ul>
 
                 <hr>
@@ -44,20 +44,20 @@
                     <table>
                         <tr>
                             <td>
-                                <form action="{{ route ('editadminsup', $showAdministrator->id) }}" method="GET">''
+                                <form action="{{ route ('editadminsup', $showAdministrator->id) }}" method="GET">
                                     @csrf
 
                                     <button type="submit">MODIFIER</button>
                                 </form>
                             </td>
                             <td>
-                    <form action="{{ route('alladminsup') }}" method="GET">
-                        @csrf
+                                <form action="{{ route('alladminsup') }}" method="GET">
+                                    @csrf
 
-                        <button type="submit">FERMER</button>
-                    </form>
-                    </td>
-                    </tr>
+                                    <button type="submit">FERMER</button>
+                                </form>
+                            </td>
+                        </tr>
                     </table>
                 </div>
             </div>

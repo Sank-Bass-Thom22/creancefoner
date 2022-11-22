@@ -25,11 +25,7 @@
             @auth
             <a href="{{ route('dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
             @else
-            <ul>
-                <li><a href="{{ route('loginother') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Se connecter en tant qu'admin</a></li>
-                <li><a href="{{ route('loginother') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Se connecter en tant qu'employeur</a></li>
-                <li><a href="{{ route('logindebtor') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Se connecter en tant que redevable</a></li>
-            </ul>
+            <h2><a href="{{ route('loginother') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Se connecter</a></h2>
             @endauth
         </div>
         @endif

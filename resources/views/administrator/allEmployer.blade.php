@@ -24,13 +24,13 @@
                 <h1 class="">Liste des employeurs</h1>
                 </p>
 
-                <ul class="">
+                <ol class="">
                     @forelse ($allEmployer as $employers)
                     <li><a href="{{ route('showemployer', $employers->id) }}" class="">{{ $employers->servicename }}</a></li>
                     @empty
                     <p class="employerlist-box-msg">Aucun employeur enregistré! :-) </p>
                     @endforelse
-                </ul>
+                </ol>
 
                 <hr>
 
@@ -38,7 +38,7 @@
                     <form action="{{ route('dashboard') }}" method="GET">
                         @csrf
 
-                        <button type="submit">Fermer</button>
+                        <button type="submit">FERMER</button>
                     </form>
                 </div>
             </div>

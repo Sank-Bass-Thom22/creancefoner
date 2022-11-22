@@ -14,7 +14,7 @@ class EmployerController extends Controller
     public function index()
     {
         $allEmployer = Debtor::where('role', 'Employer')->select('id', 'servicename')
-            ->orderBy('id', 'DESC')->get();
+            ->orderBy('servicename', 'ASC')->get();
 
         return view('administrator.allEmployer', compact('allEmployer'));
     }

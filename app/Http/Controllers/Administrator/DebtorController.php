@@ -13,14 +13,14 @@ class DebtorController extends Controller
     public function index()
     {
         $allDebtor = Debtor::where('role', 'Debtor')->select('id', 'firstname', 'lastname')
-            ->orderBy('id', 'DESC')->get();
+            ->orderBy('firstname', 'ASC')->get();
 
         return view('administrator.allDebtor', compact('allDebtor'));
     }
 
     public function create()
     {
-        $allService = Debtor::select('servicename', 'serviceindex')->orderBy('servicename', 'asc')->get();
+        $allService = Debtor::where('role', 'Employer')->orderBy('servicename', 'asc')->select('servicename', 'serviceindex')->get();
 
         return view('administrator.registerDebtor', compact('allService'));
     }
@@ -29,7 +29,7 @@ class DebtorController extends Controller
     {
         $credentialsValidated = $request->validated();
 
-        Debtor::create([
+        $id_debtor = Debtor::insertGetId([
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
             'email' => $request->email,
@@ -40,34 +40,53 @@ class DebtorController extends Controller
             'role' => 'Debtor',
         ]);
 
-        return redirect()->route('registerdebtor')->with('success', 'Redevable enregistré avec succès! :-)');
+        if (isset($errors)) {
+            return back();
+        }
+
+        session()->put('id_debtor', $id_debtor);
+        session()->put('fullname', $request->firstname . ' ' . $request->lastname);
+
+        return redirect()->route('createloan');
     }
 
-    public function show(Debtor $debtor)
+    public function show($id)
     {
-        $showDebtor = Debtor::findOrFail($debtor);
+        $showDebtor = Debtor::findOrFail($id);
+        $debtorService = Debtor::where('serviceindex', $showDebtor->debtorindex)->first();
 
-        return view('', compact('showDebtor'));
+        if (session()->has('fullname')) {
+            session()->forget('fullname');
+        }
+
+        return view('administrator.showDebtor', compact(['showDebtor', 'debtorService']));
     }
 
-    public function edit(Debtor $debtor)
+    public function edit($id)
     {
-        $editDebtor = Debtor::findOrFail($debtor);
+        $editDebtor = Debtor::findOrFail($id);
         $allService = Debtor::select('servicename', 'serviceindex')->orderBy('servicename', 'ASC')->get();
 
-        return view('', compact(['editDebtor', 'allService']));
+        return view('administrator.editDebtor', compact(['editDebtor', 'allService']));
     }
 
-    public function update(UpdateDebtorRequest $request, Debtor $debtor)
+    public function update(UpdateDebtorRequest $request, $id)
     {
         $credentialsValidated = $request->validated();
 
-        Debtor::whereId($debtor)->update($credentialsValidated);
+        Debtor::whereId($debtor)->update([
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'email' => $request->email,
+            'telephone' => $request->telephone,
+            'matricule' => $request->matricule,
+            'debtorindex' => $request->debtorindex,
+        ]);
 
-        return redirect()->route('editdebtor', $debtor)->with('success', 'Redevable modifié avec succès!');
+        return redirect()->route('showdebtor', $id)->with('success', 'Redevable modifié avec succès!');
     }
 
-    public function destroy(Debtor $debtor)
+    public function destroy($id)
     {
         //
     }

@@ -13,7 +13,7 @@ class StoreLoanRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class StoreLoanRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'amount' => ['required', 'numeric'],
+            'startline' => ['required', 'date'],
+            'deadline' => ['required', 'date'],
+            'rate' => ['required', 'int'],
         ];
     }
 }

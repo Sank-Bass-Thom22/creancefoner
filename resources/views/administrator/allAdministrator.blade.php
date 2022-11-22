@@ -24,13 +24,13 @@
                 <h1 class="">Liste des administrateurs</h1>
                 </p>
 
-                <ul class="">
+                <ol class="">
                     @forelse ($allAdministrator as $administrators)
                     <li><a href="{{ route ('showadminsup', $administrators->id) }}" class="">{{ $administrators->firstname }} {{ $administrators->lastname }}</a></li>
                     @empty
                     <p class="adminlist-box-msg">Aucun administrateur enregistré! :-) </p>
                     @endforelse
-                </ul>
+                </ol>
 
                 <hr>
 
@@ -38,7 +38,7 @@
                     <form action="{{ route('dashboard') }}" method="GET">
                         @csrf
 
-                        <button type="submit">Fermer</button>
+                        <button type="submit">FERMER</button>
                     </form>
                 </div>
             </div>

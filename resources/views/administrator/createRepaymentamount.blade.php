@@ -68,7 +68,7 @@
                     <form action="{{ route('dashboard') }}" method="GET">
                         @csrf
 
-                        <button type="submit">Fermer</button>
+                        <button type="submit">FERMER</button>
                     </form>
                 </div>
             </div>

@@ -43,7 +43,7 @@
                         <tr>
                             @if (Auth::user()->role === "SuperAdmin")
                             <td>
-                                <form action="{{ route ('editratesup', $showRate->id) }}" method="GET">''
+                                <form action="{{ route ('editratesup', $showRate->id) }}" method="GET">
                                     @csrf
 
                                     <button type="submit" class="">MODIFIER</button>

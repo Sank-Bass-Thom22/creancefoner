@@ -42,15 +42,15 @@
           <h2>Employeur</h2>
 
           <ul>
-            <li><a href="{{ route('allemployer') }}">Liste des employeurs</a></li>
-            <li><a href="{{ route('registeremployer') }}">Enregistrer un employeur</a></li>
+            <a href="{{ route('allemployer') }}">Liste des employeurs</a><br />
+            <a href="{{ route('registeremployer') }}">Enregistrer un employeur</a>
           </ul>
 
           <h2>Redevable</h2>
 
           <ul>
-            <li><a href="{{ route('alldebtor') }}">Liste des redevables</a></li>
-            <li><a href="{{ route('registerdebtor') }}">Enregistrer un redevable</a></li>
+            <a href="{{ route('alldebtor') }}">Liste des redevables</a><br />
+            <a href="{{ route('registerdebtor') }}">Enregistrer un redevable</a>
           </ul>
           </p>
 
@@ -60,20 +60,20 @@
           <h2>Documents utils</h2>
 
           <ul>
-            <li><a href="{{ route ('alldocument') }}" class="">Liste des documents</a></li>
-            <li><a href="{{ route('createdocument') }}" class="">Importer un document</a></li>
+            <a href="{{ route ('alldocument') }}" class="">Liste des documents</a><br />
+            <a href="{{ route('createdocument') }}" class="">Importer un document</a>
           </ul>
 
           <h2>Taux de remboursement</h2>
 
           <ul>
-            <li><a href="{{ route('allrate') }}" class="">Liste des taux</a></li>
+            <a href="{{ route('allrate') }}" class="">Liste des taux</a>
           </ul>
 
           <h2>Grille de remboursement</h2>
 
           <ul>
-            <li><a href="{{ route ('allrepaymentamount') }}" class="">Voir la grille</a></li>
+            <a href="{{ route ('allrepaymentamount') }}" class="">Voir la grille</a>
           </ul>
           </p>
         </section>

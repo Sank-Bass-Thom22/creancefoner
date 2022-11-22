@@ -43,7 +43,7 @@
                     <table>
                         <tr>
                             <td>
-                                <form action="{{ route ('editemployer', $showEmployer->id) }}" method="GET">''
+                                <form action="{{ route ('editemployer', $showEmployer->id) }}" method="GET">
                                     @csrf
 
                                     <button type="submit" class="">MODIFIER</button>
@@ -53,7 +53,7 @@
                                 <form action="" method="">
                                     @csrf
 
-                                    <button type="submit" class=".">Voir plus</button>
+                                    <button type="submit" class="">Voir plus</button>
                                 </form>
                             </td>
                             <td>
