@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateScheduleRequest extends FormRequest
+class UpdateEmailRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class UpdateScheduleRequest extends FormRequest
     public function rules()
     {
         return [
-            'amount' => ['required', 'numeric', 'min:1'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:debtors'],
         ];
     }
 }

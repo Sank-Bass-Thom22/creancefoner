@@ -33,17 +33,18 @@
                 </div>
                 </p><br />
 
-                <section class="">
+                <section class="main">
                     <p>
                     <h1>Mes prêts</h1>
-                    <a href="#">VOIR</a>
+                    <ul>
+                        <a href="{{ route('myloans') }}">VOIR</a>
+                    </ul>
                     </p><br />
 
                     <p>
                     <h1>Mon échéancier</h1>
                     <ul>
-                        <a href="#">Simuler un échéancier</a><br />
-                        <a href="#">Définir un échéancier</a>
+                        <a href="{{ route('createsimulation') }}">Simuler un échéancier</a>
                     </ul>
                     </p><br />
 
@@ -56,6 +57,9 @@
 
                     <p>
                     <h1>Documents utils</h1>
+                    <ul>
+                        <a href="{{ route('usefuldocuments') }}">VOIR</a>
+                    </ul>
                     </p>
                 </section>
             </div>

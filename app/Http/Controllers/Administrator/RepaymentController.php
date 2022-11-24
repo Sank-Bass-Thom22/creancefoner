@@ -33,9 +33,9 @@ class RepaymentController extends Controller
     public function store(StoreRepaymentRequest $request)
     {
         $validatedData = $request->validated();
-        $minAmount = Repaymentamount::value('minamount');
+        $minAmount = floatval(Repaymentamount::value('minamount'));
 
-        if ($request->amount < $minAmount) {
+        if (floatval($request->amount) < $minAmount) {
             return back()->withErrors(['amount' => 'Le montant minimal requis est de : ' . $minAmount]);
         }
 
@@ -54,10 +54,10 @@ class RepaymentController extends Controller
         $totalDue = 0;
         $totalPaid = 0;
         $showRepayment = Repayment::where('id_debtor', $id)->orderBy('repaymentdate', 'desc')->get();
-        $totalPaid = Repayment::where('id_debtor', $id)->sum('amount');
+        $totalPaid = floatval(Repayment::where('id_debtor', $id)->sum('amount'));
 
         if (Schedule::where([['visibility', true], ['id_debtor', $id]])->exists()) {
-            $schedule = Schedule::where([['visibility', true], ['id_debtor', $id]])->value('amount');
+            $schedule = floatval(Schedule::where([['visibility', true], ['id_debtor', $id]])->value('amount'));
 
             session()->put('schedule', $schedule);
         } else {
@@ -69,7 +69,7 @@ class RepaymentController extends Controller
             ->select('loans.amount', 'rates.value')->get();
 
         foreach ($showLoan as $loans) {
-            $totalDue += (($loans->amount * $loans->value) / 100) + $loans->amount;
+            $totalDue += floatval((($loans->amount * $loans->value) / 100) + $loans->amount);
         }
 
         return view('administrator.showRepayment', compact(['showRepayment', 'totalDue', 'totalPaid', 'id']));

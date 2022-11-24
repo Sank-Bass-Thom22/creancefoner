@@ -50,7 +50,7 @@ class LoanController extends Controller
             'amount' => floatval($request->amount),
             'startline' => $request->startline,
             'deadline' => $request->deadline,
-            'id_rate' => intval($request->rate),
+            'id_rate' => floatval($request->rate),
             'id_debtor' => intval(session()->get('id_debtor')),
         ]);
 

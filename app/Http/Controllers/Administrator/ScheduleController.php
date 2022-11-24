@@ -17,12 +17,10 @@ class ScheduleController extends Controller
 
     public function create($id)
     {
-        $repaymentAmount = Repaymentamount::select('minamount')->count();
-
-        if ($repaymentAmount === 0) {
+        if (Repaymentamount::doesntExist()) {
             return back()->withErrors(['minamount' => 'Veuiller d\'abord définir une grille minimale.']);
         } else {
-            $minAmount = Repaymentamount::value('minamount');
+            $minAmount = floatval(Repaymentamount::value('minamount'));
             session()->put('minamount', $minAmount);
             session()->put('id_debtor', $id);
         }
@@ -34,8 +32,8 @@ class ScheduleController extends Controller
     {
         $validatedData = $request->validated();
 
-        if ($request->amount < session()->get('minamount')) {
-            return back()->withErrors(['amount' => 'Le montant entré est inférieur au montant minimal.']);
+        if (floatval($request->amount) < session()->get('minamount')) {
+            return back()->withErrors(['amount' => 'Le montant entré est inférieur au montant minimal de ' . session()->get('minamount') . ' Francs.']);
         }
 
         Schedule::create([
@@ -43,7 +41,7 @@ class ScheduleController extends Controller
             'id_debtor' => intval(session()->get('id_debtor')),
         ]);
 
-        session()->put('schedule', $request->amount);
+        session()->put('schedule', floatval($request->amount));
 
         return redirect()->route('showrepayment', session()->get('id_debtor'))->with('success', 'Échéancier définit avec succès! :-)');
     }
