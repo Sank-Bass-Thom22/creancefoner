@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Debtor;
+namespace App\Http\Controllers\Employer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Loan\Document;
 
-class UsrDocumentController extends Controller
+class EmpDocumentController extends Controller
 {
     public function show()
     {

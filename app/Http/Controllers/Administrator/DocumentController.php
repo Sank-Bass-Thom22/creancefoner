@@ -12,7 +12,7 @@ class DocumentController extends Controller
 {
     public function index()
     {
-        $allDocument = Document::select('id', 'title', 'filelink')->orderBy('id', 'desc')->get();
+        $allDocument = Document::select('id', 'title', 'filelink')->orderBy('title', 'ASC')->get();
 
         return view('administrator.allDocument', compact('allDocument'));
     }

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Modification-Password</title>
+    <title>Modification-Telephone</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -16,15 +16,15 @@
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition updatepassword-page">
-    <div class="updatepassword-box">
+<body class="hold-transition updatetelephone-page">
+    <div class="updatetelephone-box">
         <div class="card">
-            <div class="card-body updatepassword-card-body">
-                <p class="updatepassword-box-msg">
-                <h1>Modification mot de passe</h1>
-                </p>
+            <div class="card-body updatetelephone-card-body">
+                <p .class="updatetelephone-box-msg">
+                <h1>Modification téléphone</h1>
+                </p><br />
 
-                <p class="updatepassword-box-error">
+                <p class="updatetelephone-box-error">
                     @if ($errors->any())
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -34,27 +34,19 @@
                 @endif
                 </p>
 
-                <p class="updatepassword-box-success">
+                <p class="updatetelephone-box-success">
                     @if (session()->get('success'))
                 <div class="alert alert-success">{{ session()->get('success') }}</div><br />
                 @endif
                 </p>
 
-                <form action="{{ route ('resetpassword') }}" method="POST">
+                <form action="{{ route ('resetemployertelephone') }}" method="POST">
                     @csrf
 
-            <div class="">
-                <label for="Oldpassword">Mot de passe actuel : </label>
-                <input id="Oldpassword" class="" type="password" name="oldpassword" required />
-            </div>
-            <div class="">
-                <label for="Password">Nouveau mot de passe : </label>
-                <input id="Password" class="" type="password" name="password" required />
-            </div>
-            <div class="">
-                <label for="Password_confirmation">Confirmez le nouveau mot de passe : </label>
-                <input id="Password_confirmation" class="" type="password" name="password_confirmation" required />
-            </div>
+                    <div class="input-group mb-3">
+                        <label for="Telephone">Numéro de téléphone : </label>
+                        <input type="telephone" class="form-control" placeholder="226 " id="Telephone" name="telephone" value="{{ $employerProfile->telephone }}" required />
+                    </div>
 
                     <!-- /.col -->
                     <div class="col-4">
@@ -77,7 +69,7 @@
         </div>
         <!-- /.card -->
     </div>
-    <!-- /.updatepassword-box -->
+    <!-- /.updatetelephone-box -->
 
     <!-- jQuery -->
     <script src="../../plugins/jquery/jquery.min.js"></script>

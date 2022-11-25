@@ -33,6 +33,28 @@
                 </div>
                 </p>
 
+                <section class="main">
+                    <p>
+                    <h1>Mes employés</h1>
+                    <ul>
+                        <a href="{{ route('myemployes') }}">VOIR</a>
+                    </ul>
+                    </p><br />
+
+                    <p>
+                    <h1>Mon profile</h1>
+                    <ul>
+                        <a href="{{ route('myemployerprofile') }}">VOIR</a>
+                    </ul>
+                    </p><br />
+
+                    <p>
+                    <h1>Documents utils</h1>
+                    <ul>
+                        <a href="{{ route('documents') }}">VOIR</a>
+                    </ul>
+                    </p>
+                </section>
             </div>
         </div>
     </div>
