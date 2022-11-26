@@ -27,17 +27,18 @@ class EmployerController extends Controller
     public function store(StoreEmployerRequest $request)
     {
         $credentialsValidated = $request->validated();
+        $password = Str::random(8);
 
         Debtor::create([
             'servicename' => $request->servicename,
             'email' => $request->email,
             'telephone' => $request->telephone,
-            'password' => Hash::make($request->password),
+            'password' => Hash::make($password),
             'serviceindex' => (string) Str::uuid(),
             'role' => 'Employer',
         ]);
 
-        return redirect()->route('registeremployer')->with('success', 'Structure enregistrée avec succès! :-)');
+        return redirect()->route('registeremployer')->with('success', 'Succès! :-) /Password : ' . $password);
     }
 
     public function show($id)

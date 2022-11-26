@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Inscription employeur</title>
+    <title>Modification-Fullname</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -16,45 +16,40 @@
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition register-page">
-    <div class="register-box">
+<body class="hold-transition updatefullname-page">
+    <div class="updatefullname-box">
         <div class="card">
-            <div class="card-body register-card-body">
-                <p class="register-box-msg">
-                <h1>Création d'un compte employeur</h1>
-                </p><br />
+            <div class="card-body updatefullname-card-body">
+                <p class="updatefullname-box-msg">
+                <h1>Modification nom prénom</h1>
+                </p>
 
-                <p class="register-box-error">
+                <p class="updatefullname-box-error">
                     @if ($errors->any())
                 <ul>
                     @foreach ($errors->all() as $error)
-                    <li><strong class="alert alert-danger">{{ $error }}</strong></li>
+                    <strong class="alert alert-danger">{{ $error }}</strong>
                     @endforeach
                 </ul><br />
                 @endif
                 </p>
 
-                <p class="register-box-success">
+                <p class="updatefullname-box-success">
                     @if (session()->get('success'))
                 <div class="alert alert-success">{{ session()->get('success') }}</div><br />
                 @endif
                 </p>
 
-                <form action="{{ route ('registeremployer') }}" method="POST">
+                <form action="{{ route ('updatefullname', $administratorProfile->id) }}" method="POST">
                     @csrf
                     <div class="input-group mb-3">
-                        <label for="Servicename">Nom de la structure : </label>
-                        <input type="text" class="form-control" id="Servicename" name="servicename" required />
+                        <label for="Firstname">Prénom : </label>
+                        <input type="text" class="form-control" id="Firstname" name="firstname" value="{{ $administratorProfile->firstname }}" required />
                     </div>
                     <div class="input-group mb-3">
-                        <label for="Email">Adresse E-mail : </label>
-                        <input type="email" class="form-control" id="Email" name="email" required />
+                        <label for="Lastname">Nom : </label>
+                        <input type="text" class="form-control" id="Lastname" name="lastname" value="{{ $administratorProfile->lastname }}" required />
                     </div>
-                    <div class="input-group mb-3">
-                        <label for="Telephone">Numéro de téléphone : </label>
-                        <input type="telephone" class="form-control" placeholder="226 " id="Telephone" name="telephone" required />
-                    </div>
-
                     <!-- /.col -->
                     <div class="col-4">
                         <button type="submit" class="btn btn-primary btn-block">VALIDER</button>
@@ -64,8 +59,8 @@
 
                 <hr>
 
-                <div class="adminlist-box-close">
-                    <form action="{{ route('dashboard') }}" method="GET">
+                <div class="debtor-box-close">
+                    <form action="{{ route('myadminprofile') }}" method="GET">
                         @csrf
 
                         <button type="submit">FERMER</button>
@@ -76,7 +71,7 @@
         </div>
         <!-- /.card -->
     </div>
-    <!-- /.register-box -->
+    <!-- /.updatefullname-box -->
 
     <!-- jQuery -->
     <script src="../../plugins/jquery/jquery.min.js"></script>

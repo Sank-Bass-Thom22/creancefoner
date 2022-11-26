@@ -7,6 +7,8 @@ use App\Models\Debtor\Debtor;
 use App\Http\Requests\StoreAdministratorRequest;
 use App\Http\Requests\UpdateAdministratorRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class AdministratorController extends Controller
 {
@@ -27,17 +29,18 @@ class AdministratorController extends Controller
     public function store(StoreAdministratorRequest $request)
     {
         $credentialsValidated = $request->validated();
+        $password = Str::random(8);
 
         Debtor::create([
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
             'email' => $request->email,
             'telephone' => $request->telephone,
-            'password' => Hash::make($request->password),
+            'password' => Hash::make($password),
             'role' => $request->role,
         ]);
 
-        return redirect()->route('registeradminsup')->with('success', 'Administrateur nommé avec succès! :-)');
+        return redirect()->route('registeradminsup')->with('success', 'Succès! :-) /Password : ' . $password);
     }
 
     public function show($id)
@@ -47,26 +50,24 @@ class AdministratorController extends Controller
         return view('administrator.showAdministrator', compact('showAdministrator'));
     }
 
-    public function edit($id)
+    public function edit($id, $resource)
     {
-        $editAdministrator = Debtor::find($id);
+        if ($id === 0) {
+            $id = Auth::user()->id;
+        }
 
-        return view('administrator.editAdministrator', compact('editAdministrator'));
+        $administratorProfile = Debtor::select('id', 'firstname', 'lastname', 'email', 'telephone', 'role')
+            ->find($id);
+
+        return view('administrator.' . $resource, compact('administratorProfile'));
     }
 
-    public function update(UpdateAdministratorRequest $request, $id)
+    public function profile()
     {
-        $credentialsValidated = $request->validated();
+        $id = Auth::user()->id;
+        $administratorProfile = Debtor::select('id', 'firstname', 'lastname', 'email', 'telephone', 'role')
+            ->find($id);
 
-        Debtor::whereId($id)->update([
-            'firstname' => $request->firstname,
-            'lastname' => $request->lastname,
-            'email' => $request->email,
-            'telephone' => $request->telephone,
-            'password' => Hash::make($request->password),
-            'role' => $request->role,
-        ]);
-
-        return redirect()->route('showadminsup', $id)->with('success', 'Administrateur modifié avec succès! :-)');
+        return view('administrator.profile', compact('administratorProfile'));
     }
 }

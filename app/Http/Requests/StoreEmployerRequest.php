@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules;
 
 class StoreEmployerRequest extends FormRequest
 {
@@ -26,10 +25,8 @@ class StoreEmployerRequest extends FormRequest
     {
         return [
             'servicename' => ['required', 'string', 'max:50'],
-'email' => ['required', 'string', 'email', 'max:50', 'unique:debtors'],
-'telephone' => ['required', 'string', 'max:25', 'unique:debtors'],
-'password' => ['required', 'confirmed', Rules\Password::defaults()],
-'role' => ['nullable', 'string', 'max:11'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:debtors'],
+            'telephone' => ['required', 'string', 'max:25', 'unique:debtors'],
         ];
     }
 }

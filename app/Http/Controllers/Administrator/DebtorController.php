@@ -7,6 +7,7 @@ use App\Models\Debtor\Debtor;
 use App\Http\Requests\StoreDebtorRequest;
 use App\Http\Requests\UpdateDebtorRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DebtorController extends Controller
 {
@@ -28,6 +29,7 @@ class DebtorController extends Controller
     public function store(StoreDebtorRequest $request)
     {
         $credentialsValidated = $request->validated();
+        $password = STR::random(8);
 
         $id_debtor = Debtor::insertGetId([
             'firstname' => $request->firstname,
@@ -36,7 +38,7 @@ class DebtorController extends Controller
             'telephone' => $request->telephone,
             'matricule' => $request->matricule,
             'debtorindex' => $request->debtorindex,
-            'password' => Hash::make('12345678'),
+            'password' => Hash::make($password),
             'role' => 'Debtor',
         ]);
 
@@ -47,7 +49,7 @@ class DebtorController extends Controller
         session()->put('id_debtor', $id_debtor);
         session()->put('fullname', $request->firstname . ' ' . $request->lastname);
 
-        return redirect()->route('createloan');
+        return redirect()->route('createloan')->with('success', $password);
     }
 
     public function show($id)

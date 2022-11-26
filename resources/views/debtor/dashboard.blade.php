@@ -22,7 +22,9 @@
             <div class="card-body dashboard-card-body">
                 <p class="dashboard-box-msg">
                 <div class="">
-                    {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}
+                    <a href="{{ route('myprofile') }}">
+                        {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}
+                    </a>
                 </div>
                 <div class="dashboard-box-close">
                     <form action="{{ route('logout') }}" method="POST">
@@ -45,13 +47,6 @@
                     <h1>Mon échéancier</h1>
                     <ul>
                         <a href="{{ route('createsimulation') }}">Simuler un échéancier</a>
-                    </ul>
-                    </p><br />
-
-                    <p>
-                    <h1>Mon profile</h1>
-                    <ul>
-                        <a href="{{ route('myprofile') }}">VOIR</a>
                     </ul>
                     </p><br />
 

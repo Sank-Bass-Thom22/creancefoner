@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules;
 
 class StoreAdministratorRequest extends FormRequest
 {
@@ -29,7 +28,6 @@ class StoreAdministratorRequest extends FormRequest
             'lastname' => ['required', 'string', 'max:25'],
             'email' => ['required', 'string', 'email', 'max:50', 'unique:debtors'],
             'telephone' => ['required', 'string', 'max:25', 'unique:debtors'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'role' => ['required', 'string', 'max:11'],
         ];
     }
