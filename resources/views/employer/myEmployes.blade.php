@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Liste des taux applicables</title>
+    <title>Mes employés</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -16,42 +16,29 @@
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition ratelist-page">
-    <div class="ratelist-box">
+<body class="hold-transition employeslist-page">
+    <div class="employeslist-box">
         <div class="card">
-            <div class="card-body ratelist-card-body">
-                <p class="ratelist-box-msg">
-                <h1 class="">Liste des taux</h1>
-                </p>
+            <div class="card-body employeslist-card-body">
+                <p class="employeslist-box-msg">
+                <h1 class="">Mes employés</h1>
+                </p><br />
 
-                <table class="">
-                    <tr>
-                        <th>TAUX</th>
-                        <th>VALIDITÉ</th>
-                        <th>OPTION SUPPLÉMENTAIRE</th>
-                    </tr>
-                    @forelse ($allRate as $rates)
-                    <tr>
-                        <td>{{ $rates->value }}%</td>
-                        <td>{{ $rates->validity }}</td>
-                        <td><a href="{{ route('showrate', $rates->id) }}" class="">VOIR PLUS</a></td>
-                    </tr>
+                <ol class="">
+                    @forelse ($myEmployes as $employes)
+                    <li><a href="{{ route('showemploye', $employes->id) }}" class="">{{ $employes->firstname }} {{ $employes->lastname }}</a></li>
                     @empty
-                    <tr>
-                        <td>
-                            <p class="ratelist-box-msg">Aucun taux enregistré! 😞</p>
-                        </td>
-                    </tr>
+                    <div class="employeslist-box-msg">Il semble que vous n'ayez aucun employé enregistré pour le moment.</div>
                     @endforelse
-                </table>
+                </ol>
 
                 <hr>
 
-                <div class="ratelist-box-close">
+                <div class="employeslist-box-close">
                     <form action="{{ route('dashboard') }}" method="GET">
                         @csrf
 
-                        <button type="submit">Fermer</button>
+                        <button type="submit">FERMER</button>
                     </form>
                 </div>
             </div>

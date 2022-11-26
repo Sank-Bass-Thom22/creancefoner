@@ -22,7 +22,9 @@
             <div class="card-body dashboard-card-body">
                 <p class="dashboard-box-msg">
                 <div class="">
-                    {{ Auth::user()->servicename }}
+                    <a href="{{ route('myemployerprofile') }}">
+                        {{ Auth::user()->servicename }}
+                    </a>
                 </div>
                 <div class="dashboard-box-close">
                     <form action="{{ route('logout') }}" method="POST">
@@ -33,6 +35,21 @@
                 </div>
                 </p>
 
+                <section class="main">
+                    <p>
+                    <h1>Mes employés</h1>
+                    <ul>
+                        <a href="{{ route('myemployes') }}">VOIR</a>
+                    </ul>
+                    </p><br />
+
+                    <p>
+                    <h1>Documents utils</h1>
+                    <ul>
+                        <a href="{{ route('documents') }}">VOIR</a>
+                    </ul>
+                    </p>
+                </section>
             </div>
         </div>
     </div>

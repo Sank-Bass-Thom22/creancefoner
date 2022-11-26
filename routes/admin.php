@@ -24,11 +24,8 @@ Route::middleware('auth')->group(function () {
         Route::get('showadminsup/{id}', [AdministratorController::class, 'show'])
             ->name('showadminsup');
 
-        Route::get('editadminsup/{id}', [AdministratorController::class, 'edit'])
-            ->name('editadminsup');
-
-        Route::post('updateadminsup/{id}', [AdministratorController::class, 'update'])
-            ->name('updateadminsup');
+        Route::post('updaterole/{id}', [AdministratorController::class, 'updaterole'])
+            ->name('updaterole');
 
         Route::get('createratesup', [RateController::class, 'create'])
             ->name('createratesup');
@@ -64,6 +61,24 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::middleware('superandsimple')->group(function () {
+        Route::get('myadminprofile', [AdministratorController::class, 'profile'])
+            ->name('myadminprofile');
+
+Route::get('editadministrator/{id}/{resource}', [AdministratorController::class, 'edit'])
+            ->name('editadministrator');
+
+        Route::post('updatefullname/{id}', [AdministratorController::class, 'updatefullname'])
+            ->name('updatefullname');
+
+        Route::post('updateemail/{id}', [AdministratorController::class, 'updateemail'])
+            ->name('updateemail');
+
+        Route::post('updatetelephone/{id}', [AdministratorController::class, 'updatetelephone'])
+            ->name('updatetelephone');
+
+        Route::post('updatepassword/{id}', [AdministratorController::class, 'updatepassword'])
+            ->name('updatepassword');
+
         Route::get('allemployer', [EmployerController::class, 'index'])
             ->name('allemployer');
 
@@ -163,5 +178,8 @@ Route::middleware('auth')->group(function () {
 
         Route::get('editschedule/{id}', [ScheduleController::class, 'edit'])
             ->name('editschedule');
+
+        Route::get('generator', [DebtorController::class, 'generator'])
+            ->name('generator');
     });
 });

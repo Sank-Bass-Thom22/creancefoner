@@ -23,7 +23,9 @@
                 <section class="header">
                     <p class="dashboard-box-msg">
                     <div class="">
-                        {{ Auth::user()->firstname }}
+                        <a href="{{ route('myadminprofile') }}">
+                            {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}
+                        </a>
                     </div>
                     <div class="dashboard-box-close">
                         <form action="{{ route('logout') }}" method="POST">

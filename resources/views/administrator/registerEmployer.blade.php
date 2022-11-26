@@ -22,7 +22,7 @@
             <div class="card-body register-card-body">
                 <p class="register-box-msg">
                 <h1>Création d'un compte employeur</h1>
-                </p>
+                </p><br />
 
                 <p class="register-box-error">
                     @if ($errors->any())
@@ -30,13 +30,13 @@
                     @foreach ($errors->all() as $error)
                     <li><strong class="alert alert-danger">{{ $error }}</strong></li>
                     @endforeach
-                </ul>
+                </ul><br />
                 @endif
                 </p>
 
                 <p class="register-box-success">
                     @if (session()->get('success'))
-                <div class="alert alert-success">{{ session()->get('success') }}</div>
+                <div class="alert alert-success">{{ session()->get('success') }}</div><br />
                 @endif
                 </p>
 
@@ -53,14 +53,6 @@
                     <div class="input-group mb-3">
                         <label for="Telephone">Numéro de téléphone : </label>
                         <input type="telephone" class="form-control" placeholder="226 " id="Telephone" name="telephone" required />
-                    </div>
-                    <div class="input-group mb-3">
-                        <label for="Password">Mot de passe : </label>
-                        <input type="password" class="form-control" id="Password" name="password" required autocomplete="new-password" />
-                    </div>
-                    <div class="input-group mb-3">
-                        <label for="Password_confirmation">Confirmer le mot de passe : </label>
-                        <input type="password" class="form-control" id="Password_confirmation" name="password_confirmation" required />
                     </div>
 
                     <!-- /.col -->

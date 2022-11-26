@@ -22,7 +22,7 @@
             <div class="card-body create-card-body">
                 <p class="create-box-msg">
                 <h1>Enregistrement d'un prêt</h1>
-                </p>
+                </p><br />
 
                 <p class="create-box-error">
                     @if ($errors->any())
@@ -36,7 +36,7 @@
 
                 <p class="create-box-success">
                     @if (session()->has('success'))
-                <div class="alert alert-success">{{ session()->get('success') }}</div>
+                <div class="alert alert-success">{{ session()->get('success') }}</div><br />
                 @endif
                 </p>
 

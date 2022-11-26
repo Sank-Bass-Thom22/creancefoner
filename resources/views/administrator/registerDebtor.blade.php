@@ -22,7 +22,7 @@
             <div class="card-body register-card-body">
                 <p class="register-box-msg">
                 <h1>Création d'un compte redevable</h1>
-                </p>
+                </p><br />
 
                 <p class="register-box-error">
                     @if ($errors->any())
@@ -30,13 +30,13 @@
                     @foreach ($errors->all() as $error)
                     <li><strong class="alert alert-danger">{{ $error }}</strong></li>
                     @endforeach
-                </ul>
+                </ul><br />
                 @endif
                 </p>
 
                 <p class="register-box-success">
                     @if (session()->get('success'))
-                <div class="alert alert-success">{{ session()->get('success') }}</div>
+                <div class="alert alert-success">{{ session()->get('success') }}</div><br />
                 @endif
                 </p>
 

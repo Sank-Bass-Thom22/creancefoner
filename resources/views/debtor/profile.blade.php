@@ -22,11 +22,11 @@
             <div class="card-body profile-card-body">
                 <p class="profile-box-msg">
                 <h1 class="">Mon profile</h1>
-                </p>
+                </p><br />
 
                 <p class="profile-box-success">
                     @if (session()->get('success'))
-                <div class="alert alert-success">{{ session()->get('success') }}</div>
+                <div class="alert alert-success">{{ session()->get('success') }}</div><br />
                 @endif
                 </p>
 
@@ -36,19 +36,70 @@
                     <ul>
                         Prénom : {{ $debtorProfile->firstname }}<br />
                         Nom : {{ $debtorProfile->lastname }}<br />
+                        <div>
+                            <form method="GET" action="{{ route('resetdebtorsaboutinfo', 'resetFullname') }}">
+                                @csrf
+
+                                <button type="submit">MODIFIER</button>
+                            </form>
+                        </div><br />
+
                         Adresse E-mail : {{ $debtorProfile->email }}<br />
-                        Numéro de téléphone : {{ $debtorProfile->telephone }}
+                        <div>
+                            <form method="GET" action="{{ route('resetdebtorsaboutinfo', 'resetEmail') }}">
+                                @csrf
+
+                                <button type="submit">MODIFIER</button>
+                            </form>
+                        </div><br />
+
+                        Numéro de téléphone : +226 {{ $debtorProfile->telephone }}
+                        <div>
+                            <form method="GET" action="{{ route('resetdebtorsaboutinfo', 'resetTelephone') }}">
+                                @csrf
+
+                                <button type="submit">MODIFIER</button>
+                            </form>
+                        </div><br />
+
+                        Numéro matricule : {{ $debtorProfile->matricule }}
+                        <div>
+                            <form method="GET" action="{{ route('resetdebtorsaboutinfo', 'resetMatricule') }}">
+                                @csrf
+
+                                <button type="submit">MODIFIER</button>
+                            </form>
+                        </div><br />
+
+                        Mot de passe :
+                        <div>
+                            <form method="GET" action="{{ route('resetdebtorsaboutinfo', 'resetPassword') }}">
+                                @csrf
+
+                                <button type="submit">MODIFIER</button>
+                            </form>
+                        </div>
                     </ul>
-                    </p>
+                    </p><br />
 
                     <p>
                     <h2>Service</h2>
                     <ul>
-Nom de la structure : {{ $debtorService->servicename }}<br />
-Adresse E-mail : {{ $debtorService->email }}<br />
-Numéro de téléphone : {{ $debtorService->telephone }}
+                        Nom de la structure : {{ $debtorService->servicename }}<br />
+                        Adresse E-mail : {{ $debtorService->email }}<br />
+                        Numéro de téléphone : +226 {{ $debtorService->telephone }}
                     </ul>
                     </p>
+
+                    <hr>
+
+                    <div class="">
+                        <form method="GET" action="{{ route('dashboard') }}">
+                            @csrf
+
+                            <button type="submit">FERMER</button>
+                        </form>
+                    </div>
                 </section>
             </div>
         </div>
