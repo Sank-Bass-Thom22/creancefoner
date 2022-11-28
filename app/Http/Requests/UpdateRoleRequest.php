@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Request;
 
-class LoginDebtorRequest extends FormRequest
+class UpdateRoleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +24,7 @@ class LoginDebtorRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['required', 'email', 'string', 'max:50'],
-            'matricule' => ['required', 'string', 'max:10'],
+            'role' => ['required', 'string', 'max:11'],
         ];
     }
 }

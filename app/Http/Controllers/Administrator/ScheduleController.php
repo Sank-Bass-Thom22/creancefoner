@@ -53,16 +53,25 @@ class ScheduleController extends Controller
 
     public function edit($id)
     {
-        //
+        $debtorSchedule = Schedule::select('id', 'amount', 'id_debtor')->find($id);
+
+        return view('administrator.editSchedule', compact('debtorSchedule'));
     }
 
     public function update(UpdateScheduleRequest $request, $id)
     {
-        //
-    }
+        $validatedData = $request->validated();
 
-    public function destroy($id)
-    {
-        //
+        if (floatval($request->amount) < session()->get('minamount')) {
+            return back()->withErrors(['amount' => 'Le montant entré est inférieur au montant minimal de ' . session()->get('minamount') . ' Francs.']);
+        }
+
+        Schedule::whereId($id)->update([
+            'amount' => floatval($request->amount),
+        ]);
+
+        session()->put('schedule', floatval($request->amount));
+
+        return redirect()->route('showrepayment', session()->get('id_debtor'))->with('success', 'Échéancier modifié avec succès! :-)');
     }
 }

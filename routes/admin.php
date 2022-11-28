@@ -9,6 +9,7 @@ use App\Http\Controllers\Administrator\RepaymentController;
 use App\Http\Controllers\Administrator\RepaymentamountController;
 use App\Http\Controllers\Administrator\DocumentController;
 use App\Http\Controllers\Administrator\ScheduleController;
+use App\Http\Controllers\Administrator\ResearchController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
@@ -26,6 +27,9 @@ Route::middleware('auth')->group(function () {
 
         Route::post('updaterole/{id}', [AdministratorController::class, 'updaterole'])
             ->name('updaterole');
+
+        Route::get('regenerate/{id}', [AdministratorController::class, 'regenerate'])
+            ->name('regenerate');
 
         Route::get('createratesup', [RateController::class, 'create'])
             ->name('createratesup');
@@ -64,7 +68,7 @@ Route::middleware('auth')->group(function () {
         Route::get('myadminprofile', [AdministratorController::class, 'profile'])
             ->name('myadminprofile');
 
-Route::get('editadministrator/{id}/{resource}', [AdministratorController::class, 'edit'])
+        Route::get('editadministrator/{id}/{resource}', [AdministratorController::class, 'edit'])
             ->name('editadministrator');
 
         Route::post('updatefullname/{id}', [AdministratorController::class, 'updatefullname'])
@@ -90,8 +94,20 @@ Route::get('editadministrator/{id}/{resource}', [AdministratorController::class,
         Route::get('showemployer/{id}', [EmployerController::class, 'show'])
             ->name('showemployer');
 
-        Route::get('editemployer/{id}', [EmployerController::class, 'edit'])
+        Route::get('editemployer/{id}/{resource}', [EmployerController::class, 'edit'])
             ->name('editemployer');
+
+        Route::post('updateservicename/{id}', [EmployerController::class, 'updateservicename'])
+            ->name('updateservicename');
+
+        Route::post('updateemployeremail/{id}', [EmployerController::class, 'updateemail'])
+            ->name('updateemployeremail');
+
+        Route::post('updateemployertelephone/{id}', [EmployerController::class, 'updatetelephone'])
+            ->name('updateemployertelephone');
+
+        Route::get('empregenerate/{id}', [EmployerController::class, 'regenerate'])
+            ->name('empregenerate');
 
         Route::get('alldebtor', [DebtorController::class, 'index'])
             ->name('alldebtor');
@@ -104,8 +120,26 @@ Route::get('editadministrator/{id}/{resource}', [AdministratorController::class,
         Route::get('showdebtor/{id}', [DebtorController::class, 'show'])
             ->name('showdebtor');
 
-        Route::get('editdebtor/{id}', [DebtorController::class, 'edit'])
+        Route::get('editdebtor/{id}/{resource}', [DebtorController::class, 'edit'])
             ->name('editdebtor');
+
+        Route::post('updatedebtorfullname/{id}', [DebtorController::class, 'updatefullname'])
+            ->name('updatedebtorfullname');
+
+        Route::post('updatedebtoremail/{id}', [DebtorController::class, 'updateemail'])
+            ->name('updatedebtoremail');
+
+        Route::post('updatedebtortelephone/{id}', [DebtorController::class, 'updatetelephone'])
+            ->name('updatedebtortelephone');
+
+        Route::post('updatedebtormatricule/{id}', [DebtorController::class, 'updatematricule'])
+            ->name('updatedebtormatricule');
+
+        Route::post('updatedebtorservice/{id}', [DebtorController::class, 'updateservice'])
+            ->name('updatedebtorservice');
+
+        Route::get('debregenerate/{id}', [DebtorController::class, 'regenerate'])
+            ->name('debregenerate');
 
         Route::get('allrate', [RateController::class, 'index'])
             ->name('allrate');
@@ -155,6 +189,9 @@ Route::get('editadministrator/{id}/{resource}', [AdministratorController::class,
         Route::get('editloan/{id}', [LoanController::class, 'edit'])
             ->name('editloan');
 
+        Route::post('updateloan/{id}', [LoanController::class, 'update'])
+            ->name('updateloan');
+
         Route::get('createrepayment/{id}', [RepaymentController::class, 'create'])
             ->name('createrepayment');
 
@@ -166,6 +203,9 @@ Route::get('editadministrator/{id}/{resource}', [AdministratorController::class,
 
         Route::get('editrepayment/{id}', [RepaymentController::class, 'edit'])
             ->name('editrepayment');
+
+        Route::post('updaterepayment/{id}', [RepaymentController::class, 'update'])
+            ->name('updaterepayment');
 
         Route::get('createschedule/{id}', [ScheduleController::class, 'create'])
             ->name('createschedule');
@@ -179,7 +219,10 @@ Route::get('editadministrator/{id}/{resource}', [AdministratorController::class,
         Route::get('editschedule/{id}', [ScheduleController::class, 'edit'])
             ->name('editschedule');
 
-        Route::get('generator', [DebtorController::class, 'generator'])
-            ->name('generator');
+        Route::post('updateschedule/{id}', [ScheduleController::class, 'update'])
+            ->name('updateschedule');
+
+        Route::post('researchdebtor', [ResearchController::class, 'researchdebtor'])
+            ->name('researchdebtor');
     });
 });

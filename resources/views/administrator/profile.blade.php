@@ -37,7 +37,7 @@
                         Prénom : {{ $administratorProfile->firstname }}<br />
                         Nom : {{ $administratorProfile->lastname }}<br />
                         <div>
-                            <form method="GET" action="{{ route('editadministrator', 0, 'editFullname') }}">
+                            <form method="GET" action="{{ route('editadministrator', ['id' => 0, 'resource' => 'editFullname']) }}">
                                 @csrf
 
                                 <button type="submit">MODIFIER</button>
@@ -46,7 +46,7 @@
 
                         Adresse E-mail : {{ $administratorProfile->email }}<br />
                         <div>
-                            <form method="GET" action="{{ route('editadministrator', 0, 'editEmail') }}">
+                            <form method="GET" action="{{ route('editadministrator', ['id' => 0, 'resource' => 'editEmail']) }}">
                                 @csrf
 
                                 <button type="submit">MODIFIER</button>
@@ -55,7 +55,7 @@
 
                         Numéro de téléphone : +226 {{ $administratorProfile->telephone }}
                         <div>
-                            <form method="GET" action="{{ route('editadministrator', 0, 'editTelephone') }}">
+                            <form method="GET" action="{{ route('editadministrator', ['id' => 0, 'resource' => 'editTelephone']) }}">
                                 @csrf
 
                                 <button type="submit">MODIFIER</button>
@@ -64,7 +64,7 @@
 
                         Mot de passe :
                         <div>
-                            <form method="GET" action="{{ route('editadministrator', 0, 'editPassword') }}">
+                            <form method="GET" action="{{ route('editadministrator', ['id' => 0, 'resource' => 'editPassword']) }}">
                                 @csrf
 
                                 <button type="submit">MODIFIER</button>

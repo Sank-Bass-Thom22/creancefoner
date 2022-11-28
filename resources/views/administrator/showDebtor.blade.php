@@ -22,47 +22,90 @@
             <div class="card-body debtordetail-card-body">
                 <p class="debtordetail-box-msg">
                 <h1 class="">Détail redevable</h1>
-                </p>
+                </p><br />
 
                 <p class="debtordetail-box-success">
                     @if (session()->get('success'))
-                <div class="alert alert-success">{{ session()->get('success') }}</div>
+                <div class="alert alert-success">{{ session()->get('success') }}</div><br />
                 @endif
                 </p>
 
-                <p class="">
-                <h2 class="">Informations personnelles</h2>
+                <section class="main">
+                    <p>
+                    <h2 class="">Informations personnelles</h2>
 
-                <ul class="">
-                    <li>Prénom : {{ $showDebtor->firstname }}</li>
-                    <li>Nom : {{ $showDebtor->lastname }}</li>
-                    <li>Adresse E-mail : {{ $showDebtor->email }}</li>
-                    <li>Numéro de téléphone : +226 {{ $showDebtor->telephone }}</li>
-                </ul>
-                </p>
+                    <ul class="">
+                        Prénom : {{ $showDebtor->firstname }}<br />
+                        Nom : {{ $showDebtor->lastname }}<br />
+                        <div>
+                            <form method="GET" action="{{ route ('editdebtor', ['id' => $showDebtor->id, 'resource' => 'editDebtorFullname']) }}">
+                                @csrf
 
-                <p class="">
-                <h2 class="">Service</h2>
+                                <button type="submit">MODIFIER</button>
+                            </form>
+                        </div><br />
 
-                <ul class="">
-                    <li>Service : {{ $debtorService->servicename }}</li>
-                    <li>Adresse E-mail : {{ $debtorService->email }}</li>
-                    <li>Téléphone : +226 {{ $debtorService->telephone }}</li>
-                </ul>
-                </p>
+                        Adresse E-mail : {{ $showDebtor->email }}<br />
+                        <div>
+                            <form method="GET" action="{{ route ('editdebtor', ['id' => $showDebtor->id, 'resource' => 'editDebtorEmail']) }}">
+                                @csrf
+
+                                <button type="submit">MODIFIER</button>
+                            </form>
+                        </div><br />
+
+                        Numéro de téléphone : +226 {{ $showDebtor->telephone }}<br />
+                        <div>
+                            <form method="GET" action="{{ route ('editdebtor', ['id' => $showDebtor->id, 'resource' => 'editDebtorTelephone']) }}">
+                                @csrf
+
+                                <button type="submit">MODIFIER</button>
+                            </form>
+                        </div><br />
+
+                        Numéro matricule : {{ $showDebtor->matricule }}<br />
+                        <div>
+                            <form method="GET" action="{{ route ('editdebtor', ['id' => $showDebtor->id, 'resource' => 'editDebtorMatricule']) }}">
+                                @csrf
+
+                                <button type="submit">MODIFIER</button>
+                            </form>
+                        </div><br />
+
+                        Mot de passe :
+                        <div>
+                            <form method="GET" action="{{ route ('debregenerate', $showDebtor->id) }}">
+                                @csrf
+
+                                <button type="submit">REGÉNÉRER</button>
+                            </form>
+                        </div>
+                    </ul>
+                    </p><br />
+
+                    <p>
+                    <h2 class="">Service</h2>
+
+                    <ul class="">
+                        Service : {{ $debtorService->servicename }}<br />
+                        Adresse E-mail : {{ $debtorService->email }}<br />
+                        Téléphone : +226 {{ $debtorService->telephone }}<br />
+                        <div>
+                            <form method="GET" action="{{ route('editdebtor', ['id' => $showDebtor->id, 'resource' => 'editDebtorService']) }}">
+                                @csrf
+
+                                <button type="submit">MODIFIER LE SERVICE</button>
+                            </form>
+                        </div>
+                    </ul>
+                    </p>
+                </section>
 
                 <hr>
 
                 <div class="debtordetail-box-close">
                     <table>
                         <tr>
-                            <td>
-                                <form action="{{ route ('editdebtor', $showDebtor->id) }}" method="GET">
-                                    @csrf
-
-                                    <button type="submit">MODIFIER</button>
-                                </form>
-                            </td>
                             <td>
                                 <form action="{{ route ('showloan', $showDebtor->id) }}" method="GET">
                                     @csrf
@@ -80,6 +123,7 @@
                         </tr>
                     </table>
                 </div>
+
             </div>
         </div>
     </div>

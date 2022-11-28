@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Modification-Email</title>
+    <title>Modification-Debtor-Email</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -40,12 +40,12 @@
                 @endif
                 </p>
 
-                <form action="{{ route ('resetemployeremail') }}" method="POST">
+                <form action="{{ route ('updatedebtoremail', $debtorProfile->id) }}" method="POST">
                     @csrf
 
                     <div class="input-group mb-3">
                         <label for="Email">Adresse E-mail : </label>
-                        <input type="email" class="form-control" id="Email" name="email" value="{{ $employerProfile->email }}" required />
+                        <input type="email" class="form-control" id="Email" name="email" value="{{ $debtorProfile->email }}" required />
                     </div>
 
                     <!-- /.col -->
@@ -57,13 +57,14 @@
 
                 <hr>
 
-                <div class="employer-box-close">
-                    <form action="{{ route('myemployerprofile') }}" method="GET">
+                <div class="admin-box-close">
+                    <form action="{{ route('showdebtor', $debtorProfile->id) }}" method="GET">
                         @csrf
 
                         <button type="submit">FERMER</button>
                     </form>
                 </div>
+
             </div>
             <!-- /.form-box -->
         </div>

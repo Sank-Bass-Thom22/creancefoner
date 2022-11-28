@@ -57,8 +57,8 @@
 
                 <hr>
 
-                <div class="debtor-box-close">
-                    <form action="{{ route('myprofile') }}" method="GET">
+                <div class="employer-box-close">
+                    <form action="{{ route('myemployerprofile') }}" method="GET">
                         @csrf
 
                         <button type="submit">FERMER</button>

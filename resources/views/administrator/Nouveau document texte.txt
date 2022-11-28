@@ -1,9 +1,0 @@
-
-                        Niveau d'administration : {{ $administratorProfile->role }}
-                        <div>
-                            <form method="GET" action="{{ route('editadministrator', 'editRole') }}">
-                                @csrf
-
-                                <button type="submit">MODIFIER</button>
-                            </form>
-                        </div><br />

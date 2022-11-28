@@ -22,33 +22,64 @@
             <div class="card-body adminemployer-card-body">
                 <p class="adminemployer-box-msg">
                 <h1 class="">Détail employer</h1>
-                </p>
+                </p><br />
 
                 <p class="adminemployer-box-success">
                     @if (session()->get('success'))
-                <div class="alert alert-success">{{ session()->get('success') }}</div>
+                <div class="alert alert-success">{{ session()->get('success') }}</div><br />
                 @endif
                 </p>
 
-                <ul class="">
-                    <li>Raison sociale : {{ $showEmployer->servicename }}</li>
-                    <li>Adresse E-mail : {{ $showEmployer->email }}</li>
-                    <li>Numéro de téléphone : +226 {{ $showEmployer->telephone }}</li>
-                    <li>Nombre d'employé redevable : {{ $countDebtor }}</li>
-                </ul>
+                <section class="main">
+                    <p>
+                    <h3>Raison sociale</h3>
+                    <ul class="">
+                        Nom de la structure : {{ $showEmployer->servicename }}<br />
+                        <div>
+                            <form method="GET" action="{{ route('editemployer', ['id' => $showEmployer->id, 'resource' => 'editServicename']) }}">
+                                @csrf
+
+                                <button type="submit">MODIFIER</button>
+                            </form>
+                        </div><br />
+
+                        Adresse E-mail : {{ $showEmployer->email }}<br />
+                        <div>
+                            <form method="GET" action="{{ route('editemployer', ['id' => $showEmployer->id, 'resource' => 'editEmployerEmail']) }}">
+                                @csrf
+
+                                <button type="submit">MODIFIER</button>
+                            </form>
+                        </div><br />
+
+                        Numéro de téléphone : +226 {{ $showEmployer->telephone }}<br />
+                        <div>
+                            <form method="GET" action="{{ route('editemployer', ['id' => $showEmployer->id, 'resource' => 'editEmployerTelephone']) }}">
+                                @csrf
+
+                                <button type="submit">MODIFIER</button>
+                            </form>
+                        </div><br />
+
+                        Mot de passe :
+                        <div>
+                            <form method="GET" action="{{ route('empregenerate', $showEmployer->id) }}">
+                                @csrf
+
+                                <button type="submit">REGÉNÉRER</button>
+                            </form>
+                        </div><br />
+
+                        Nombre d'employé redevable : {{ $countDebtor }}
+                    </ul>
+                    </p>
+                </section>
 
                 <hr>
 
                 <div class="adminemployer-box-close">
                     <table>
                         <tr>
-                            <td>
-                                <form action="{{ route ('editemployer', $showEmployer->id) }}" method="GET">
-                                    @csrf
-
-                                    <button type="submit" class="">MODIFIER</button>
-                                </form>
-                            </td>
                             <td>
                                 <form action="" method="">
                                     @csrf
@@ -66,6 +97,7 @@
                         </tr>
                     </table>
                 </div>
+
             </div>
         </div>
     </div>

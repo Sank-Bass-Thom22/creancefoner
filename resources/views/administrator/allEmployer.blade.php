@@ -22,15 +22,23 @@
             <div class="card-body employerlist-card-body">
                 <p class="employerlist-box-msg">
                 <h1 class="">Liste des employeurs</h1>
+                </p><br />
+
+                <p class="employer-box-success">
+                    @if (session()->has('success'))
+                <div class="">{{ session()->get('success') }}</div><br />
+                @endif
                 </p>
 
-                <ol class="">
-                    @forelse ($allEmployer as $employers)
-                    <li><a href="{{ route('showemployer', $employers->id) }}" class="">{{ $employers->servicename }}</a></li>
-                    @empty
-                    <p class="employerlist-box-msg">Aucun employeur enregistré! :-) </p>
-                    @endforelse
-                </ol>
+                <section class="main">
+                    <ol class="">
+                        @forelse ($allEmployer as $employers)
+                        <li><a href="{{ route('showemployer', $employers->id) }}" class="">{{ $employers->servicename }}</a></li>
+                        @empty
+                        <div class="employerlist-box-msg">Aucun employeur enregistré! :-) </div>
+                        @endforelse
+                    </ol>
+                </section>
 
                 <hr>
 

@@ -13,7 +13,7 @@ class UpdateRepaymentRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class UpdateRepaymentRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'amount' => ['required', 'numeric'],
+            'repaymentdate' => ['required', 'date'],
+            'repaymentway' => ['required', 'string'],
         ];
     }
 }

@@ -52,19 +52,21 @@
                         <th>TOTAL DÛ</th>
                         <th>TOTAL PAYÉ</th>
                         <th>RESTE À PAYER</th>
+                        <th>ÉCHÉANCIER</th>
                     </tr>
                     <tr>
                         <td>{{ $totalDue }} Francs CFA</td>
                         <td>{{ $totalPaid }} Francs CFA</td>
                         <td>{{ $totalDue - $totalPaid }} Francs CFA</td>
+                        <td>
+                        @if (session()->get('schedule') > 0)
+                <div class="">{{ session()->get('schedule') }} Francs par mois</div>
+                @else
+                <div class="">Veuillez définir un échéancier!</div>
+                @endif
+                        </td>
                     </tr>
                 </table>
-                </p><br />
-
-                <p class="">
-                    @if (session()->has('schedule'))
-                <div class="">MONTANT DE L'ÉCHÉANCIER : {{ session()->get('schedule') }} Francs CFA</div>
-                @endif
                 </p><br />
 
                 <p class="loan-list">
@@ -108,7 +110,7 @@
                                     </form>
                                 </td>
                                 <td>
-                                    <form action="{{ route ('editschedule', $id) }}" method="GET">
+                                    <form action="{{ route ('editschedule', session()->get('id_schedule')) }}" method="GET">
                                         @csrf
 
                                         <button type="submit">MODIFIER L'ÉCHÉANCIER</button>

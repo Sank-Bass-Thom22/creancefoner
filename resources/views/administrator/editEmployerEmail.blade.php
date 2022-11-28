@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Modification-Password</title>
+    <title>Modification-Email</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -16,15 +16,15 @@
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition updatepassword-page">
-    <div class="updatepassword-box">
+<body class="hold-transition updateemail-page">
+    <div class="updateemail-box">
         <div class="card">
-            <div class="card-body updatepassword-card-body">
-                <p class="updatepassword-box-msg">
-                <h1>Modification mot de passe</h1>
+            <div class="card-body updateemail-card-body">
+                <p class="updateemail-box-msg">
+                <h1>Modification email</h1>
                 </p><br />
 
-                <p class="updatepassword-box-error">
+                <p class="updateemail-box-error">
                     @if ($errors->any())
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -34,26 +34,18 @@
                 @endif
                 </p>
 
-                <p class="updatepassword-box-success">
+                <p class="updateemail-box-success">
                     @if (session()->get('success'))
                 <div class="alert alert-success">{{ session()->get('success') }}</div><br />
                 @endif
                 </p>
 
-                <form action="{{ route ('updatepassword', $administratorProfile->id) }}" method="POST">
+                <form action="{{ route ('updateemployeremail', $employerProfile->id) }}" method="POST">
                     @csrf
 
-                    <div class="">
-                        <label for="Oldpassword">Mot de passe actuel : </label>
-                        <input id="Oldpassword" class="" type="password" name="oldpassword" required />
-                    </div>
-                    <div class="">
-                        <label for="Password">Nouveau mot de passe : </label>
-                        <input id="Password" class="" type="password" name="password" required />
-                    </div>
-                    <div class="">
-                        <label for="Password_confirmation">Confirmez le nouveau mot de passe : </label>
-                        <input id="Password_confirmation" class="" type="password" name="password_confirmation" required />
+                    <div class="input-group mb-3">
+                        <label for="Email">Adresse E-mail : </label>
+                        <input type="email" class="form-control" id="Email" name="email" value="{{ $employerProfile->email }}" required />
                     </div>
 
                     <!-- /.col -->
@@ -65,8 +57,8 @@
 
                 <hr>
 
-                <div class="debtor-box-close">
-                    <form action="{{ route('myadminprofile') }}" method="GET">
+                <div class="employer-box-close">
+                    <form action="{{ route('showemployer', $employerProfile->id) }}" method="GET">
                         @csrf
 
                         <button type="submit">FERMER</button>
@@ -77,7 +69,7 @@
         </div>
         <!-- /.card -->
     </div>
-    <!-- /.updatepassword-box -->
+    <!-- /.updateemail-box -->
 
     <!-- jQuery -->
     <script src="../../plugins/jquery/jquery.min.js"></script>

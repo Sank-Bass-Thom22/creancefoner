@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Modification-Email</title>
+    <title>Modification-Debtor-Fullname</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -16,15 +16,15 @@
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition updateemail-page">
-    <div class="updateemail-box">
+<body class="hold-transition updatefullname-page">
+    <div class="updatefullname-box">
         <div class="card">
-            <div class="card-body updateemail-card-body">
-                <p class="updateemail-box-msg">
-                <h1>Modification email</h1>
+            <div class="card-body updatefullname-card-body">
+                <p class="updatefullname-box-msg">
+                <h1>Modification nom prénom</h1>
                 </p><br />
 
-                <p class="updateemail-box-error">
+                <p class="updatefullname-box-error">
                     @if ($errors->any())
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -34,18 +34,21 @@
                 @endif
                 </p>
 
-                <p class="updateemail-box-success">
+                <p class="updatefullname-box-success">
                     @if (session()->get('success'))
                 <div class="alert alert-success">{{ session()->get('success') }}</div><br />
                 @endif
                 </p>
 
-                <form action="{{ route ('resetemployeremail') }}" method="POST">
+                <form action="{{ route('updatedebtorfullname', $debtorProfile->id) }}" method="POST">
                     @csrf
-
                     <div class="input-group mb-3">
-                        <label for="Email">Adresse E-mail : </label>
-                        <input type="email" class="form-control" id="Email" name="email" value="{{ $employerProfile->email }}" required />
+                        <label for="Firstname">Prénom : </label>
+                        <input type="text" class="form-control" id="Firstname" name="firstname" value="{{ $debtorProfile->firstname }}" required />
+                    </div>
+                    <div class="input-group mb-3">
+                        <label for="Lastname">Nom : </label>
+                        <input type="text" class="form-control" id="Lastname" name="lastname" value="{{ $debtorProfile->lastname }}" required />
                     </div>
 
                     <!-- /.col -->
@@ -57,19 +60,20 @@
 
                 <hr>
 
-                <div class="employer-box-close">
-                    <form action="{{ route('myemployerprofile') }}" method="GET">
+                <div class="admin-box-close">
+                    <form action="{{ route('showdebtor', $debtorProfile->id) }}" method="GET">
                         @csrf
 
                         <button type="submit">FERMER</button>
                     </form>
                 </div>
+
             </div>
             <!-- /.form-box -->
         </div>
         <!-- /.card -->
     </div>
-    <!-- /.updateemail-box -->
+    <!-- /.updatefullname-box -->
 
     <!-- jQuery -->
     <script src="../../plugins/jquery/jquery.min.js"></script>

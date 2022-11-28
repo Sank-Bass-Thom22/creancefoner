@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Modification-Email</title>
+    <title>Modification d'un échéancier</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -16,36 +16,41 @@
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition updateemail-page">
-    <div class="updateemail-box">
+<body class="hold-transition updateschedule-page">
+    <div class="updateschedule-box">
         <div class="card">
-            <div class="card-body updateemail-card-body">
-                <p class="updateemail-box-msg">
-                <h1>Modification email</h1>
+            <div class="card-body updateschedule-card-body">
+                <p class="updateschedule-box-msg">
+                <h1>Modification d'un échéancier</h1>
                 </p><br />
 
-                <p class="updateemail-box-error">
+                <p class="updateschedule-box-error">
                     @if ($errors->any())
                 <ul>
                     @foreach ($errors->all() as $error)
-                    <strong class="alert alert-danger">{{ $error }}</strong>
+                    <li><strong class="alert alert-danger">{{ $error }}</strong></li>
                     @endforeach
                 </ul><br />
                 @endif
                 </p>
 
-                <p class="updateemail-box-success">
+                <p class="updateschedule-box-success">
                     @if (session()->get('success'))
                 <div class="alert alert-success">{{ session()->get('success') }}</div><br />
                 @endif
                 </p>
 
-                <form action="{{ route ('resetemployeremail') }}" method="POST">
-                    @csrf
+                <p class="updateschedule-box-fullname">
+                    @if (session()->has('fullname'))
+                <div class="alert alert-success">{{ session()->get('fullname') }}</div><br />
+                @endif
+                </p>
 
+                <form action="{{ route ('updateschedule', $debtorSchedule->id) }}" method="POST">
+                    @csrf
                     <div class="input-group mb-3">
-                        <label for="Email">Adresse E-mail : </label>
-                        <input type="email" class="form-control" id="Email" name="email" value="{{ $employerProfile->email }}" required />
+                        <label for="Amount">Montant de l'échéancier : </label>
+                        <input type="number" class="form-control" id="Amount" name="amount" value="{{ $debtorSchedule->amount }}" required />
                     </div>
 
                     <!-- /.col -->
@@ -57,8 +62,8 @@
 
                 <hr>
 
-                <div class="employer-box-close">
-                    <form action="{{ route('myemployerprofile') }}" method="GET">
+                <div class="adminlist-box-close">
+                    <form action="{{ route('showrepayment', $debtorSchedule->id_debtor) }}" method="GET">
                         @csrf
 
                         <button type="submit">FERMER</button>
@@ -69,7 +74,7 @@
         </div>
         <!-- /.card -->
     </div>
-    <!-- /.updateemail-box -->
+    <!-- /.updateschedule-box -->
 
     <!-- jQuery -->
     <script src="../../plugins/jquery/jquery.min.js"></script>

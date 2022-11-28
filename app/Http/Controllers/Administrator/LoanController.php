@@ -50,7 +50,7 @@ class LoanController extends Controller
             'amount' => floatval($request->amount),
             'startline' => $request->startline,
             'deadline' => $request->deadline,
-            'id_rate' => floatval($request->rate),
+            'id_rate' => intval($request->rate),
             'id_debtor' => intval(session()->get('id_debtor')),
         ]);
 
@@ -74,16 +74,25 @@ class LoanController extends Controller
 
     public function edit($id)
     {
-        //
+        $debtorLoan = Loan::select('id', 'amount', 'startline', 'deadline', 'id_debtor')->find($id);
+        $allRates = Rate::select('id', 'value')->orderBy('value', 'asc')->get();
+
+        return view('administrator.editLoan', compact(['debtorLoan', 'allRates']));
     }
 
     public function update(UpdateLoanRequest $request, $id)
     {
-        //
-    }
+        $validatedData = $request->validated();
 
-    public function destroy($id)
-    {
-        //
+        Loan::whereId($id)->update([
+            'amount' => floatval($request->amount),
+            'startline' => $request->startline,
+            'deadline' => $request->deadline,
+            'id_rate' => intval($request->rate),
+        ]);
+
+        $id_debtor = Loan::whereId($id)->value('id_debtor');
+
+        return redirect()->route('showloan', $id_debtor)->with('success', 'Prêt modifié avec succès! :-)');
     }
 }

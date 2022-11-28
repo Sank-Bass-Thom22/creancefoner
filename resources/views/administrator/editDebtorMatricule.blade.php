@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Modification-Email</title>
+    <title>Modification-Debtor-Matricule</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -16,15 +16,15 @@
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition updateemail-page">
-    <div class="updateemail-box">
+<body class="hold-transition updatematricule-page">
+    <div class="updatematricule-box">
         <div class="card">
-            <div class="card-body updateemail-card-body">
-                <p class="updateemail-box-msg">
-                <h1>Modification email</h1>
+            <div class="card-body updatematricule-card-body">
+                <p class="updatematricule-box-msg">
+                <h1>Modification matricule</h1>
                 </p><br />
 
-                <p class="updateemail-box-error">
+                <p class="updatematricule-box-error">
                     @if ($errors->any())
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -34,18 +34,18 @@
                 @endif
                 </p>
 
-                <p class="updateemail-box-success">
+                <p class="updatematricule-box-success">
                     @if (session()->get('success'))
                 <div class="alert alert-success">{{ session()->get('success') }}</div><br />
                 @endif
                 </p>
 
-                <form action="{{ route ('resetemployeremail') }}" method="POST">
+                <form action="{{ route ('updatedebtormatricule', $debtorProfile->id) }}" method="POST">
                     @csrf
 
                     <div class="input-group mb-3">
-                        <label for="Email">Adresse E-mail : </label>
-                        <input type="email" class="form-control" id="Email" name="email" value="{{ $employerProfile->email }}" required />
+                        <label for="Matricule">Numéro matricule : </label>
+                        <input type="text" class="form-control" id="Matricule" name="matricule" value="{{ $debtorProfile->matricule }}" required />
                     </div>
 
                     <!-- /.col -->
@@ -57,8 +57,8 @@
 
                 <hr>
 
-                <div class="employer-box-close">
-                    <form action="{{ route('myemployerprofile') }}" method="GET">
+                <div class="admin-box-close">
+                    <form action="{{ route('showdebtor', $debtorProfile->id) }}" method="GET">
                         @csrf
 
                         <button type="submit">FERMER</button>
@@ -69,7 +69,7 @@
         </div>
         <!-- /.card -->
     </div>
-    <!-- /.updateemail-box -->
+    <!-- /.updatematricule-box -->
 
     <!-- jQuery -->
     <script src="../../plugins/jquery/jquery.min.js"></script>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Modification employeur</title>
+    <title>Modification d'un remboursement</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -16,51 +16,54 @@
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition update-page">
-    <div class="update-box">
+<body class="hold-transition updaterepayment-page">
+    <div class="updaterepayment-box">
         <div class="card">
-            <div class="card-body update-card-body">
-                <p class="update-box-msg">
-                <h1>Modification d'un compte employeur</h1>
-                </p>
+            <div class="card-body updaterepayment-card-body">
+                <p class="updaterepayment-box-msg">
+                <h1>Modification d'un remboursement</h1>
+                </p><br />
 
-                <p class="update-box-error">
+                <p class="updaterepayment-box-error">
                     @if ($errors->any())
                 <ul>
                     @foreach ($errors->all() as $error)
                     <li><strong class="alert alert-danger">{{ $error }}</strong></li>
                     @endforeach
-                </ul>
+                </ul><br />
                 @endif
                 </p>
 
-                <p class="update-box-success">
+                <p class="updaterepayment-box-success">
                     @if (session()->get('success'))
                 <div class="alert alert-success">{{ session()->get('success') }}</div>
                 @endif
                 </p>
 
-                <form action="{{ route ('updateemployer', $editEmployer->id) }}" method="POST">
+                <p class="updaterepayment-box-fullname">
+                    @if (session()->has('fullname'))
+                <div class="alert alert-success">{{ session()->get('fullname') }}</div>
+                @endif
+                </p>
+
+                <form action="{{ route ('updaterepayment', $debtorRepayment->id) }}" method="POST">
                     @csrf
                     <div class="input-group mb-3">
-                        <label for="Servicename">Nom de la structure : </label>
-                        <input type="text" class="form-control" id="Servicename" name="servicename" value="{{ $editEmployer->servicename }}" required />
+                        <label for="Amount">Montant du remboursement : </label>
+                        <input type="number" class="form-control" id="Amount" name="amount" value="{{ $debtorRepayment->amount }}" required />
                     </div>
                     <div class="input-group mb-3">
-                        <label for="Email">Adresse E-mail : </label>
-                        <input type="email" class="form-control" id="Email" name="email" value="{{ $editEmployer->email }}" required />
+                        <label for="Repaymentdate">Date du remboursement : </label>
+                        <input type="date" class="form-control" id="Repaymentdate" name="repaymentdate" value="{{ $debtorRepayment->repaymentdate }}" required />
                     </div>
                     <div class="input-group mb-3">
-                        <label for="Telephone">Numéro de téléphone : </label>
-                        <input type="telephone" class="form-control" id="Telephone" name="telephone" value="{{ $editEmployer->telephone }}" required />
-                    </div>
-                    <div class="input-group mb-3">
-                        <label for="Password">Mot de passe : </label>
-                        <input type="password" class="form-control" id="Password" name="password" required autocomplete="new-password" />
-                    </div>
-                    <div class="input-group mb-3">
-                        <label for="Password_confirmation">Confirmer le mot de passe : </label>
-                        <input type="password" class="form-control" id="Password_confirmation" name="password_confirmation" required />
+                        <label for="Repaymentway">Méthode de remboursement : </label>
+                        <select id="Repaymentway" name="repaymentway" required>
+                            <option value=""></option>
+                            <option value="En espèces">En espèces</option>
+                            <option value="Virement banquaire">Par virement banquaire</option>
+                            <option value="Par checque">Par checque</option>
+                        </select>
                     </div>
 
                     <!-- /.col -->
@@ -73,7 +76,7 @@
                 <hr>
 
                 <div class="adminlist-box-close">
-                    <form action="{{ route('showemployer', $editEmployer->id) }}" method="GET">
+                    <form action="{{ route('showrepayment', $debtorRepayment->id_debtor) }}" method="GET">
                         @csrf
 
                         <button type="submit">FERMER</button>
@@ -84,7 +87,7 @@
         </div>
         <!-- /.card -->
     </div>
-    <!-- /.update-box -->
+    <!-- /.updaterepayment-box -->
 
     <!-- jQuery -->
     <script src="../../plugins/jquery/jquery.min.js"></script>

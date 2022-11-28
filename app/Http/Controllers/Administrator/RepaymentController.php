@@ -57,11 +57,14 @@ class RepaymentController extends Controller
         $totalPaid = floatval(Repayment::where('id_debtor', $id)->sum('amount'));
 
         if (Schedule::where([['visibility', true], ['id_debtor', $id]])->exists()) {
-            $schedule = floatval(Schedule::where([['visibility', true], ['id_debtor', $id]])->value('amount'));
+            $schedule = Schedule::where([['visibility', true], ['id_debtor', $id]])
+                ->select('id', 'amount')->first();
 
-            session()->put('schedule', $schedule);
+            session()->put('schedule', floatval($schedule->amount));
+            session()->put('id_schedule', intval($schedule->id));
         } else {
             session()->put('schedule', 0);
+            session()->put('id_schedule', 0);
         }
 
         $showLoan = Loan::where('id_debtor', $id)
@@ -77,16 +80,23 @@ class RepaymentController extends Controller
 
     public function edit($id)
     {
-        //
+        $debtorRepayment = Repayment::select('id', 'amount', 'repaymentdate', 'repaymentway', 'id_debtor')->find($id);
+
+        return view('administrator.editRepayment', compact('debtorRepayment'));
     }
 
     public function update(UpdateRepaymentRequest $request, $id)
     {
-        //
-    }
+        $validatedData = $request->validated();
 
-    public function destroy($id)
-    {
-        //
+        Repayment::whereId($id)->update([
+            'amount' => floatval($request->amount),
+            'repaymentdate' => $request->repaymentdate,
+            'repaymentway' => $request->repaymentway,
+        ]);
+
+        $id_debtor = Repayment::whereId($id)->value('id_debtor');
+
+        return redirect()->route('showrepayment', $id_debtor)->with('success', 'Remboursement modifié avec succès! :-)');
     }
 }

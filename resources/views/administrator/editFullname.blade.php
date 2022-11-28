@@ -40,7 +40,7 @@
                 @endif
                 </p>
 
-                <form action="{{ route ('updatefullname', $administratorProfile->id) }}" method="POST">
+                <form action="{{ route('updatefullname', $administratorProfile->id) }}" method="POST">
                     @csrf
                     <div class="input-group mb-3">
                         <label for="Firstname">Prénom : </label>
@@ -59,12 +59,20 @@
 
                 <hr>
 
-                <div class="debtor-box-close">
+                <div class="admin-box-close">
+                    @if ($administratorProfile->id == Auth::user()->id)
                     <form action="{{ route('myadminprofile') }}" method="GET">
                         @csrf
 
                         <button type="submit">FERMER</button>
                     </form>
+                    @else
+                    <form action="{{ route('showadminsup', $administratorProfile->id) }}" method="GET">
+                        @csrf
+
+                        <button type="submit">FERMER</button>
+                    </form>
+                    @endif
                 </div>
             </div>
             <!-- /.form-box -->
