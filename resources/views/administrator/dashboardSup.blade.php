@@ -1,103 +1,58 @@
-<!DOCTYPE html>
-<html lang="fr">
+@extends('layouts.app-master')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Créance FONER dashboard</title>
+@section('content')
 
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-    <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-</head>
-
-<body class="hold-transition dashboard-page">
-    <div class="dashboard-box">
-        <div class="card">
-            <div class="card-body dashboard-card-body">
-                <section class="header">
-                    <p class="dashboard-box-msg">
-                    <div class="">
-                        <a href="{{ route('myadminprofile') }}">
-                            {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}
-                        </a>
+<div class="row">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card gradient-1">
+                            <div class="card-body">
+                                <h3 class="card-title text-white">Products Sold</h3>
+                                <div class="d-inline-block">
+                                    <h2 class="text-white">4565</h2>
+                                    <p class="text-white mb-0">Jan - March 2019</p>
+                                </div>
+                                <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="dashboard-box-close">
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-
-                            <button type="submit">Se déconnecter</button>
-                        </form>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card gradient-2">
+                            <div class="card-body">
+                                <h3 class="card-title text-white">Net Profit</h3>
+                                <div class="d-inline-block">
+                                    <h2 class="text-white">$ 8541</h2>
+                                    <p class="text-white mb-0">Jan - March 2019</p>
+                                </div>
+                                <span class="float-right display-5 opacity-5"><i class="fa fa-money"></i></span>
+                            </div>
+                        </div>
                     </div>
-                    </p>
-                </section><br /><br />
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card gradient-3">
+                            <div class="card-body">
+                                <h3 class="card-title text-white">New Customers</h3>
+                                <div class="d-inline-block">
+                                    <h2 class="text-white">4565</h2>
+                                    <p class="text-white mb-0">Jan - March 2019</p>
+                                </div>
+                                <span class="float-right display-5 opacity-5"><i class="fa fa-users"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card gradient-4">
+                            <div class="card-body">
+                                <h3 class="card-title text-white">Customer Satisfaction</h3>
+                                <div class="d-inline-block">
+                                    <h2 class="text-white">99%</h2>
+                                    <p class="text-white mb-0">Jan - March 2019</p>
+                                </div>
+                                <span class="float-right display-5 opacity-5"><i class="fa fa-heart"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                <section class="main">
-                    <p class="menu-item-1">
-                    <h1>Comptes</h1>
 
-                    <h2>Administrateur</h2>
+@endsection
 
-                    <ul>
-                        <a href="{{ route('alladminsup') }}">Liste des administrateurs</a><br />
-                        <a href="{{ route('registeradminsup') }}">Nommer un administrateur</a>
-                    </ul>
-
-                    <h2>Employeur</h2>
-
-                    <ul>
-                        <a href="{{ route('allemployer') }}">Liste des employeurs</a><br />
-                        <a href="{{ route('registeremployer') }}">Enregistrer un employeur</a>
-                    </ul>
-
-                    <h2>Redevable</h2>
-
-                    <ul>
-                        <a href="{{ route('alldebtor') }}">Liste des redevables</a><br />
-                        <a href="{{ route('registerdebtor') }}">Enregistrer un redevable</a>
-                    </ul>
-                    </p>
-
-                    <p class="menu-item-2">
-                    <h1>Informations Générales</h1>
-
-                    <h2>Documents utils</h2>
-
-                    <ul>
-                        <a href="{{ route ('alldocument') }}" class="">Liste des documents</a><br />
-                        <a href="{{ route('createdocument') }}" class="">Importer un document</a>
-                    </ul>
-
-                    <h2>Taux de remboursement</h2>
-
-                    <ul>
-                        <a href="{{ route('allrate') }}" class="">Liste des taux</a><br />
-                        <a href="{{ route('createratesup') }}" class="">Enregistrer un taux de remboursement</a>
-                    </ul>
-
-                    <h2>Grille de remboursement</h2>
-
-                    <ul>
-                        <a href="{{ route ('allrepaymentamount') }}" class="">Voir la grille</a><br />
-                        <a href="{{ route ('createrepaymentamountsup') }}" class="">Ajouter une grille</a>
-                    </ul>
-                    </p>
-                </section>
-            </div>
-        </div>
-    </div>
-
-    <!-- jQuery -->
-    <script src="../../plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="../../dist/js/adminlte.min.js"></script>
-</body>
-
-</html>

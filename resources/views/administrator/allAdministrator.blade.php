@@ -1,56 +1,51 @@
-<!DOCTYPE html>
-<html lang="fr">
+@extends('layouts.app-master')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Liste des administrateurs</title>
+@section('content')
 
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-    <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-</head>
 
-<body class="hold-transition adminlist-page">
-    <div class="adminlist-box">
-        <div class="card">
-            <div class="card-body adminlist-card-body">
-                <p class="adminlist-box-msg">
-                <h1 class="">Liste des administrateurs</h1>
-                </p>
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Liste des administrateurs</h4>
+                                <a href="" class="btn btn-danger btn-lg float-right" style="margin: 15px;">Retour</a>  
+                                <a href="{{ route ('registeradminsup') }}" class="btn btn-primary btn-lg float-right" style="margin: 15px;" >Nouveau</a>
+                                <div class="table-responsive">
+                                    <table class="table header-border">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>    
+                                                <th>Nom & prénom (s)</th>
+                                                <th>Email</th>
+                                                <th>Téléphone</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        @forelse ($allAdministrator as $administrators)
+                   
+                                            <tr>
+                                                <td>{{ $loop->index + 1}} </td>
+                                                <td>{{ $administrators->firstname }} {{ $administrators->lastname }}</td>
+                                                <td>{{ $administrators->email }}  </td>
+                                                <td>{{ $administrators->telephone }} </td>
+                                                <td></td>
+                                             
+                                            </tr>
 
-                <ol class="">
-                    @forelse ($allAdministrator as $administrators)
-                    <li><a href="{{ route ('showadminsup', $administrators->id) }}" class="">{{ $administrators->firstname }} {{ $administrators->lastname }}</a></li>
-                    @empty
-                    <p class="adminlist-box-msg">Aucun administrateur enregistré! :-) </p>
-                    @endforelse
-                </ol>
+                                        @empty
+                                            <tr>
+                                                <td colspan="5"></td>
+                                             
+                                             </tr>
 
-                <hr>
+                                        @endforelse
 
-                <div class="adminlist-box-close">
-                    <form action="{{ route('dashboard') }}" method="GET">
-                        @csrf
 
-                        <button type="submit">FERMER</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- jQuery -->
-    <script src="../../plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="../../dist/js/adminlte.min.js"></script>
-</body>
+                                          
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
 
-</html>
+@endsection

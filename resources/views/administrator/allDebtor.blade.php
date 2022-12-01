@@ -1,86 +1,81 @@
-<!DOCTYPE html>
-<html lang="fr">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Liste des redevables</title>
 
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-    <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-</head>
 
-<body class="hold-transition debtorlist-page">
-    <div class="debtorlist-box">
-        <div class="card">
-            <div class="card-body debtorlist-card-body">
-                <p class="debtorlist-box-msg">
-                <h1 class="">Liste des redevables</h1>
-                </p><br />
+@extends('layouts.app-master')
 
-                <p class="search-box">
-                <h3>Zone de recherche</h3>
+@section('content')
+
+
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Liste des redevables</h4>
+                                <p class="search-box">
+                                    
+             
                 <form method="POST" action="{{ route ('researchdebtor') }}">
                     @csrf
 
-                    <div class="">
-                        <label for="Research">Recherchez un redevable : </label>
-                        <input type="search" class="" id="Research" name="research" required />
+                        <div class="">
+                        
+                            <div class="header-left">
+                        <div class="input-group icons">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
+                            </div>
+                            <input type="search" class="form-control"  id="Research" name="research" required placeholder="Recherche redevable" >
+                            <button type=""  class="btn-info btn-lg">Valider</button>
+                        </div>
+                        
                     </div>
-                    <span class="">
-                        <button type="">RECHERCHER</button>
-                    </span>
+                    </div>
+             
                 </form>
                 </p><br />
 
-                <section class="research-box">
-                    @if (isset($key))
-                    <br /><h3>Résultat de recherche :</h3>
-                    <ol>
-                        @forelse ($result as $search)
-                        <li><a href="{{ route ('showdebtor', $search->id) }}" class="">{{ $search->firstname }} {{ $search->lastname }}</a></li>
-                        @empty
-                        <div class="">Aucun resultat.</div>
-                        @endforelse
-                    </ol><br /><br />
-                    @endif
-                </section>
 
-                <section class="main">
-                <ol class="">
-                    @forelse ($allDebtor as $debtors)
-                    <li><a href="{{ route('showdebtor', $debtors->id) }}" class="">{{ $debtors->firstname }} {{ $debtors->lastname }}</a></li>
-                    @empty
-                    <div class="debtorlist-box-msg">{{ $message }}</div>
-                    @endforelse
-                </ol>
-                </section>
+            
 
-                <hr>
 
-                <div class="debtorlist-box-close">
-                    <form action="{{ route('dashboard') }}" method="GET">
-                        @csrf
+                                <a href=" " class="btn btn-danger btn-lg float-right" style="margin: 15px;">Retour</a>  
+                                <a href="{{ route ('registerdebtor') }}" class="btn btn-primary btn-lg float-right" style="margin: 15px;" >Nouveau</a>
+                                <div class="table-responsive">
+                                    <table class="table header-border">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>    
+                                                <th>Nom & prénom (s)</th>
+                                                <th>Email</th>
+                                                <th>Téléphone</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @forelse ($allDebtor as $debtors)
+                    
+                                                <tr>
+                                                    <td>{{ $loop->index + 1}} </td>
+                                                    <td>{{ $debtors->firstname }} {{ $debtors->lastname }}</td>
+                                                    <td>{{ $debtors->email }} </td>
+                                                    <td> </td>
+                                                    <td></td>
+                                                
+                                                </tr>
 
-                        <button type="submit">FERMER</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+                                            @empty
+                                                <tr>
+                                                    <td colspan="5">{{ $message }}</td>
+                                                
+                                                </tr>
 
-    <!-- jQuery -->
-    <script src="../../plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="../../dist/js/adminlte.min.js"></script>
-</body>
+                                            @endforelse
 
-</html>
+
+
+                                          
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+@endsection

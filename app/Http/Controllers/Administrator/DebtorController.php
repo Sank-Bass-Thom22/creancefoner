@@ -17,7 +17,7 @@ class DebtorController extends Controller
 {
     public function index()
     {
-        $allDebtor = Debtor::where('role', 'Debtor')->select('id', 'firstname', 'lastname')
+        $allDebtor = Debtor::where('role', 'Debtor')
             ->orderBy('firstname', 'ASC')->get();
         $message = 'Il n\'y a aucun redevable enregistré.';
 

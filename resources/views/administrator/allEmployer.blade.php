@@ -1,64 +1,54 @@
-<!DOCTYPE html>
-<html lang="fr">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Liste des employeurs</title>
 
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-    <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-</head>
 
-<body class="hold-transition employerlist-page">
-    <div class="employerlist-box">
-        <div class="card">
-            <div class="card-body employerlist-card-body">
-                <p class="employerlist-box-msg">
-                <h1 class="">Liste des employeurs</h1>
-                </p><br />
+@extends('layouts.app-master')
 
-                <p class="employer-box-success">
-                    @if (session()->has('success'))
-                <div class="">{{ session()->get('success') }}</div><br />
-                @endif
-                </p>
+@section('content')
 
-                <section class="main">
-                    <ol class="">
-                        @forelse ($allEmployer as $employers)
-                        <li><a href="{{ route('showemployer', $employers->id) }}" class="">{{ $employers->servicename }}</a></li>
-                        @empty
-                        <div class="employerlist-box-msg">Aucun employeur enregistré! :-) </div>
-                        @endforelse
-                    </ol>
-                </section>
 
-                <hr>
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Liste des employeurs</h4>
+                                <a href="" class="btn btn-danger btn-lg float-right" style="margin: 15px;">Retour</a>  
+                                <a href="{{ route ('registeremployer') }}" class="btn btn-primary btn-lg float-right" style="margin: 15px;" >Nouveau</a>
+                                <div class="table-responsive">
+                                    <table class="table header-border">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>    
+                                                <th>Nom & prénom (s)</th>
+                                                <th>Email</th>
+                                                <th>Téléphone</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        @forelse ($allEmployer as $employers)
+                   
+                                            <tr>
+                                                <td>{{ $loop->index + 1}} </td>
+                                                <td>{{ $employers->firstname }} {{ $employers->lastname }}</td>
+                                                <td>{{ $employers->email }}  </td>
+                                                <td>{{ $employers->telephone }} </td>
+                                                <td></td>
+                                             
+                                            </tr>
 
-                <div class="employerlist-box-close">
-                    <form action="{{ route('dashboard') }}" method="GET">
-                        @csrf
+                                        @empty
+                                            <tr>
+                                                <td colspan="5"></td>
+                                             
+                                             </tr>
 
-                        <button type="submit">FERMER</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+                                        @endforelse
 
-    <!-- jQuery -->
-    <script src="../../plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="../../dist/js/adminlte.min.js"></script>
-</body>
 
-</html>
+
+                                          
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+@endsection

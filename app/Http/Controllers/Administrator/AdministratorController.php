@@ -22,7 +22,6 @@ class AdministratorController extends Controller
 
         $allAdministrator = Debtor::whereIn('role', ['SuperAdmin', 'SimpleAdmin'])
             ->where('id', '<>', $currentAdminId)
-            ->select('id', 'firstname', 'lastname')
             ->orderBy('firstname', 'ASC')->get();
 
         return view('administrator.allAdministrator', compact('allAdministrator'));
