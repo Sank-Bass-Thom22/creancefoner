@@ -13,14 +13,12 @@ class ResearchController extends Controller
         $validatedData = $request->validated();
         $key = $request->get('research');
 
-        $result = Debtor::where([['firstname', 'like', $key], ['role', 'Debtor']])
+        $allDebtor = Debtor::where([['firstname', 'like', $key], ['role', 'Debtor']])
             ->orWhere([['lastname', 'like', $key], ['role', 'Debtor']])
             ->orderBy('created_at', 'DESC')->get();
 
-        $allDebtor = Debtor::where('role', 'Debtor')->select('id', 'firstname', 'lastname')
-            ->orderBy('firstname', 'ASC')->get();
         $message = 'Il n\'y a aucun redevable enregistré.';
 
-        return view('administrator.allDebtor', compact(['allDebtor', 'message', 'result', 'key']));
+        return view('administrator.allDebtor', compact(['allDebtor', 'message']));
     }
 }
