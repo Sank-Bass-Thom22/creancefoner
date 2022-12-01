@@ -36,7 +36,7 @@
             
 
 
-                                <a href=" " class="btn btn-danger btn-lg float-right" style="margin: 15px;">Retour</a>  
+                                <a href="{{ route('dashboard') }} " class="btn btn-danger btn-lg float-right" style="margin: 15px;">Retour</a>  
                                 <a href="{{ route ('registerdebtor') }}" class="btn btn-primary btn-lg float-right" style="margin: 15px;" >Nouveau</a>
                                 <div class="table-responsive">
                                     <table class="table header-border">
