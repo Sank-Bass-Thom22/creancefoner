@@ -27,35 +27,32 @@
 
                 <form action="{{ route ('updateemployer', $employerProfile->id) }}" method="POST">
                     @csrf
-                    <div class="input-group mb-3">
-                        <label for="Servicename">Nom de la structure : </label>
+                    <div class="form-group ">
+                        <label for="Servicename">Nom de la structure </label>
                         <input type="text" class="form-control" id="Servicename" name="servicename" value="{{ $employerProfile->servicename }}" required />
                     </div>
-                    <div class="input-group mb-3">
-                        <label for="Email">Adresse E-mail : </label>
+                    <div class="form-group ">
+                        <label for="Email">Adresse E-mail </label>
                         <input type="email" class="form-control" id="Email" name="email" value="{{ $employerProfile->email }}" required />
                     </div>
-                    <div class="input-group mb-3">
-                        <label for="Telephone">Numéro de téléphone : </label>
+                    <div class="form-group">
+                        <label for="Telephone">Numéro de téléphone </label>
                         <input type="telephone" class="form-control" placeholder="226 " id="Telephone" name="telephone" value="{{ $employerProfile->telephone }}" required />
                     </div>
 
-                    <!-- /.col -->
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">VALIDER</button>
+                  
+                    <div class="form-group">
+       
+                        <button type="submit" class="btn mb-1 btn-primary">Valider</button>
+                    
+                        <a href="{{ route('allemployer') }}" class="btn mb-1 btn-danger">Retour</a> 
+                        
                     </div>
-                    <!-- /.col -->
+
+
                 </form>
 
-                <hr>
-
-                <div class="employer-box-close">
-                    <form action="{{ route('showemployer', $employerProfile->id) }}" method="GET">
-                        @csrf
-
-                        <button type="submit">FERMER</button>
-                    </form>
-                </div>
+             
             </div>
             <!-- /.form-box -->
         </div>

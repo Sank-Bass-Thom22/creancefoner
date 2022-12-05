@@ -2,33 +2,46 @@
 
 @section('content')
 
-    <div class="documentlist-box">
-        <div class="card">
-            <div class="card-body documentlist-card-body">
-                <p class="documentlist-box-msg">
-                <h1 class="">Documents utils</h1>
-                </p><br />
 
-                <section class="main">
-                    <ul>
-                        @forelse ($showDocuments as $documents)
-                        <a href="/storage/{{ $documents->filelink }}" class="" download="">{{ $documents->title }}</a><br />
-                        @empty
-                        Il n'y a aucun document enregistré pour le moment! 😞
-                        @endforelse
-                    </ul>
-                </section>
 
-                <hr>
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Documents utils</h4>
+                               
+                                    <table class="table header-border">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>    
+                                                <th>Titre</th>
+                                                <th>Fichier</th>
+                                               
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        @forelse ($showDocuments as $documents)
+                   
+                                            <tr>
+                                                <td>{{ $loop->index + 1}} </td>
+                                                <td>{{ $documents->title }} </td>
+                                                <td> <a href="/storage/{{ $documents->filelink }}" class="" download="">Télécharger</a>  </td>
 
-                <div class="documentlist-box-close">
-                    <form action="{{ route('dashboard') }}" method="GET">
-                        @csrf
+                                             
+                                            </tr>
 
-                        <button type="submit">FERMER</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+                                        @empty
+                                            <tr>
+                                                <td colspan="5"></td>
+                                             
+                                             </tr>
+
+                                        @endforelse
+
+
+
+                                          
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
 @endsection

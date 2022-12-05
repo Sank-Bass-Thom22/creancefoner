@@ -18,7 +18,7 @@
                                                 <th>#</th>    
                                                 <th>Montant Minimun</th>
                                                 <th>Montant Maximal</th>
-                                                <th>Option Suplémentaire</th>
+                                                <th>Description</th>
                                                                                               
                                                 <th>Action</th>
                                             </tr>
@@ -30,8 +30,15 @@
                                                 <td>{{ $loop->index + 1}} </td>
                                                 <td>{{ $repaymentamounts->minamount }} Francs CFA</td>
                                                 <td>{{ $repaymentamounts->maxamount }} Francs CFA</td>
-                                                <td><a href="{{ route('showrepaymentamount', $repaymentamounts->id) }}" class="">VOIR PLUS</a></td>
-                                                <td></td>
+                                                <td>
+                                                    {{ $repaymentamounts->description }}
+                                                </td>
+                                                <td>
+                                                @if (Auth::user()->role === "SuperAdmin")
+                                                    <a href="{{ route ('editrepaymentamountsup', $repaymentamounts->id) }}" class="">Modifier</a>
+                                                    <a href="{{ route('destroyrepaymentamountsup', $repaymentamounts->id) }}" class="">Supprimer</a>
+                                                @endif
+                                                </td>
                                              
                                             </tr>
 

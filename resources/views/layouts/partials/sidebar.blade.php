@@ -2,7 +2,7 @@
             <div class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
                     <li class="nav-label">Tableau de bord</li>
-                    <a href="/" aria-expanded="false">
+                    <a href="" aria-expanded="false">
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text"> Tableau de bord</span>
                         </a>
                     <li>

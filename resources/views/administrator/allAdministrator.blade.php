@@ -17,7 +17,7 @@
                                                 <th>Email</th>
                                                 <th>Téléphone</th>
                                                 <th>Responsabilité</th>
-                                                <th colspan="3">Action</th>
+                                                <th >Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -29,9 +29,13 @@
                                                 <td>{{ $administrators->email }}  </td>
                                                 <td>{{ $administrators->telephone }} </td>
                                                 <td>{{ $administrators->role }}</td>
-                                                <td><a href="{{ route ('editadministrator', $administrators->id) }}">MODIFIER</a></td>
-                                                <td><a href="{{ route ('deleteadministrator', $administrators->id) }}">SUPPRIMER</a></td>
-                                                <td><a href="{{ route('regenerate', $administrators->id) }}">GÉNÉRER UN NOUVEAU MOT DE PASSE</a></td>
+                                                <td>
+                                                @if (Auth::user()->role === "SuperAdmin")
+                                                <a href="{{ route ('editadministrator', $administrators->id) }}">MODIFIER</a>
+                                                <a href="{{ route ('deleteadministrator', $administrators->id) }}">SUPPRIMER</a>
+                                                <a href="{{ route('regenerate', $administrators->id) }}">GÉNÉRER UN NOUVEAU MOT DE PASSE</a>
+                                                @endif
+                                                </td>
 
                                             </tr>
 

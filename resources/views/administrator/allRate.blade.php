@@ -17,7 +17,7 @@
                                                 <th>#</th>    
                                                 <th>Taux</th>
                                                 <th>Validité</th>
-                                                <th>Option Suplémentaire</th>
+                                                <th>Description</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -28,9 +28,15 @@
                                                 <td>{{ $loop->index + 1}} </td>
                                                 <td>{{ $rates->value }}%</td>
                                                 <td>{{ $rates->validity }}</td>
-                                                <td><a href="{{ route('showrate', $rates->id) }}" class="">VOIR PLUS</a></td>
-                                                <td></td>
-                                             
+                                                <td>{{ $rates->description }}</td>
+                                                <td>
+                                                @if (Auth::user()->role === "SuperAdmin")
+                                                    <a href="{{ route ('editratesup', $rates->id) }}" class="">Modifier</a>
+                                                    <a href="{{ route('destroyratesup', $rates->id) }}" class="">Supprimer</a>
+                                                @endif
+                                                </td>
+                                              
+                                                
                                             </tr>
 
                                         @empty

@@ -8,16 +8,16 @@
         <h4 class="card-title">Liste des redevables</h4>
         <p class="search-box">
 
-                        <div class="">
-                        
-                            <div class="header-left">
-                        <div class="input-group icons">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
-                            </div>
-                            <input type="search" class="form-control"  id="Research" name="research" required placeholder="Recherche redevable" >
-                            <button type=""  class="btn-info btn-lg">Valider</button>
-                           
+
+        <form method="POST" action="{{ route ('researchdebtor') }}">
+            @csrf
+
+            <div class="">
+
+                <div class="header-left">
+                    <div class="input-group icons">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
                         </div>
                         <input type="search" class="form-control" id="Research" name="research" required placeholder="Recherche redevable">
                         <button type="" class="btn-info btn-lg">Valider</button>
@@ -44,7 +44,7 @@
                         <th>Email</th>
                         <th>Téléphone</th>
                         <th>Matricule</th>
-                        <th colspan="3">Action</th>
+                        <th >Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,9 +56,13 @@
                         <td>{{ $debtors->email }}</td>
                         <td>{{ $debtors->telephone }}</td>
                         <td>{{ $debtors->matricule }}</td>
-                        <td><a href="{{ route ('editdebtor', $debtors->id) }}">MODIFIER</a></td>
-                        <td><a href="{{ route ('deletedebtor', $debtors->id) }}">SUPPRIMER</a></td>
-                        <td><a href="{{ route('debregenerate', $debtors->id) }}">GÉNÉRER UN NOUVEAU MOT DE PASSE</a></td>
+                        <td>
+                        @if (Auth::user()->role === "SuperAdmin")
+                        <a href="{{ route ('editdebtor', $debtors->id) }}">MODIFIER</a>
+                        <a href="{{ route ('deletedebtor', $debtors->id) }}">SUPPRIMER</a>
+                        <a href="{{ route('debregenerate', $debtors->id) }}">GÉNÉRER UN NOUVEAU MOT DE PASSE</a>
+                        @endif
+                        </td>
 
                     </tr>
 

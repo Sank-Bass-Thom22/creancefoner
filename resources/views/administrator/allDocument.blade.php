@@ -17,7 +17,7 @@
                                                 <th>#</th>    
                                                 <th>Titre</th>
                                                 <th>Fichier</th>
-                                                <th>Option Suplémentaire</th>
+                                                <th>Description</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -28,8 +28,13 @@
                                                 <td>{{ $loop->index + 1}} </td>
                                                 <td>{{ $documents->title }} </td>
                                                 <td> <a href="/storage/{{ $documents->filelink }}" class="" download="">Télécharger</a>  </td>
-                                                <td> <a href="{{ route('showdocument', $documents->id) }}" class="">VOIR PLUS</a> </td>
-                                                <td></td>
+                                                <td> {{ $documents->description }} </td>
+                                                <td>
+                                                @if (Auth::user()->role === "SuperAdmin")
+                                                    <a href="{{ route ('editdocument', $documents->id) }}" class="">Modifier</a>
+                                                    <a href="{{ route('destroydocument', $documents->id) }}" class="">Supprimer</a>
+                                                @endif
+                                                </td>
                                              
                                             </tr>
 
