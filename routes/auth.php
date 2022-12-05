@@ -1,20 +1,17 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginOtherController;
-// use App\Http\Controllers\Auth\LoginDebtorController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
-    Route::get('loginother', [LoginOtherController::class, 'show'])
-        ->name('loginother');
+    Route::get('/', [LoginController::class, 'show'])
+        ->name('login');
 
-    // Route::get('logindebtor', [LoginDebtorController::class, 'show'])
-    // ->name('logindebtor');
+    Route::get('forgot-password', [LoginController::class, 'reset'])
+        ->name('forgot-password');
 
-    Route::post('loginother', [LoginOtherController::class, 'authenticate']);
-
-    // Route::post('logindebtor', [LoginDebtorController::class, 'authenticate']);
+    Route::post('login', [LoginController::class, 'authenticate']);
 });
 
 Route::middleware('auth')->group(function () {

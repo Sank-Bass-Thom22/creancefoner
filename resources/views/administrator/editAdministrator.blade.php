@@ -2,14 +2,14 @@
 
 @section('content')
 
-    <div class="updaterole-box">
+    <div class="updatefullname-box">
         <div class="card">
-            <div class="card-body updaterole-card-body">
-                <p class="updaterole-box-msg">
-                <h1>Modification niveau d'administration</h1>
-                </p><br />
+            <div class="card-body updatefullname-card-body">
+                <p class="updatefullname-box-msg">
+                <h1>Modification administrateur</h1>
+                </p>
 
-                <p class="updaterole-box-error">
+                <p class="updatefullname-box-error">
                     @if ($errors->any())
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -19,15 +19,30 @@
                 @endif
                 </p>
 
-                <p class="updaterole-box-success">
+                <p class="updatefullname-box-success">
                     @if (session()->get('success'))
                 <div class="alert alert-success">{{ session()->get('success') }}</div><br />
                 @endif
                 </p>
 
-                <form action="{{ route ('updaterole', $administratorProfile->id) }}" method="POST">
+                <form action="{{ route('updateadministrator', $administratorProfile->id) }}" method="POST">
                     @csrf
-
+                    <div class="input-group mb-3">
+                        <label for="Firstname">Prénom : </label>
+                        <input type="text" class="form-control" id="Firstname" name="firstname" value="{{ $administratorProfile->firstname }}" required />
+                    </div>
+                    <div class="input-group mb-3">
+                        <label for="Lastname">Nom : </label>
+                        <input type="text" class="form-control" id="Lastname" name="lastname" value="{{ $administratorProfile->lastname }}" required />
+                    </div>
+                    <div class="input-group mb-3">
+                        <label for="Email">Adresse E-mail : </label>
+                        <input type="email" class="form-control" id="Email" name="email" value="{{ $administratorProfile->email }}" required />
+                    </div>
+                    <div class="input-group mb-3">
+                        <label for="Telephone">Numéro de téléphone : </label>
+                        <input type="telephone" class="form-control" placeholder="226 " id="Telephone" name="telephone" value="{{ $administratorProfile->telephone }}" required />
+                    </div>
                     <div class="input-group mb-3">
                         <label for="Role">Niveau d'administration : </label>
                         <select class="form-control" id="Role" name="role" required>
@@ -54,7 +69,7 @@
                         <button type="submit">FERMER</button>
                     </form>
                     @else
-                    <form action="{{ route('showadminsup', $administratorProfile->id) }}" method="GET">
+                    <form action="{{ route('alladminsup') }}" method="GET">
                         @csrf
 
                         <button type="submit">FERMER</button>
@@ -66,6 +81,6 @@
         </div>
         <!-- /.card -->
     </div>
-    <!-- /.updaterole-box -->
+    <!-- /.updatefullname-box -->
 
 @endsection

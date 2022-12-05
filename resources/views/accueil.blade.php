@@ -22,7 +22,7 @@
 
         @if (Route::has('loginother'))
         <div class="">
-            @auth
+            @auth     
             <a href="{{ route('dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
             @else
             <h2><a href="{{ route('loginother') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Se connecter</a></h2>

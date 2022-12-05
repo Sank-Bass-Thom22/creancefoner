@@ -11,11 +11,11 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/images/favicon.png')}}">
     <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
-    
+
 </head>
 
 <body class="h-100">
-    
+
     <!--*******************
         Preloader start
     ********************-->
@@ -30,7 +30,7 @@
         Preloader end
     ********************-->
 
-    
+
 
 
 
@@ -49,13 +49,13 @@
                                     </ul>
                                 @endif
                                 <a class="text-center" href="index.html"> <h4>Connexion</h4></a>
-        
-                               
 
 
-                                <form action="{{ route('loginother') }}" method="POST">
+
+
+                                <form action="{{ route('login') }}" method="POST">
                                     @csrf
-                                   
+
                                     <div class="form-group">
                                         <input type="email" class="form-control"  id="Email" name="email" placeholder="Adresse E-mail" required>
                                     </div>
@@ -68,12 +68,12 @@
                                         <label for="Remember">
                                             Se souvenir de moi
                                         </label>
-                    
+
                                     </div>
 
                                     <button class="btn login-form__btn submit w-100">Se Connecter</button>
                                 </form>
-                                <p class="mt-5 login-form__footer">Mot de passe oublié ? <a href="" class="text-primary">Cliquez</a> ici</p>
+                                <p class="mt-5 login-form__footer">Mot de passe oublié ? <a href="{{ route ('forgot-password') }}" class="text-primary">Cliquez</a> ici</p>
                             </div>
                         </div>
                     </div>
@@ -84,9 +84,9 @@
 
 
 
-    
 
-    
+
+
 
     <!--**********************************
         Scripts

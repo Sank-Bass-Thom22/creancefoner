@@ -25,7 +25,7 @@
                 @endif
                 </p>
 
-                <form action="{{ route('updatedebtorfullname', $debtorProfile->id) }}" method="POST">
+                <form action="{{ route('updatedebtor', $debtorProfile->id) }}" method="POST">
                     @csrf
                     <div class="input-group mb-3">
                         <label for="Firstname">Prénom : </label>
@@ -35,6 +35,30 @@
                         <label for="Lastname">Nom : </label>
                         <input type="text" class="form-control" id="Lastname" name="lastname" value="{{ $debtorProfile->lastname }}" required />
                     </div>
+                    <div class="input-group mb-3">
+                        <label for="Email">Adresse E-mail : </label>
+                        <input type="email" class="form-control" id="Email" name="email" value="{{ $debtorProfile->email }}" required />
+                    </div>
+                    <div class="input-group mb-3">
+                        <label for="Telephone">Numéro de téléphone : </label>
+                        <input type="telephone" class="form-control" placeholder="226 " id="Telephone" name="telephone" value="{{ $debtorProfile->telephone }}" required />
+                    </div>
+                    <div class="input-group mb-3">
+                        <label for="Matricule">Numéro matricule : </label>
+                        <input type="text" class="form-control" id="Matricule" name="matricule" value="{{ $debtorProfile->matricule }}" required />
+                    </div>
+                    <div class="input-group mb-3">
+                            <label for="Serviceindex">Lieu de travail : </label>
+                            <select id="Serviceindex" name="serviceindex" required>
+                                <option></option>
+                                @forelse($allServices as $services)
+                                <option value="{{ $services->serviceindex }}">{{ $services->servicename }}</option>
+                                @empty
+                            </select><br />
+                            <div class="">Aucune structure enregistrÃ©e! ðŸ˜ž </div>
+                            @endforelse
+                            </select>
+                        </div>
 
                     <!-- /.col -->
                     <div class="col-4">

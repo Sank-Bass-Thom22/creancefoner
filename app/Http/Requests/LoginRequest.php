@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 
-class UpdateFullnameRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +25,8 @@ class UpdateFullnameRequest extends FormRequest
     public function rules()
     {
         return [
-            'firstname' => ['nullable', 'string', 'max:25'],
-            'lastname' => ['nullable', 'string', 'max:50'],
-            'servicename' => ['nullable', 'string', 'max:50'],
+            'email' => ['required', 'email', 'string', 'max:50'],
+            'password' => ['required'],
         ];
     }
 }

@@ -5,11 +5,7 @@ namespace App\Http\Controllers\Administrator;
 use App\Http\Controllers\Controller;
 use App\Models\Debtor\Debtor;
 use App\Http\Requests\StoreDebtorRequest;
-use App\Http\Requests\UpdateFullnameRequest;
-use App\Http\Requests\UpdateEmailRequest;
-use App\Http\Requests\UpdateTelephoneRequest;
-use App\Http\Requests\UpdateMatriculeRequest;
-use App\Http\Requests\UpdateServiceRequest;
+use App\Http\Requests\UpdateDebtorRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -43,7 +39,7 @@ class DebtorController extends Controller
             'email' => $request->email,
             'telephone' => $request->telephone,
             'matricule' => $request->matricule,
-            'debtorindex' => $request->debtorindex,
+            'debtorindex' => $request->serviceindex,
             'password' => Hash::make($password),
             'role' => 'Debtor',
         ]);
@@ -70,68 +66,27 @@ class DebtorController extends Controller
         return view('administrator.showDebtor', compact(['showDebtor', 'debtorService']));
     }
 
-    public function edit($id, $resource)
+    public function edit($id)
     {
-        $debtorProfile = Debtor::select('id', 'firstname', 'lastname', 'email', 'telephone', 'matricule')->find($id);
+        $debtorProfile = Debtor::find($id);
         $allServices = Debtor::where('role', 'Employer')->select('servicename', 'serviceindex')->orderBy('servicename', 'ASC')->get();
 
-        return view('administrator.' . $resource, compact(['debtorProfile', 'allServices']));
+        return view('administrator.editDebtor', compact(['debtorProfile', 'allServices']));
     }
 
-    public function updatefullname(UpdateFullnameRequest $request, $id)
+    public function update(UpdateDebtorRequest $request, $id)
     {
         $validatedData = $request->validated();
 
         Debtor::whereId($id)->update([
-            'firstname' => ucfirst($request->firstname),
-            'lastname' => ucfirst($request->lastname),
-        ]);
-
-        return redirect()->route('showdebtor', $id)->with('success', 'Informations modifiées avec succès! :-)');
-    }
-
-    public function updateemail(UpdateEmailRequest $request, $id)
-    {
-        $validatedData = $request->validated();
-
-        Debtor::whereId($id)->update([
+            'firstname' => ucwords(strlower($request->firstname)),
+            'lastname' => ucwords(strlower($request->lastname)),
             'email' => strtolower($request->email),
-        ]);
-
-        return redirect()->route('showdebtor', $id)->with('success', 'Email modifiées avec succès! :-)');
-    }
-
-    public function updatetelephone(UpdateTelephoneRequest $request, $id)
-    {
-        $validatedData = $request->validated();
-
-        Debtor::whereId($id)->update([
             'telephone' => $request->telephone,
-        ]);
-
-        return redirect()->route('showdebtor', $id)->with('success', 'Numéro de téléphone modifiées avec succès! :-)');
-    }
-
-    public function updatematricule(UpdateMatriculeRequest $request, $id)
-    {
-        $validatedData = $request->validated();
-
-        Debtor::whereId($id)->update([
             'matricule' => $request->matricule,
-        ]);
-
-        return redirect()->route('showdebtor', $id)->with('success', 'Numéro matricule modifiées avec succès! :-)');
-    }
-
-    public function updateservice(UpdateServiceRequest $request, $id)
-    {
-        $validatedData = $request->validated();
-
-        Debtor::whereId($id)->update([
             'debtorindex' => $request->serviceindex,
         ]);
-
-        return redirect()->route('showdebtor', $id)->with('success', 'Service modifiées avec succès! :-)');
+        return redirect()->route('showdebtor', $id)->with('success', 'Informations modifiées avec succès! :-)');
     }
 
     public function regenerate($id)
@@ -143,5 +98,13 @@ class DebtorController extends Controller
         ]);
 
         return redirect()->route('showdebtor', $id)->with('success', 'Succès! Le nouveau mot de passe est : ' . $newPassword);
+    }
+
+    public function destroy($id)
+    {
+        $debtorProfile = Debtor::find($id);
+        $debtorProfile->delete();
+
+        return redirect()->route('alldebtor')->with('success', 'Redevable supprimé avec succès!');
     }
 }

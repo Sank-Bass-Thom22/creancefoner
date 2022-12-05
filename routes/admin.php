@@ -68,17 +68,14 @@ Route::middleware('auth')->group(function () {
         Route::get('myadminprofile', [AdministratorController::class, 'profile'])
             ->name('myadminprofile');
 
-        Route::get('editadministrator/{id}/{resource}', [AdministratorController::class, 'edit'])
+        Route::get('editadministrator/{id}', [AdministratorController::class, 'edit'])
             ->name('editadministrator');
 
-        Route::post('updatefullname/{id}', [AdministratorController::class, 'updatefullname'])
-            ->name('updatefullname');
+        Route::post('updateadministrator/{id}', [AdministratorController::class, 'update'])
+            ->name('updateadministrator');
 
-        Route::post('updateemail/{id}', [AdministratorController::class, 'updateemail'])
-            ->name('updateemail');
-
-        Route::post('updatetelephone/{id}', [AdministratorController::class, 'updatetelephone'])
-            ->name('updatetelephone');
+        Route::get('deleteadministrator/{id}', [AdministratorController::class, 'destroy'])
+            ->name('deleteadministrator');
 
         Route::post('updatepassword/{id}', [AdministratorController::class, 'updatepassword'])
             ->name('updatepassword');
@@ -94,17 +91,14 @@ Route::middleware('auth')->group(function () {
         Route::get('showemployer/{id}', [EmployerController::class, 'show'])
             ->name('showemployer');
 
-        Route::get('editemployer/{id}/{resource}', [EmployerController::class, 'edit'])
+        Route::get('editemployer/{id}', [EmployerController::class, 'edit'])
             ->name('editemployer');
 
-        Route::post('updateservicename/{id}', [EmployerController::class, 'updateservicename'])
-            ->name('updateservicename');
+        Route::post('updateemployer/{id}', [EmployerController::class, 'update'])
+            ->name('updateemployer');
 
-        Route::post('updateemployeremail/{id}', [EmployerController::class, 'updateemail'])
-            ->name('updateemployeremail');
-
-        Route::post('updateemployertelephone/{id}', [EmployerController::class, 'updatetelephone'])
-            ->name('updateemployertelephone');
+        Route::get('deleteemployer/{id}', [EmployerController::class, 'destroy'])
+            ->name('deleteemployer');
 
         Route::get('empregenerate/{id}', [EmployerController::class, 'regenerate'])
             ->name('empregenerate');
@@ -120,23 +114,14 @@ Route::middleware('auth')->group(function () {
         Route::get('showdebtor/{id}', [DebtorController::class, 'show'])
             ->name('showdebtor');
 
-        Route::get('editdebtor/{id}/{resource}', [DebtorController::class, 'edit'])
+        Route::get('editdebtor/{id}', [DebtorController::class, 'edit'])
             ->name('editdebtor');
 
-        Route::post('updatedebtorfullname/{id}', [DebtorController::class, 'updatefullname'])
-            ->name('updatedebtorfullname');
+        Route::post('updatedebtor/{id}', [DebtorController::class, 'update'])
+            ->name('updatedebtor');
 
-        Route::post('updatedebtoremail/{id}', [DebtorController::class, 'updateemail'])
-            ->name('updatedebtoremail');
-
-        Route::post('updatedebtortelephone/{id}', [DebtorController::class, 'updatetelephone'])
-            ->name('updatedebtortelephone');
-
-        Route::post('updatedebtormatricule/{id}', [DebtorController::class, 'updatematricule'])
-            ->name('updatedebtormatricule');
-
-        Route::post('updatedebtorservice/{id}', [DebtorController::class, 'updateservice'])
-            ->name('updatedebtorservice');
+        Route::get('deletedebtor/{id}', [DebtorController::class, 'destroy'])
+            ->name('deletedebtor');
 
         Route::get('debregenerate/{id}', [DebtorController::class, 'regenerate'])
             ->name('debregenerate');

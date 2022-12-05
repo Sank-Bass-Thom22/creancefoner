@@ -9,42 +9,43 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Liste des employeurs</h4>
-                                <a href="{{ route('dashboard') }}" class="btn btn-danger btn-lg float-right" style="margin: 15px;">Retour</a>  
+                                <a href="{{ route('dashboard') }}" class="btn btn-danger btn-lg float-right" style="margin: 15px;">Retour</a>
                                 <a href="{{ route ('registeremployer') }}" class="btn btn-primary btn-lg float-right" style="margin: 15px;" >Nouveau</a>
                                 <div class="table-responsive">
                                     <table class="table header-border">
                                         <thead>
                                             <tr>
-                                                <th>#</th>    
+                                                <th>#</th>
                                                 <th>Désignation</th>
                                                 <th>Email</th>
                                                 <th>Téléphone</th>
-                                                <th>Action</th>
+                                                <th colspan="3">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                         @forelse ($allEmployer as $employers)
-                   
+
                                             <tr>
                                                 <td>{{ $loop->index + 1}} </td>
-                                                <td>{{ $employers->firstname }} {{ $employers->lastname }}</td>
+                                                <td>{{ $employers->servicename }}</td>
                                                 <td>{{ $employers->email }}  </td>
                                                 <td>{{ $employers->telephone }} </td>
-                                                <td></td>
-                                             
+                                                <td><a href="{{ route ('editemployer', $employers->id) }}">MODIFIER</a></td>
+                        <td><a href="{{ route ('deleteemployer', $employers->id) 3}}">SUPPRIMER</a></td>
+                        <td><a href="{{ route('empregenerate', $employers->id) }}">GÉNÉRER UN NOUVEAU MOT DE PASSE</a></td>
                                             </tr>
 
                                         @empty
                                             <tr>
                                                 <td colspan="5"></td>
-                                             
+
                                              </tr>
 
                                         @endforelse
 
 
 
-                                          
+
                                         </tbody>
                                     </table>
                                 </div>
