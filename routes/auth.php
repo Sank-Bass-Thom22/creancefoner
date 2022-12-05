@@ -11,7 +11,7 @@ Route::middleware('guest')->group(function () {
     Route::get('forgot-password', [LoginController::class, 'reset'])
         ->name('forgot-password');
 
-    Route::post('login', [LoginController::class, 'authenticate']);
+    Route::post('login', [LoginController::class, 'authenticate'])->name('login');
 });
 
 Route::middleware('auth')->group(function () {
