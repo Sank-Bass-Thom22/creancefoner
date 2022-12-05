@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Modification-Debtor-Fullname</title>
+    <title>Modification-Administrateur</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -21,8 +21,8 @@
         <div class="card">
             <div class="card-body updatefullname-card-body">
                 <p class="updatefullname-box-msg">
-                <h1>Modification nom prénom</h1>
-                </p><br />
+                <h1>Modification administrateur</h1>
+                </p>
 
                 <p class="updatefullname-box-error">
                     @if ($errors->any())
@@ -40,15 +40,31 @@
                 @endif
                 </p>
 
-                <form action="{{ route('updatedebtorfullname', $debtorProfile->id) }}" method="POST">
+                <form action="{{ route('updateadministrator', $administratorProfile->id) }}" method="POST">
                     @csrf
                     <div class="input-group mb-3">
                         <label for="Firstname">Prénom : </label>
-                        <input type="text" class="form-control" id="Firstname" name="firstname" value="{{ $debtorProfile->firstname }}" required />
+                        <input type="text" class="form-control" id="Firstname" name="firstname" value="{{ $administratorProfile->firstname }}" required />
                     </div>
                     <div class="input-group mb-3">
                         <label for="Lastname">Nom : </label>
-                        <input type="text" class="form-control" id="Lastname" name="lastname" value="{{ $debtorProfile->lastname }}" required />
+                        <input type="text" class="form-control" id="Lastname" name="lastname" value="{{ $administratorProfile->lastname }}" required />
+                    </div>
+                    <div class="input-group mb-3">
+                        <label for="Email">Adresse E-mail : </label>
+                        <input type="email" class="form-control" id="Email" name="email" value="{{ $administratorProfile->email }}" required />
+                    </div>
+                    <div class="input-group mb-3">
+                        <label for="Telephone">Numéro de téléphone : </label>
+                        <input type="telephone" class="form-control" placeholder="226 " id="Telephone" name="telephone" value="{{ $administratorProfile->telephone }}" required />
+                    </div>
+                    <div class="input-group mb-3">
+                        <label for="Role">Niveau d'administration : </label>
+                        <select class="form-control" id="Role" name="role" required>
+                            <option></option>
+                            <option value="SimpleAdmin">Simple</option>
+                            <option value="SuperAdmin">Super</option>
+                        </select>
                     </div>
 
                     <!-- /.col -->
@@ -61,13 +77,20 @@
                 <hr>
 
                 <div class="admin-box-close">
-                    <form action="{{ route('showdebtor', $debtorProfile->id) }}" method="GET">
+                    @if ($administratorProfile->id == Auth::user()->id)
+                    <form action="{{ route('myadminprofile') }}" method="GET">
                         @csrf
 
                         <button type="submit">FERMER</button>
                     </form>
-                </div>
+                    @else
+                    <form action="{{ route('alladminsup') }}" method="GET">
+                        @csrf
 
+                        <button type="submit">FERMER</button>
+                    </form>
+                    @endif
+                </div>
             </div>
             <!-- /.form-box -->
         </div>

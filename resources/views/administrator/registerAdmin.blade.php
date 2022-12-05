@@ -76,7 +76,7 @@
                 <hr>
 
                 <div class="adminlist-box-close">
-                    <form action="{{ route('dashboard') }}" method="GET">
+                    <form action="{{ route('alladminsup') }}" method="GET">
                         @csrf
 
                         <button type="submit">FERMER</button>

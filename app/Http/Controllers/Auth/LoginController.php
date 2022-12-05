@@ -3,18 +3,23 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Http\Requests\LoginOtherRequest;
+use App\Models\Debtor\Debtor;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 
-class LoginOtherController extends Controller
+class LoginController extends Controller
 {
     public function show()
     {
-        return view('auth.loginOther');
+        return view('auth.login');
     }
 
-    public function authenticate(LoginOtherRequest $request)
+    public function reset()
+    {
+        return view('auth.forgot-password');
+    }
+
+    public function authenticate(LoginRequest $request)
     {
         $request->validated();
 

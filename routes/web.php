@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('accueil');
+    return view('auth.login');
 });
 
-Route::get('/dashboard', function () {
+Route::get('dashboard', function () {
     $role = Auth::user()->role;
 
     switch ($role) {
@@ -34,7 +34,7 @@ Route::get('/dashboard', function () {
         case 'Debtor':
             return view('debtor.dashboard');
         default:
-            return view('accueil');
+            return view('auth.login');
     }
 })->middleware(['auth'])->name('dashboard');
 

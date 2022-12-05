@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Modification-Debtor-Telephone</title>
+    <title>Modification-Debtor-Fullname</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -16,15 +16,15 @@
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition updatetelephone-page">
-    <div class="updatetelephone-box">
+<body class="hold-transition updatefullname-page">
+    <div class="updatefullname-box">
         <div class="card">
-            <div class="card-body updatetelephone-card-body">
-                <p class="updatetelephone-box-msg">
-                <h1>Modification téléphone</h1>
+            <div class="card-body updatefullname-card-body">
+                <p class="updatefullname-box-msg">
+                <h1>Modification nom prénom</h1>
                 </p><br />
 
-                <p class="updatetelephone-box-error">
+                <p class="updatefullname-box-error">
                     @if ($errors->any())
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -34,19 +34,46 @@
                 @endif
                 </p>
 
-                <p class="updatetelephone-box-success">
+                <p class="updatefullname-box-success">
                     @if (session()->get('success'))
                 <div class="alert alert-success">{{ session()->get('success') }}</div><br />
                 @endif
                 </p>
 
-                <form action="{{ route ('updatedebtortelephone', $debtorProfile->id) }}" method="POST">
+                <form action="{{ route('updatedebtor', $debtorProfile->id) }}" method="POST">
                     @csrf
-
+                    <div class="input-group mb-3">
+                        <label for="Firstname">Prénom : </label>
+                        <input type="text" class="form-control" id="Firstname" name="firstname" value="{{ $debtorProfile->firstname }}" required />
+                    </div>
+                    <div class="input-group mb-3">
+                        <label for="Lastname">Nom : </label>
+                        <input type="text" class="form-control" id="Lastname" name="lastname" value="{{ $debtorProfile->lastname }}" required />
+                    </div>
+                    <div class="input-group mb-3">
+                        <label for="Email">Adresse E-mail : </label>
+                        <input type="email" class="form-control" id="Email" name="email" value="{{ $debtorProfile->email }}" required />
+                    </div>
                     <div class="input-group mb-3">
                         <label for="Telephone">Numéro de téléphone : </label>
                         <input type="telephone" class="form-control" placeholder="226 " id="Telephone" name="telephone" value="{{ $debtorProfile->telephone }}" required />
                     </div>
+                    <div class="input-group mb-3">
+                        <label for="Matricule">Numéro matricule : </label>
+                        <input type="text" class="form-control" id="Matricule" name="matricule" value="{{ $debtorProfile->matricule }}" required />
+                    </div>
+                    <div class="input-group mb-3">
+                            <label for="Serviceindex">Lieu de travail : </label>
+                            <select id="Serviceindex" name="serviceindex" required>
+                                <option></option>
+                                @forelse($allServices as $services)
+                                <option value="{{ $services->serviceindex }}">{{ $services->servicename }}</option>
+                                @empty
+                            </select><br />
+                            <div class="">Aucune structure enregistrÃ©e! ðŸ˜ž </div>
+                            @endforelse
+                            </select>
+                        </div>
 
                     <!-- /.col -->
                     <div class="col-4">
@@ -70,7 +97,7 @@
         </div>
         <!-- /.card -->
     </div>
-    <!-- /.updatetelephone-box -->
+    <!-- /.updatefullname-box -->
 
     <!-- jQuery -->
     <script src="../../plugins/jquery/jquery.min.js"></script>

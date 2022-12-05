@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Administrator;
 use App\Http\Controllers\Controller;
 use App\Models\Debtor\Debtor;
 use App\Http\Requests\StoreEmployerRequest;
-use App\Http\Requests\UpdateFullnameRequest;
-use App\Http\Requests\UpdateEmailRequest;
-use App\Http\Requests\UpdateTelephoneRequest;
+use App\Http\Requests\UpdateEmployerRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 
@@ -51,44 +49,24 @@ class EmployerController extends Controller
         return view('administrator.showEmployer', compact(['showEmployer', 'countDebtor']));
     }
 
-    public function edit($id, $resource)
+    public function edit($id)
     {
         $employerProfile = Debtor::select('id', 'servicename', 'email', 'telephone')->find($id);
 
-        return view('administrator.' . $resource, compact('employerProfile'));
+        return view('administrator.editEmployer', compact('employerProfile'));
     }
 
-    public function updateservicename(UpdateFullnameRequest $request, $id)
+    public function update(UpdateEmployerRequest $request, $id)
     {
         $validatedData = $request->validated();
 
         Debtor::whereId($id)->update([
             'servicename' => ucfirst(strtolower($request->servicename)),
-        ]);
-
-        return redirect()->route('showemployer', $id)->with('success', 'Informations modifiées avec succès! :-)');
-    }
-
-    public function updateemail(UpdateEmailRequest $request, $id)
-    {
-        $validatedData = $request->validated();
-
-        Debtor::whereId($id)->update([
             'email' => strtolower($request->email),
-        ]);
-
-        return redirect()->route('showemployer', $id)->with('success', 'Email modifiées avec succès! :-)');
-    }
-
-    public function updatetelephone(UpdateTelephoneRequest $request, $id)
-    {
-        $validatedData = $request->validated();
-
-        Debtor::whereId($id)->update([
             'telephone' => $request->telephone,
         ]);
 
-        return redirect()->route('showemployer', $id)->with('success', 'Numéro de téléphone modifiées avec succès! :-)');
+        return redirect()->route('showemployer', $id)->with('success', 'Informations modifiées avec succès! :-)');
     }
 
     public function regenerate($id)
@@ -100,5 +78,13 @@ class EmployerController extends Controller
         ]);
 
         return redirect()->route('showemployer', $id)->with('success', 'Succès! Le nouveau mot de passe est : ' . $newPassword);
+    }
+
+    public function destroy($id)
+    {
+        $employerProfile = Debtor::find($id);
+        $employerProfile->delete();
+
+        return redirect()->route('allemployer')->with('success', 'Structure supprimée avec succès!');
     }
 }

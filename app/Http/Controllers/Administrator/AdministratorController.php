@@ -5,11 +5,7 @@ namespace App\Http\Controllers\Administrator;
 use App\Http\Controllers\Controller;
 use App\Models\Debtor\Debtor;
 use App\Http\Requests\StoreAdministratorRequest;
-use App\Http\Requests\UpdateFullnameRequest;
-use App\Http\Requests\UpdateEmailRequest;
-use App\Http\Requests\UpdateTelephoneRequest;
-use App\Http\Requests\UpdateRoleRequest;
-use App\Http\Requests\UpdatePasswordRequest;
+use App\Http\Requests\UpdateAdministratorRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -56,16 +52,11 @@ class AdministratorController extends Controller
         return view('administrator.showAdministrator', compact('showAdministrator'));
     }
 
-    public function edit($id, $resource)
+    public function edit($id)
     {
-        if ($id == 0) {
-            $id = Auth::user()->id;
-        }
+        $administratorProfile = Debtor::find($id);
 
-        $administratorProfile = Debtor::select('id', 'firstname', 'lastname', 'email', 'telephone', 'role')
-            ->find($id);
-
-        return view('administrator.' . $resource, compact('administratorProfile'));
+        return view('administrator.editAdministrator', compact('administratorProfile'));
     }
 
     public function profile()
@@ -77,64 +68,22 @@ class AdministratorController extends Controller
         return view('administrator.profile', compact('administratorProfile'));
     }
 
-    public function updatefullname(UpdateFullnameRequest $request, $id)
+    public function update(UpdateAdministratorRequest $request, $id)
     {
         $validatedData = $request->validated();
 
         Debtor::whereId($id)->update([
-            'firstname' => ucfirst(strtolower($request->firstname)),
-            'lastname' => ucfirst(strtolower($request->lastname)),
+            'firstname' => ucwords(strtolower($request->firstname)),
+            'lastname' => ucwords(strtolower($request->lastname)),
+            'email' => strtolower($request->email),
+            'telephone' => $request->telephone,
+            'role' => $request->role,
         ]);
 
         if ($id == Auth::user()->id) {
             return redirect()->route('myadminprofile')->with('success', 'Informations modifiées avec succès! :-)');
         } else {
             return redirect()->route('showadminsup', $id)->with('success', 'Informations modifiées avec succès! :-)');
-        }
-    }
-
-    public function updateemail(UpdateEmailRequest $request, $id)
-    {
-        $validatedData = $request->validated();
-
-        Debtor::whereId($id)->update([
-            'email' => strtolower($request->email),
-        ]);
-
-        if ($id == Auth::user()->id) {
-            return redirect()->route('myadminprofile')->with('success', 'Email modifiées avec succès! :-)');
-        } else {
-            return redirect()->route('showadminsup', $id)->with('success', 'Email modifiées avec succès! :-)');
-        }
-    }
-
-    public function updatetelephone(UpdateTelephoneRequest $request, $id)
-    {
-        $validatedData = $request->validated();
-
-        Debtor::whereId($id)->update([
-            'telephone' => $request->telephone,
-        ]);
-
-        if ($id == Auth::user()->id) {
-            return redirect()->route('myadminprofile')->with('success', 'Numéro de téléphone modifiées avec succès! :-)');
-        } else {
-            return redirect()->route('showadminsup', $id)->with('success', 'Numéro de téléphone modifiées avec succès! :-)');
-        }
-    }
-
-    public function updaterole(UpdateRoleRequest $request, $id)
-    {
-        $validatedData = $request->validated();
-
-        Debtor::whereId($id)->update([
-            'role' => $request->role,
-        ]);
-
-        if ($id == Auth::user()->id) {
-            return redirect()->route('myadminprofile')->with('success', 'Niveau d\'administration modifiées avec succès! :-)');
-        } else {
-            return redirect()->route('showadminsup', $id)->with('success', 'Niveau d\'administration modifiées avec succès! :-)');
         }
     }
 
@@ -168,5 +117,13 @@ class AdministratorController extends Controller
         ]);
 
         return redirect()->route('showadminsup', $id)->with('success', 'Succès! Le nouveau mot de passe est : ' . $newPassword);
+    }
+
+    public function destroy($id)
+    {
+        $administratorProfile = Debtor::find($id);
+        $administratorProfile->delete();
+
+        return redirect()->route('alladminsup')->with('success', 'Administrateur supprimé avec succès!');
     }
 }

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Modification-Email</title>
+    <title>Modification-Servicename</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -16,15 +16,15 @@
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition updateemail-page">
-    <div class="updateemail-box">
+<body class="hold-transition updateservicename-page">
+    <div class="updateservicename-box">
         <div class="card">
-            <div class="card-body updateemail-card-body">
-                <p class="updateemail-box-msg">
-                <h1>Modification email</h1>
+            <div class="card-body updateservicename-card-body">
+                <p class="updateservicename-box-msg">
+                <h1>Modification nom structure</h1>
                 </p><br />
 
-                <p class="updateemail-box-error">
+                <p class="updateservicename-box-error">
                     @if ($errors->any())
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -34,18 +34,25 @@
                 @endif
                 </p>
 
-                <p class="updateemail-box-success">
+                <p class="updateservicename-box-success">
                     @if (session()->get('success'))
                 <div class="alert alert-success">{{ session()->get('success') }}</div><br />
                 @endif
                 </p>
 
-                <form action="{{ route ('updateemployeremail', $employerProfile->id) }}" method="POST">
+                <form action="{{ route ('updateemployer', $employerProfile->id) }}" method="POST">
                     @csrf
-
+                    <div class="input-group mb-3">
+                        <label for="Servicename">Nom de la structure : </label>
+                        <input type="text" class="form-control" id="Servicename" name="servicename" value="{{ $employerProfile->servicename }}" required />
+                    </div>
                     <div class="input-group mb-3">
                         <label for="Email">Adresse E-mail : </label>
                         <input type="email" class="form-control" id="Email" name="email" value="{{ $employerProfile->email }}" required />
+                    </div>
+                    <div class="input-group mb-3">
+                        <label for="Telephone">Numéro de téléphone : </label>
+                        <input type="telephone" class="form-control" placeholder="226 " id="Telephone" name="telephone" value="{{ $employerProfile->telephone }}" required />
                     </div>
 
                     <!-- /.col -->
@@ -69,7 +76,7 @@
         </div>
         <!-- /.card -->
     </div>
-    <!-- /.updateemail-box -->
+    <!-- /.updateservicename-box -->
 
     <!-- jQuery -->
     <script src="../../plugins/jquery/jquery.min.js"></script>

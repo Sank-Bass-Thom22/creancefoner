@@ -5,11 +5,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    
+
     <!-- theme meta -->
     <meta name="theme-name" content="quixlab" />
-  
-    <title>Créance FONER  - 
+
+    <title>Créance FONER  -
 
     @yield('title')
     </title>
@@ -41,7 +41,7 @@
         Preloader end
     ********************-->
 
-    
+
     <!--**********************************
         Main wrapper start
     ***********************************-->
@@ -52,7 +52,7 @@
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="index.html">
+                <a href="index.html" return="false">
                     <b class="logo-abbr"><img src="images/logo.png" alt=""> </b>
                     <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
@@ -87,7 +87,7 @@
         <div class="content-body">
 
             <div class="container-fluid mt-3">
-              
+
             @yield('content')
 
             </div>
@@ -96,11 +96,11 @@
         <!--**********************************
             Content body end
         ***********************************-->
-        
-        
+
+
         <!--**********************************
             Footer start
-        ***********************************-->   
+        ***********************************-->
         @include('layouts.partials.footer')
         <!--**********************************
             Footer end
