@@ -76,7 +76,7 @@
         <!--**********************************
             Sidebar start
         ***********************************-->
-        @include('layouts.partials.sidebar')
+        @include('layouts.partials.sidebar2')
         <!--**********************************
             Sidebar end
         ***********************************-->

@@ -25,7 +25,7 @@
                             <i class="icon-envelope menu-icon"></i> <span class="nav-text">Documents utils</span>
                         </a>
                         <ul aria-expanded="false">
-                              <li><a href="{{ route('alldocument') }}">Liste des taux</a></li>
+                              <li><a href="{{ route('alldocument') }}">Liste des documents</a></li>
                         </ul>
                     </li>
 

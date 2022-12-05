@@ -24,6 +24,7 @@
                             </div>
                             <input type="search" class="form-control"  id="Research" name="research" required placeholder="Recherche redevable" >
                             <button type=""  class="btn-info btn-lg">Valider</button>
+                           
                         </div>
                         
                     </div>

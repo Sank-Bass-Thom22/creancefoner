@@ -1,22 +1,7 @@
-<!DOCTYPE html>
-<html lang="fr">
+@extends('layouts.app-debtor')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Enregistrement d'un échéancier</title>
+@section('content')
 
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-    <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-</head>
-
-<body class="hold-transition defineschedule-page">
     <div class="defineschedule-box">
         <div class="card">
             <div class="card-body defineschedule-card-body">
@@ -44,27 +29,22 @@
                     <form action="{{ route ('saveschedule') }}" method="POST">
                         @csrf
 
-                        <div class="input-group mb-3">
+                        <div class="form-group">
                             <label for="Amount">Montant de l'échéancier : </label>
                             <input type="number" class="form-control" id="Amount" name="amount" required />
                         </div>
 
-                        <!-- /.col -->
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">VALIDER</button>
+               
+
+                        <div class="form-group">
+       
+                            <button type="submit" class="btn mb-1 btn-primary">Valider</button>
+
+                            <a href="{{ route('myrepayments') }}" class="btn mb-1 btn-danger">Retour</a>                    
                         </div>
-                        <!-- /.col -->
                     </form>
 
-                    <hr>
-
-                    <div class="defineschedule-box-close">
-                        <form action="{{ route('myrepayments') }}" method="GET">
-                            @csrf
-
-                            <button type="submit">FERMER</button>
-                        </form>
-                    </div>
+                 
                 </section>
             </div>
             <!-- /.form-box -->
@@ -73,12 +53,4 @@
     </div>
     <!-- /.defineschedule-box -->
 
-    <!-- jQuery -->
-    <script src="../../plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="../../dist/js/adminlte.min.js"></script>
-</body>
-
-</html>
+@endsection

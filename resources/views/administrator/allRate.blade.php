@@ -1,42 +1,53 @@
 @extends('layouts.app-master')
 
 @section('content')
-    <div class="ratelist-box">
-        <div class="card">
-            <div class="card-body ratelist-card-body">
-                <p class="ratelist-box-msg">
-                <h1 class="">Liste des taux</h1>
-                </p>
 
-                <table class="">
-                    <tr>
-                        <th>TAUX</th>
-                        <th>VALIDITÉ</th>
-                        <th>OPTION SUPPLÉMENTAIRE</th>
-                    </tr>
-                    @forelse ($allRate as $rates)
-                    <tr>
-                        <td>{{ $rates->value }}%</td>
-                        <td>{{ $rates->validity }}</td>
-                        <td><a href="{{ route('showrate', $rates->id) }}" class="">VOIR PLUS</a></td>
-                    </tr>
-                    @empty
-                </table><br />
-                <p class="ratelist-box-msg">Aucun taux enregistré! 😞</p>
-                @endforelse
-                </table>
 
-                <hr>
 
-                <div class="ratelist-box-close">
-                    <form action="{{ route('dashboard') }}" method="GET">
-                        @csrf
+    
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Liste des taux</h4>
+                                <a href="{{ route('dashboard') }}" class="btn btn-danger btn-lg float-right" style="margin: 15px;">Retour</a>  
+                                <a href="{{ route ('createratesup') }}" class="btn btn-primary btn-lg float-right" style="margin: 15px;" >Nouveau</a>
+                                <div class="table-responsive">
+                                    <table class="table header-border">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>    
+                                                <th>Taux</th>
+                                                <th>Validité</th>
+                                                <th>Option Suplémentaire</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        @forelse ($allRate as $rates)
+                   
+                                            <tr>
+                                                <td>{{ $loop->index + 1}} </td>
+                                                <td>{{ $rates->value }}%</td>
+                                                <td>{{ $rates->validity }}</td>
+                                                <td><a href="{{ route('showrate', $rates->id) }}" class="">VOIR PLUS</a></td>
+                                                <td></td>
+                                             
+                                            </tr>
 
-                        <button type="submit">FERMER</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+                                        @empty
+                                            <tr>
+                                                <td colspan="5"></td>
+                                             
+                                             </tr>
+
+                                        @endforelse
+
+
+
+                                          
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
 
 @endsection

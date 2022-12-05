@@ -34,7 +34,8 @@ class DebtorController extends Controller
     public function store(StoreDebtorRequest $request)
     {
         $credentialsValidated = $request->validated();
-        $password = STR::random(8);
+        //$password = STR::random(8);
+        $password = "12345678";
 
         $id_debtor = Debtor::insertGetId([
             'firstname' => $request->firstname,

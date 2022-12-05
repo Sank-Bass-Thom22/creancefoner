@@ -11,6 +11,6 @@ class EmpDocumentController extends Controller
     {
         $showDocuments = Document::select('title', 'filelink')->orderBy('title', 'ASC')->get();
 
-        return view('debtor.documents', compact('showDocuments'));
+        return view('employer.documents', compact('showDocuments'));
     }
 }
