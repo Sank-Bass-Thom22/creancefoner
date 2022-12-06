@@ -9,7 +9,7 @@
         <p class="search-box">
 
                         <div class="">
-                        
+
                             <div class="header-left">
                         <div class="input-group icons">
                             <div class="input-group-prepend">
@@ -17,10 +17,7 @@
                             </div>
                             <input type="search" class="form-control"  id="Research" name="research" required placeholder="Recherche redevable" >
                             <button type=""  class="btn-info btn-lg">Valider</button>
-                           
                         </div>
-                        <input type="search" class="form-control" id="Research" name="research" required placeholder="Recherche redevable">
-                        <button type="" class="btn-info btn-lg">Valider</button>
                     </div>
 
                 </div>
@@ -44,7 +41,8 @@
                         <th>Email</th>
                         <th>Téléphone</th>
                         <th>Matricule</th>
-                        <th colspan="3">Action</th>
+                        <th>Service</th>
+                        <th colspan="4">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,9 +54,20 @@
                         <td>{{ $debtors->email }}</td>
                         <td>{{ $debtors->telephone }}</td>
                         <td>{{ $debtors->matricule }}</td>
+                        <td>
+                            @forelse($allService as $services)
+                            @if ($services->serviceindex == $debtors->debtorindex)
+                            {{ $services->servicename }}
+                            @break
+                            @endif
+                            @empty
+                            {{ __('Aucun service.') }}'
+                            @endforelse
+                        </td>
                         <td><a href="{{ route ('editdebtor', $debtors->id) }}">MODIFIER</a></td>
                         <td><a href="{{ route ('deletedebtor', $debtors->id) }}">SUPPRIMER</a></td>
-                        <td><a href="{{ route('debregenerate', $debtors->id) }}">GÉNÉRER UN NOUVEAU MOT DE PASSE</a></td>
+                        <td><a href="{{ route ('showloan', $debtors->id) }}">PRÊTS</a></td>
+                        <td><a href="{{ route('debregenerate', $debtors->id) }}">NOUVEAU MOT DE PASSE</a></td>
 
                     </tr>
 

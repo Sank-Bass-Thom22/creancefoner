@@ -54,26 +54,25 @@
                 </table>
                 </p><br />
 
-                <p class="loan-list">
+                <div class="loan-list">
+                <!-- <a href="{{ route('showloan', $id) }}" class="btn btn-danger btn-lg float-right" style="margin: 15px;">Retour</a> -->
+                                <!-- <a href="{{ route ('createrepayment', $id) }}" class="btn btn-primary btn-lg float-right" style="margin: 15px;" >Nouveau</a> -->
                 <table class="tab">
                     <tr>
+                        <th>#</th>
                         <th>EFFECTUÉ LE</th>
                         <th>MONTANT</th>
                         <th>MODE DE REMBOURSEMENT</th>
-                        <th>OPTION</th>
+                        <th colspan="2">ACTION</th>
                     </tr>
                     @forelse($showRepayment as $repayments)
                     <tr>
+                        <td>{{ $loop->index + 1 }}</td>
                         <td>{{ $repayments->repaymentdate }}</td>
                         <td>{{ $repayments->amount }} Francs CFA</td>
                         <td>{{ $repayments->repaymentway }}</td>
-                        <td>
-                            <form action="{{ route ('editrepayment', $repayments->id) }}" method="GET">
-                                @csrf
-
-                                <button type="submit">MODIFIER</button>
-                            </form>
-                        </td>
+                        <td><a href="{{ route ('editrepayment', $repayments->id) }}">MODIFIER</a></td>
+                        <td><a href="{{ route ('deleterepayment', $repayments->id) }}">SUPPRIMER</a></td>
                     </tr>
                     @empty
                 </table><br />

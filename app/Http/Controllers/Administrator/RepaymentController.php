@@ -21,11 +21,9 @@ class RepaymentController extends Controller
 
     public function create($id)
     {
-        if (session()->missing('id_debtor')) {
-            $debtorName = Debtor::where('id', $id)->select('firstname', 'lastname')->first();
-            session()->put('id_debtor', $id);
-            session()->put('fullname', $debtorName->firstname . ' ' . $debtorName->lastname);
-        }
+        $debtorName = Debtor::where('id', $id)->select('firstname', 'lastname')->first();
+        session()->put('id_debtor', $id);
+        session()->put('fullname', $debtorName->firstname . ' ' . $debtorName->lastname);
 
         return view('administrator.createRepayment');
     }
@@ -98,5 +96,14 @@ class RepaymentController extends Controller
         $id_debtor = Repayment::whereId($id)->value('id_debtor');
 
         return redirect()->route('showrepayment', $id_debtor)->with('success', 'Remboursement modifié avec succès! :-)');
+    }
+
+    public function destroy($id)
+    {
+        $repayment = Repayment::find($id);
+        $id_debtor = Repayment::whereId($id)->value('id_debtor');
+        $repayment->delete();
+
+        return redirect()->route('showrepayment', $id_debtor)->with('success', 'Remboursement supprimé avec succès!');
     }
 }

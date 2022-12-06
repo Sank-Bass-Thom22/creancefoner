@@ -58,18 +58,18 @@ Route::middleware('auth')->group(function () {
         Route::post('updaterepaymentamountsup/{id}', [RepaymentamountController::class, 'update'])
             ->name('updaterepaymentamountsup');
 
-        Route::post('destroyrepaymentamountsup/{id}', [RepaymentamountController::class, 'destroy'])
+        Route::get('destroyrepaymentamountsup/{id}', [RepaymentamountController::class, 'destroy'])
             ->name('destroyrepaymentamountsup');
     });
 });
 
 Route::middleware('auth')->group(function () {
     Route::middleware('superandsimple')->group(function () {
-        Route::get('myadminprofile', [AdministratorController::class, 'profile'])
-            ->name('myadminprofile');
-
         Route::get('editadministrator/{id}', [AdministratorController::class, 'edit'])
             ->name('editadministrator');
+
+        Route::get('editadminpassword', [AdministratorController::class, 'editpassword'])
+            ->name('editadminpassword');
 
         Route::post('updateadministrator/{id}', [AdministratorController::class, 'update'])
             ->name('updateadministrator');
@@ -77,8 +77,8 @@ Route::middleware('auth')->group(function () {
         Route::get('deleteadministrator/{id}', [AdministratorController::class, 'destroy'])
             ->name('deleteadministrator');
 
-        Route::post('updatepassword/{id}', [AdministratorController::class, 'updatepassword'])
-            ->name('updatepassword');
+        Route::post('updateadminpassword', [AdministratorController::class, 'updatepassword'])
+            ->name('updateadminpassword');
 
         Route::get('allemployer', [EmployerController::class, 'index'])
             ->name('allemployer');
@@ -177,6 +177,9 @@ Route::middleware('auth')->group(function () {
         Route::post('updateloan/{id}', [LoanController::class, 'update'])
             ->name('updateloan');
 
+        Route::get('deleteloan/{id}', [LoanController::class, 'destroy'])
+            ->name('deleteloan');
+
         Route::get('createrepayment/{id}', [RepaymentController::class, 'create'])
             ->name('createrepayment');
 
@@ -191,6 +194,9 @@ Route::middleware('auth')->group(function () {
 
         Route::post('updaterepayment/{id}', [RepaymentController::class, 'update'])
             ->name('updaterepayment');
+
+        Route::get('deleterepayment/{id}', [RepaymentController::class, 'destroy'])
+            ->name('deleterepayment');
 
         Route::get('createschedule/{id}', [ScheduleController::class, 'create'])
             ->name('createschedule');

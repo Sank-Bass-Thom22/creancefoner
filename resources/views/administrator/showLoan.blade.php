@@ -21,68 +21,39 @@
                 @endif
                 </p>
 
-                <p class="loan-list">
-                <table class="tab">
+                <div class="table-responsive">
+                <a href="{{ route('alldebtor') }}" class="btn btn-danger btn-lg float-right" style="margin: 15px;">Retour</a>
+                                <a href="{{ route ('createloannow', $id) }}" class="btn btn-primary btn-lg float-right" style="margin: 15px;" >Nouveau</a>
+                                <a href="{{ route ('showrepayment', $id) }}" class="btn btn-primary btn-lg float-right" style="margin: 15px;" >Remboursements</a>
+                <table class="table header-border">
+                <thead>
                     <tr>
-                        <th>MONTANT</th>
-                        <th>CONTRACTÉ LE</th>
-                        <th>TAUX APPLICABLE</th>
-                        <th>DATE DE CLOTURE</th>
-                        <th>OPTION</th>
+                    <th>#</th>
+                        <th>Montant</th>
+                        <th>Contracté le</th>
+                        <th>Taux applicable</th>
+                        <th>Date de cloture</th>
+                        <th colspan="2">Action</th>
                     </tr>
+                    </thead>
+                    <tbody>
                     @forelse($showLoan as $loans)
                     <tr>
+                    <td>{{ $loop->index + 1}} </td>
                         <td>{{ $loans->amount }} Francs CFA</td>
                         <td>{{ $loans->startline }}</td>
                         <td>{{ $loans->value }}%</td>
                         <td>{{ $loans->deadline }}</td>
-                        <td>
-                            <form action="{{ route ('editloan', $loans->id) }}" method="GET">
-                                @csrf
-
-                                <button type="submit">MODIFIER</button>
-                            </form>
-                        </td>
+                        <td><a href="{{ route ('editloan', $loans->id) }}">Modifier</a></td>
+                        <td><a href="{{ route ('deleteloan', $loans->id) }}">Supprimer</a></td>
                     </tr>
                     @empty
                 </table><br />
-                <p class="">Aucun prêt enregistré pour le moment! 😞</p>
+                <div class="">Aucun prêt enregistré pour le moment! 😞</div>
                 @endforelse
+                </tbody>
                 </table>
-                </p>
-
-                <hr>
-
-                <div class="loandetail-box-close">
-                    <table>
-                        <tr>
-                            @if ($countLoan < 15) <td>
-                                <form action="{{ route ('createloannow', $id) }}" method="GET">
-                                    @csrf
-
-                                    <button type="submit">ENREGISTRER</button>
-                                </form>
-                                </td>
-                                @endif
-                                @if ($countLoan > 0)
-                                <td>
-                                    <form action="{{ route ('showrepayment', $id) }}" method="GET">
-                                        @csrf
-
-                                        <button type="submit">VOIR PLUS</button>
-                                    </form>
-                                </td>
-                                @endif
-                                <td>
-                                    <form action="{{ route('showdebtor', $id) }}" method="GET">
-                                        @csrf
-
-                                        <button type="submit">FERMER</button>
-                                    </form>
-                                </td>
-                        </tr>
-                    </table>
-                </div>
+</div>
             </div>
         </div>
     </div>

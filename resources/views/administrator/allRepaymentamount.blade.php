@@ -6,50 +6,61 @@
 
 
 
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Grille</h4>
-                                <a href="{{ route('dashboard') }}" class="btn btn-danger btn-lg float-right" style="margin: 15px;">Retour</a>  
-                                <a href="{{ route ('createrepaymentamountsup') }}" class="btn btn-primary btn-lg float-right" style="margin: 15px;" >Nouveau</a>
-                                <div class="table-responsive">
-                                    <table class="table header-border">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>    
-                                                <th>Montant Minimun</th>
-                                                <th>Montant Maximal</th>
-                                                <th>Option Suplémentaire</th>
-                                                                                              
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        @forelse ($allRepaymentamount as $repaymentamounts)
-                   
-                                            <tr>
-                                                <td>{{ $loop->index + 1}} </td>
-                                                <td>{{ $repaymentamounts->minamount }} Francs CFA</td>
-                                                <td>{{ $repaymentamounts->maxamount }} Francs CFA</td>
-                                                <td><a href="{{ route('showrepaymentamount', $repaymentamounts->id) }}" class="">VOIR PLUS</a></td>
-                                                <td></td>
-                                             
-                                            </tr>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Grille</h4>
+        <a href="{{ route('dashboard') }}" class="btn btn-danger btn-lg float-right" style="margin: 15px;">Retour</a>
+        <a href="{{ route ('createrepaymentamountsup') }}" class="btn btn-primary btn-lg float-right" style="margin: 15px;">Nouveau</a>
+        <div class="table-responsive">
+            <table class="table header-border">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Montant Minimal</th>
+                        <th>Montant Maximal</th>
+                        <th>Description</th>
+                        <th colspan="2">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($allRepaymentamount as $repaymentamounts)
 
-                                        @empty
-                                            <tr>
-                                                <td colspan="5"></td>
-                                             
-                                             </tr>
+                    <tr>
+                        <td>{{ $loop->index + 1}} </td>
+                        <td>{{ $repaymentamounts->minamount }} Francs CFA</td>
+                        <td>{{ $repaymentamounts->maxamount }} Francs CFA</td>
+                        <td>{{ $repaymentamounts->description }}</td>
+                        <td>
+                            @if (Auth::user()->role == "SuperAdmin")
+                            <a href="{{ route('editrepaymentamountsup', $repaymentamounts->id) }}" class="">MODIFIER</a>
+                            @else
+                            <a href="{{ route('editrepaymentamountsup', $repaymentamounts->id) }}" class="" disabled="disabled">MODIFIER</a>
+                            @endif
+                        </td>
+                        <td>
+                            @if (Auth::user()->role == "SuperAdmin")
+                            <a href="{{ route('destroyrepaymentamountsup', $repaymentamounts->id) }}" class="">SUPPRIMER</a>
+                            @else
+                            <a href="{{ route('destroyrepaymentamountsup', $repaymentamounts->id) }}" class="" disabled="disabled">SUPPRIMER</a>
+                            @endif
+                        </td>
+                    </tr>
 
-                                        @endforelse
+                    @empty
+                    <tr>
+                        <td colspan="5"></td>
+
+                    </tr>
+
+                    @endforelse
 
 
 
-                                          
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
 @endsection

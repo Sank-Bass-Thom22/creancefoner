@@ -70,7 +70,7 @@
                 <hr>
 
                 <div class="admin-box-close">
-                    <form action="{{ route('showdebtor', $debtorProfile->id) }}" method="GET">
+                    <form action="{{ route('alldebtor') }}" method="GET">
                         @csrf
 
                         <button type="submit">FERMER</button>

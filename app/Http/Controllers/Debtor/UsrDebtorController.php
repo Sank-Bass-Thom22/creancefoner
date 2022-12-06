@@ -25,15 +25,6 @@ class UsrDebtorController extends Controller
         return view('debtor.' . $resource, compact('debtorProfile'));
     }
 
-    public function profile()
-    {
-        $id = Auth::user()->id;
-        $debtorProfile = Debtor::find($id);
-        $debtorService = Debtor::where('serviceindex', $debtorProfile->debtorindex)->first();
-
-        return view('debtor.profile', compact(['debtorProfile', 'debtorService']));
-    }
-
     public function resetfullname(UpdateFullnameRequest $request)
     {
         $id = Auth::user()->id;
