@@ -5,9 +5,6 @@ use App\Http\Controllers\Auth\LogoutController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
-    Route::get('/', [LoginController::class, 'show'])
-        ->name('login');
-
     Route::get('forgot-password', [LoginController::class, 'reset'])
         ->name('forgot-password');
 
@@ -15,6 +12,9 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('myprofile', [LoginController::class, 'profile'])
+        ->name('myprofile');
+
     Route::get('logout', [LogoutController::class, 'logout'])
         ->name('logout');
 });

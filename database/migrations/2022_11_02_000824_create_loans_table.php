@@ -22,11 +22,11 @@ class CreateLoansTable extends Migration
             $table->unsignedBigInteger('id_rate');
             $table->foreign('id_rate')
                 ->references('id')->on('rates')
-                ->onDelete('restrict')->onUpdate('restrict');
+                ->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('id_debtor');
             $table->foreign('id_debtor')
                 ->references('id')->on('debtors')
-                ->onDelete('restrict')->onUpdate('restrict');
+                ->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

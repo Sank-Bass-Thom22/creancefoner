@@ -63,13 +63,11 @@ class LoanController extends Controller
             ->join('rates', 'rates.id', '=', 'loans.id_rate')
             ->select('loans.*', 'rates.value')
             ->orderBy('startline', 'asc')->get();
-        $countLoan = Loan::where('id_debtor', $id)->count();
-        if (session()->missing('fullname')) {
-            $debtorName = Debtor::where('id', $id)->select('firstname', 'lastname')->first();
-            session()->put('fullname', $debtorName->firstname . ' ' . $debtorName->lastname);
-        }
 
-        return view('administrator.showLoan', compact(['showLoan', 'countLoan', 'id']));
+        $debtorName = Debtor::where('id', $id)->select('firstname', 'lastname')->first();
+        session()->put('fullname', $debtorName->firstname . ' ' . $debtorName->lastname);
+
+        return view('administrator.showLoan', compact(['showLoan', 'id']));
     }
 
     public function edit($id)
@@ -94,5 +92,14 @@ class LoanController extends Controller
         $id_debtor = Loan::whereId($id)->value('id_debtor');
 
         return redirect()->route('showloan', $id_debtor)->with('success', 'Prêt modifié avec succès! :-)');
+    }
+
+    public function destroy($id)
+    {
+        $loan = Loan::find($id);
+        $id_debtor = Loan::whereId($id)->value('id_debtor');
+        $loan->delete();
+
+        return redirect()->route('showloan', $id_debtor)->with('success', 'Prêt supprimé avec succès!');
     }
 }

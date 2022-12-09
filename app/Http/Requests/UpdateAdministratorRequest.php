@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateAdministratorRequest extends FormRequest
 {
@@ -23,11 +24,14 @@ class UpdateAdministratorRequest extends FormRequest
      */
     public function rules()
     {
+        $email = $this->request->get('email');
+        $telephone = $this->request->get('telephone');
+
         return [
             'firstname' => ['required', 'string', 'max:50'],
             'lastname' => ['required', 'string', 'max:25'],
-            'email' => ['required', 'string', 'email', 'max:50', 'unique:debtors'],
-            'telephone' => ['required', 'string', 'max:25', 'unique:debtors'],
+            'email' => ['required', 'string', 'email', 'max:50', Rule::unique('debtors')->ignore($email, 'email')],
+            'telephone' => ['required', 'string', 'max:25', Rule::unique('debtors')->ignore($telephone, 'telephone')],
             'role' => ['required', 'string', 'max:11'],
         ]; 
     }

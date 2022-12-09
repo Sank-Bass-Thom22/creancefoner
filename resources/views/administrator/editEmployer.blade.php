@@ -50,7 +50,7 @@
                 <hr>
 
                 <div class="employer-box-close">
-                    <form action="{{ route('showemployer', $employerProfile->id) }}" method="GET">
+                    <form action="{{ route('allemployer') }}" method="GET">
                         @csrf
 
                         <button type="submit">FERMER</button>

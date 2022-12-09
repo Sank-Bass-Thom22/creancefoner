@@ -10,9 +10,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
     Route::middleware('debtor')->group(function () {
-        Route::get('myprofile', [UsrDebtorController::class, 'profile'])
-            ->name('myprofile');
-
         Route::get('myloans', [UsrLoanController::class, 'loans'])
             ->name('myloans');
 

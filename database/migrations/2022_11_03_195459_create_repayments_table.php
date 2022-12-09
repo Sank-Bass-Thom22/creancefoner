@@ -22,7 +22,7 @@ class CreateRepaymentsTable extends Migration
             $table->unsignedBigInteger('id_debtor');
             $table->foreign('id_debtor')
                 ->references('id')->on('debtors')
-                ->onDelete('restrict')->onUpdate('restrict');
+                ->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

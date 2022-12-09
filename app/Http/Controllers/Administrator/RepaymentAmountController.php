@@ -11,7 +11,7 @@ class RepaymentAmountController extends Controller
 {
     public function index()
     {
-        $allRepaymentamount = Repaymentamount::select('id', 'minamount', 'maxamount')->orderBy('id', 'desc')->get();
+        $allRepaymentamount = Repaymentamount::get();
 
         return view('administrator.allRepaymentamount', compact('allRepaymentamount'));
     }
@@ -34,13 +34,6 @@ class RepaymentAmountController extends Controller
         return back()->with('success', 'Grille enregistrée avec succès ! :-)');
     }
 
-    public function show($id)
-    {
-        $showRepaymentamount = Repaymentamount::select('id', 'minamount', 'maxamount', 'description')->findOrFail($id);
-
-        return view('administrator.showRepaymentamount', compact('showRepaymentamount'));
-    }
-
     public function edit($id)
     {
         $editRepaymentamount = Repaymentamount::select('id', 'minamount', 'maxamount', 'description')->findOrFail($id);
@@ -58,7 +51,7 @@ class RepaymentAmountController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('showrepaymentamount', $id)->with('success', 'Grille modifié avec succès ! :-)');
+        return redirect()->route('allrepaymentamount')->with('success', 'Grille modifié avec succès ! :-)');
     }
 
     public function destroy($id)

@@ -1,4 +1,4 @@
-<div class="nk-sidebar">           
+<div class="nk-sidebar">
             <div class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
                     <li class="nav-label">Tableau de bord</li>
@@ -6,7 +6,7 @@
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text"> Tableau de bord</span>
                         </a>
                     <li>
-                      
+
                     </li>
                     <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
@@ -16,7 +16,7 @@
                             <li><a href="{{ route('alladminsup') }}">Liste des administrateurs</a></li>
                             <li><a href="{{ route('allemployer') }}">Liste des employeurs</a></li>
                             <li><a href="{{ route('alldebtor') }}">Liste des redevables</a></li>
-                           
+
                         </ul>
                     </li>
                     <li class="nav-label">Informations Générales</li>
@@ -46,8 +46,8 @@
                               <li><a href="{{ route('allrepaymentamount') }}">Voir la grille</a></li>
                         </ul>
                     </li>
-                 
-                   
+
+
                 </ul>
             </div>
         </div>

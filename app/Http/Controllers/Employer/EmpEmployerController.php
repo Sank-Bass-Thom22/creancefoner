@@ -24,14 +24,6 @@ class EmpEmployerController extends Controller
         return view('employer.' . $resource, compact('employerProfile'));
     }
 
-    public function profile()
-    {
-        $id = Auth::user()->id;
-        $employerProfile = Debtor::select('servicename', 'email', 'telephone')->find($id);
-
-        return view('employer.profile', compact('employerProfile'));
-    }
-
     public function resetservicename(UpdateFullnameRequest $request)
     {
         $id = Auth::user()->id;
