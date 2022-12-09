@@ -29,6 +29,6 @@ class UpdateAdministratorRequest extends FormRequest
             'email' => ['required', 'string', 'email', 'max:50', 'unique:debtors'],
             'telephone' => ['required', 'string', 'max:25', 'unique:debtors'],
             'role' => ['required', 'string', 'max:11'],
-        ];
+        ]; 
     }
 }
