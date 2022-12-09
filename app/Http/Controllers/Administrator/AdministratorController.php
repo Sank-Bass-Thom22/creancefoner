@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Debtor\Debtor;
 use App\Http\Requests\StoreAdministratorRequest;
 use App\Http\Requests\UpdateAdministratorRequest;
+use App\Http\Requests\UpdatePasswordRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -34,9 +35,9 @@ class AdministratorController extends Controller
         $password = Str::random(8);
 
         Debtor::create([
-            'firstname' => $request->firstname,
-            'lastname' => $request->lastname,
-            'email' => $request->email,
+            'firstname' => ucwords(strtolower($request->firstname)),
+            'lastname' => ucwords(strtolower($request->lastname)),
+            'email' => strtolower($request->email),
             'telephone' => $request->telephone,
             'password' => Hash::make($password),
             'role' => $request->role,
@@ -45,11 +46,9 @@ class AdministratorController extends Controller
         return redirect()->route('registeradminsup')->with('success', 'Succès! :-) /Password : ' . $password);
     }
 
-    public function show($id)
+    public function editpassword()
     {
-        $showAdministrator = Debtor::find($id);
-
-        return view('administrator.showAdministrator', compact('showAdministrator'));
+        return view('administrator.editAdminPassword');
     }
 
     public function edit($id)
@@ -57,15 +56,6 @@ class AdministratorController extends Controller
         $administratorProfile = Debtor::find($id);
 
         return view('administrator.editAdministrator', compact('administratorProfile'));
-    }
-
-    public function profile()
-    {
-        $id = Auth::user()->id;
-        $administratorProfile = Debtor::select('id', 'firstname', 'lastname', 'email', 'telephone', 'role')
-            ->find($id);
-
-        return view('administrator.profile', compact('administratorProfile'));
     }
 
     public function update(UpdateAdministratorRequest $request, $id)
@@ -81,13 +71,13 @@ class AdministratorController extends Controller
         ]);
 
         if ($id == Auth::user()->id) {
-            return redirect()->route('myadminprofile')->with('success', 'Informations modifiées avec succès! :-)');
+            return redirect()->route('myprofile')->with('success', 'Informations modifiées avec succès! :-)');
         } else {
-            return redirect()->route('showadminsup', $id)->with('success', 'Informations modifiées avec succès! :-)');
+            return redirect()->route('alladminsup', $id)->with('success', 'Informations modifiées avec succès! :-)');
         }
     }
 
-    public function updatepassword(UpdatePasswordRequest $request, $id)
+    public function updatepassword(UpdatePasswordRequest $request)
     {
         $id = Auth::user()->id;
         $message = '';
@@ -105,7 +95,7 @@ class AdministratorController extends Controller
             $message = 'Le mot de passe entré est incorrect.';
         }
 
-        return redirect()->route('myadminprofile')->with('success', $message);
+        return redirect()->route('myprofile')->with('success', $message);
     }
 
     public function regenerate($id)

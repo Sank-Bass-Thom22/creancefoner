@@ -52,7 +52,15 @@
 
                 </form>
 
-             
+                <hr>
+
+                <div class="employer-box-close">
+                    <form action="{{ route('allemployer') }}" method="GET">
+                        @csrf
+
+                        <button type="submit">FERMER</button>
+                    </form>
+                </div>
             </div>
             <!-- /.form-box -->
         </div>

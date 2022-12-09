@@ -10,9 +10,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
     Route::middleware('employer')->group(function () {
-        Route::get('myemployerprofile', [EmpEmployerController::class, 'profile'])
-            ->name('myemployerprofile');
-
         Route::get('myemployes', [EmpEmployerController::class, 'myemployes'])
             ->name('myemployes');
 

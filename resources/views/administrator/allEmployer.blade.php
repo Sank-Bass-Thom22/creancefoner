@@ -30,13 +30,9 @@
                                                 <td>{{ $employers->servicename }}</td>
                                                 <td>{{ $employers->email }}  </td>
                                                 <td>{{ $employers->telephone }} </td>
-                                                <td>
-                                                @if (Auth::user()->role === "SuperAdmin")
-                                                    <a href="{{ route ('editemployer', $employers->id) }}">MODIFIER</a>
-                                                    <a href="{{ route ('deleteemployer', $employers->id) }}">SUPPRIMER</a>
-                                                    <a href="{{ route('empregenerate', $employers->id) }}">GÉNÉRER UN NOUVEAU MOT DE PASSE</a>
-                                                @endif
-                                                </td>
+                                                <td><a href="{{ route ('editemployer', $employers->id) }}">MODIFIER</a></td>
+                        <td><a href="{{ route ('deleteemployer', $employers->id) }}">SUPPRIMER</a></td>
+                        <td><a href="{{ route('empregenerate', $employers->id) }}">GÉNÉRER UN NOUVEAU MOT DE PASSE</a></td>
                                             </tr>
 
                                         @empty

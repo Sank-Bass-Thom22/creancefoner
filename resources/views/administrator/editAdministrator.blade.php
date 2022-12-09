@@ -13,7 +13,7 @@
                     @if ($errors->any())
                 <ul>
                     @foreach ($errors->all() as $error)
-                    <strong class="alert alert-danger">{{ $error }}</strong>
+                    <strong class="alert alert-danger">{{ $error }}</strong><br />
                     @endforeach
                 </ul><br />
                 @endif

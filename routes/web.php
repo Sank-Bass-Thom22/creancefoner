@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('auth.login');
-});
+})->middleware(['guest']);
 
 Route::get('dashboard', function () {
     $role = Auth::user()->role;

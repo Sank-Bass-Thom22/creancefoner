@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
 use App\Models\Debtor\Debtor;
+use App\Models\Loan\Loan;
+use App\Models\Loan\Repayment;
 use App\Http\Requests\StoreDebtorRequest;
 use App\Http\Requests\UpdateDebtorRequest;
 use Illuminate\Support\Facades\Hash;
@@ -15,9 +17,11 @@ class DebtorController extends Controller
     {
         $allDebtor = Debtor::where('role', 'Debtor')
             ->orderBy('firstname', 'ASC')->get();
+            $allService = Debtor::where('role', 'Employer')
+            ->orderBy('servicename', 'ASC')->get();
         $message = 'Il n\'y a aucun redevable enregistré.';
 
-        return view('administrator.allDebtor', compact(['allDebtor', 'message']));
+        return view('administrator.allDebtor', compact(['allDebtor', 'message', 'allService']));
     }
 
     public function create()
@@ -30,12 +34,11 @@ class DebtorController extends Controller
     public function store(StoreDebtorRequest $request)
     {
         $credentialsValidated = $request->validated();
-        //$password = STR::random(8);
-        $password = "12345678";
+        $password = Str::random(8);
 
         $id_debtor = Debtor::insertGetId([
-            'firstname' => $request->firstname,
-            'lastname' => $request->lastname,
+            'firstname' => ucwords(strtolower($request->firstname)),
+            'lastname' => ucwords(strtolower($request->lastname)),
             'email' => $request->email,
             'telephone' => $request->telephone,
             'matricule' => $request->matricule,
@@ -54,18 +57,6 @@ class DebtorController extends Controller
         return redirect()->route('createloan')->with('success', $password);
     }
 
-    public function show($id)
-    {
-        $showDebtor = Debtor::findOrFail($id);
-        $debtorService = Debtor::where('serviceindex', $showDebtor->debtorindex)->first();
-
-        if (session()->has('fullname')) {
-            session()->forget('fullname');
-        }
-
-        return view('administrator.showDebtor', compact(['showDebtor', 'debtorService']));
-    }
-
     public function edit($id)
     {
         $debtorProfile = Debtor::find($id);
@@ -79,14 +70,14 @@ class DebtorController extends Controller
         $validatedData = $request->validated();
 
         Debtor::whereId($id)->update([
-            'firstname' => ucwords(strlower($request->firstname)),
-            'lastname' => ucwords(strlower($request->lastname)),
+            'firstname' => ucwords(strtolower($request->firstname)),
+            'lastname' => ucwords(strtolower($request->lastname)),
             'email' => strtolower($request->email),
             'telephone' => $request->telephone,
             'matricule' => $request->matricule,
             'debtorindex' => $request->serviceindex,
         ]);
-        return redirect()->route('showdebtor', $id)->with('success', 'Informations modifiées avec succès! :-)');
+        return redirect()->route('alldebtor')->with('success', 'Informations modifiées avec succès! :-)');
     }
 
     public function regenerate($id)
@@ -97,11 +88,17 @@ class DebtorController extends Controller
             'password' => Hash::make($newPassword),
         ]);
 
-        return redirect()->route('showdebtor', $id)->with('success', 'Succès! Le nouveau mot de passe est : ' . $newPassword);
+        return redirect()->route('alldebtor', $id)->with('success', 'Succès! Le nouveau mot de passe est : ' . $newPassword);
     }
 
     public function destroy($id)
     {
+        if (Repayment::where('id_debtor', $id)->exists()) {
+            return back()->with('success', 'Veuillez d\'abord supprimer les remboursements effectués par ce redevable.');
+        }
+        if (Loan::where('id_debtor', $id)->exists()) {
+            return back()->with('success', 'Veuillez d\'abord supprimer les prêts de ce redevable.');
+        }
         $debtorProfile = Debtor::find($id);
         $debtorProfile->delete();
 

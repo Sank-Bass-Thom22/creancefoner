@@ -30,4 +30,21 @@ class LoginController extends Controller
 
         return back()->withErrors('Les informations d\'identification fournies ne correspondent pas a nos enregistrements.');
     }
+
+    public function profile()
+    {
+        $id = Auth::user()->id;
+        $role = Auth::user()->role;
+
+        $userProfile = Debtor::find($id);
+
+        if ($role == 'SuperAdmin' or $role == 'SimpleAdmin') {
+            return view('administrator.profile', compact('userProfile'));
+        } elseif ($role == 'Employer') {
+            return view('employer.profile', compact('userProfile'));
+        } else {
+            $serviceProfile = Debtor::where('serviceindex', 'userProfile->debtorindex')->first();
+            return view('debtor.profile', compact(['userProfile', 'serviceProfile']));
+        }
+    }
 }

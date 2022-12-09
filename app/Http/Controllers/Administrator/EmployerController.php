@@ -13,7 +13,7 @@ class EmployerController extends Controller
 {
     public function index()
     {
-        $allEmployer = Debtor::where('role', 'Employer')->select('id', 'servicename')
+        $allEmployer = Debtor::where('role', 'Employer')->select('id', 'servicename', 'email', 'telephone')
             ->orderBy('servicename', 'ASC')->get();
 
         return view('administrator.allEmployer', compact('allEmployer'));
@@ -41,14 +41,6 @@ class EmployerController extends Controller
         return redirect()->route('registeremployer')->with('success', 'Succès! :-) /Password : ' . $password);
     }
 
-    public function show($id)
-    {
-        $showEmployer = Debtor::find($id);
-        $countDebtor = Debtor::where('debtorindex', $showEmployer->serviceindex)->count();
-
-        return view('administrator.showEmployer', compact(['showEmployer', 'countDebtor']));
-    }
-
     public function edit($id)
     {
         $employerProfile = Debtor::select('id', 'servicename', 'email', 'telephone')->find($id);
@@ -61,12 +53,12 @@ class EmployerController extends Controller
         $validatedData = $request->validated();
 
         Debtor::whereId($id)->update([
-            'servicename' => ucfirst(strtolower($request->servicename)),
+            'servicename' => ucwords(strtolower($request->servicename)),
             'email' => strtolower($request->email),
             'telephone' => $request->telephone,
         ]);
 
-        return redirect()->route('showemployer', $id)->with('success', 'Informations modifiées avec succès! :-)');
+        return redirect()->route('allemployer')->with('success', 'Informations modifiées avec succès! :-)');
     }
 
     public function regenerate($id)
@@ -77,12 +69,17 @@ class EmployerController extends Controller
             'password' => Hash::make($newPassword),
         ]);
 
-        return redirect()->route('showemployer', $id)->with('success', 'Succès! Le nouveau mot de passe est : ' . $newPassword);
+        return redirect()->route('allemployer')->with('success', 'Succès! Le nouveau mot de passe est : ' . $newPassword);
     }
 
     public function destroy($id)
     {
         $employerProfile = Debtor::find($id);
+
+        if (Debtor::where('debtorindex', $employerProfile->serviceindex)->exists()) {
+            return back()->with('success', 'Veuillez d\abord supprimé les redevables de ces structure.');
+        }
+
         $employerProfile->delete();
 
         return redirect()->route('allemployer')->with('success', 'Structure supprimée avec succès!');

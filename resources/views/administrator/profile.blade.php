@@ -19,41 +19,18 @@
                     <p>
                     <h2>Informations personnelles</h2>
                     <ul>
-                        Prénom : {{ $administratorProfile->firstname }}<br />
-                        Nom : {{ $administratorProfile->lastname }}<br />
+                        Prénom : {{ $userProfile->firstname }}<br />
+                        Nom : {{ $userProfile->lastname }}<br />
+                        Adresse E-mail : {{ $userProfile->email }}<br />
+                        Numéro de téléphone : +226 {{ $userProfile->telephone }}<br />
+                        Responsabilité : {{ $userProfile->role }}
                         <div>
-                            <form method="GET" action="{{ route('editadministrator', ['id' => 0, 'resource' => 'editFullname']) }}">
-                                @csrf
-
-                                <button type="submit">MODIFIER</button>
-                            </form>
+                            <a href="{{ route('editadministrator', $userProfile->id) }}">MODIFIER</a>
                         </div><br />
 
-                        Adresse E-mail : {{ $administratorProfile->email }}<br />
+                        Mot de passe : ********
                         <div>
-                            <form method="GET" action="{{ route('editadministrator', ['id' => 0, 'resource' => 'editEmail']) }}">
-                                @csrf
-
-                                <button type="submit">MODIFIER</button>
-                            </form>
-                        </div><br />
-
-                        Numéro de téléphone : +226 {{ $administratorProfile->telephone }}
-                        <div>
-                            <form method="GET" action="{{ route('editadministrator', ['id' => 0, 'resource' => 'editTelephone']) }}">
-                                @csrf
-
-                                <button type="submit">MODIFIER</button>
-                            </form>
-                        </div><br />
-
-                        Mot de passe :
-                        <div>
-                            <form method="GET" action="{{ route('editadministrator', ['id' => 0, 'resource' => 'editPassword']) }}">
-                                @csrf
-
-                                <button type="submit">MODIFIER</button>
-                            </form>
+                            <a href="{{ route('editadminpassword') }}">MODIFIER</a>
                         </div>
                     </ul>
                     </p>
@@ -61,11 +38,7 @@
                     <hr>
 
                     <div class="">
-                        <form method="GET" action="{{ route('dashboard') }}">
-                            @csrf
-
-                            <button type="submit">FERMER</button>
-                        </form>
+                        <a href="{{ route('dashboard') }}">FERMER</a>
                     </div>
                 </section>
             </div>
