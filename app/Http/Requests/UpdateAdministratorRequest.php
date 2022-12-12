@@ -33,6 +33,6 @@ class UpdateAdministratorRequest extends FormRequest
             'email' => ['required', 'string', 'email', 'max:50', Rule::unique('debtors')->ignore($email, 'email')],
             'telephone' => ['required', 'string', 'max:25', Rule::unique('debtors')->ignore($telephone, 'telephone')],
             'role' => ['required', 'string', 'max:11'],
-        ];
+        ]; 
     }
 }
