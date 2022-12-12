@@ -4,81 +4,42 @@ namespace App\Http\Controllers\Debtor;
 
 use App\Http\Controllers\Controller;
 use App\Models\Debtor\Debtor;
-use App\Http\Requests\UpdateFullnameRequest;
-use App\Http\Requests\UpdateEmailRequest;
-use App\Http\Requests\UpdateTelephoneRequest;
-use App\Http\Requests\UpdateMatriculeRequest;
+use App\Http\Requests\UpdateDebtorRequest;
 use App\Http\Requests\UpdatePasswordRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UsrDebtorController extends Controller
 {
-    public function create($resource)
+    public function reset($id)
     {
-        $id = Auth::user()->id;
+        $resetDebtor = Debtor::find($id);
+        $service = Debtor::where('serviceindex', $resetDebtor->debtorindex)->first();
 
-        $debtorProfile = Debtor::where('id', $id)
-            ->select('firstname', 'lastname', 'email', 'telephone', 'matricule')
-            ->first();
-
-        return view('debtor.' . $resource, compact('debtorProfile'));
+        return view('debtor.resetDebtor', compact(['resetDebtor', 'service']));
     }
 
-    public function resetfullname(UpdateFullnameRequest $request)
+    public function resetpassword()
     {
-        $id = Auth::user()->id;
+        return view('debtor.resetPassword');
+    }
 
+    public function update(UpdateDebtorRequest $request, $id)
+    {
         $validatedData = $request->validated();
 
         Debtor::whereId($id)->update([
-            'firstname' => ucfirst(strtolower($request->firstname)),
-            'lastname' => ucfirst(strtolower($request->lastname)),
+            'firstname' => ucwords(strtolower($request->firstname)),
+            'lastname' => ucwords(strtolower($request->lastname)),
+            'email' => strtolower($request->email),
+            'telephone' => $request->telephone,
+            'matricule' => $request->matricule,
         ]);
 
         return redirect()->route('myprofile')->with('success', 'Informations modifiées avec succès! :-)');
     }
 
-    public function resetemail(UpdateEmailRequest $request)
-    {
-        $id = Auth::user()->id;
-
-        $validatedData = $request->validated();
-
-        Debtor::whereId($id)->update([
-            'email' => strtolower($request->email),
-        ]);
-
-        return redirect()->route('myprofile')->with('success', 'Email modifiées avec succès! :-)');
-    }
-
-    public function resettelephone(UpdateTelephoneRequest $request)
-    {
-        $id = Auth::user()->id;
-
-        $validatedData = $request->validated();
-
-        Debtor::whereId($id)->update([
-            'telephone' => $request->telephone,
-        ]);
-
-        return redirect()->route('myprofile')->with('success', 'Numéro de téléphone modifiées avec succès! :-)');
-    }
-
-    public function resetmatricule(UpdateMatriculeRequest $request)
-    {
-        $id = Auth::user()->id;
-
-        $validatedData = $request->validated();
-
-        Debtor::whereId($id)->update([
-            'matricule' => $request->matricule,
-        ]);
-
-        return redirect()->route('myprofile')->with('success', 'Matricule modifiées avec succès! :-)');
-    }
-
-    public function resetpassword(UpdatePasswordRequest $request)
+    public function updatepassword(UpdatePasswordRequest $request)
     {
         $id = Auth::user()->id;
         $message = '';

@@ -12,9 +12,9 @@
                     @if ($errors->any())
                 <ul>
                     @foreach ($errors->all() as $error)
-                    <strong class="alert alert-danger">{{ $error }}</strong>
+                    <strong class="alert alert-danger">{{ $error }}</strong><br />
                     @endforeach
-                </ul><br />
+                </ul>
                 @endif
                 </p>
 
@@ -24,7 +24,7 @@
                 @endif
                 </p>
 
-                <form action="{{ route ('resetpassword') }}" method="POST">
+                <form action="{{ route ('resetdebtorpassword') }}" method="POST">
                     @csrf
 
                     <div class="">
@@ -50,11 +50,7 @@
                 <hr>
 
                 <div class="debtor-box-close">
-                    <form action="{{ route('myprofile') }}" method="GET">
-                        @csrf
-
-                        <button type="submit">FERMER</button>
-                    </form>
+                    <a href="{{ route('myprofile') }}" class="">FERMER</a>
                 </div>
             </div>
             <!-- /.form-box -->

@@ -2,33 +2,46 @@
 
 @section('content')
 
-    <div class="documentlist-box">
-        <div class="card">
-            <div class="card-body documentlist-card-body">
-                <p class="documentlist-box-msg">
-                <h1 class="">Documents utils</h1>
-                </p><br />
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Documents utils</h4>
 
-                <section class="main">
-                    <ul>
-                        @forelse ($showDocuments as $documents)
-                        <a href="/storage/{{ $documents->filelink }}" class="" download="">{{ $documents->title }}</a><br />
-                        @empty
-                        Il n'y a aucun document enregistré pour le moment! 😞
-                        @endforelse
-                    </ul>
-                </section>
+        <a href="{{ route('dashboard') }}" class="btn btn-danger btn-lg float-right" style="margin: 15px;">Retour</a>
+        <table class="table header-border">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Titre</th>
+                    <th>Fichier</th>
 
-                <hr>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($showDocuments as $documents)
 
-                <div class="documentlist-box-close">
-                    <form action="{{ route('dashboard') }}" method="GET">
-                        @csrf
+                <tr>
+                    <td>{{ $loop->index + 1}} </td>
+                    <td>{{ $documents->title }} </td>
+                    <td> <a href="/storage/{{ $documents->filelink }}" class="" download="">Télécharger</a> </td>
 
-                        <button type="submit">FERMER</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+
+                </tr>
+
+                @empty
+                <tr>
+                    <td colspan="5"></td>
+
+                </tr>
+
+                @endforelse
+
+
+
+
+            </tbody>
+        </table>
     </div>
+</div>
+</div>
+
 @endsection

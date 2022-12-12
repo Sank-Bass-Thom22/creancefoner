@@ -40,22 +40,14 @@ Route::middleware('auth')->group(function () {
         Route::get('usefuldocuments', [UsrDocumentController::class, 'show'])
             ->name('usefuldocuments');
 
-        Route::get('resetdebtorsaboutinfo/{resource}', [UsrDebtorController::class, 'create'])
-            ->name('resetdebtorsaboutinfo');
+        Route::get('resetdebtor/{id}', [UsrDebtorController::class, 'reset'])
+            ->name('resetdebtor');
 
-        Route::post('resetfullname', [UsrDebtorController::class, 'resetfullname'])
-            ->name('resetfullname');
+        Route::post('resetdebtor/{id}', [UsrDebtorController::class, 'update']);
 
-        Route::post('resetemail', [UsrDebtorController::class, 'resetemail'])
-            ->name('resetemail');
+        Route::get('resetdebtorpassword', [UsrDebtorController::class, 'resetpassword'])
+        ->name('resetdebtorpassword');
 
-        Route::post('resettelephone', [UsrDebtorController::class, 'resettelephone'])
-            ->name('resettelephone');
-
-        Route::post('resetmatricule', [UsrDebtorController::class, 'resetmatricule'])
-            ->name('resetmatricule');
-
-        Route::post('resetpassword', [UsrDebtorController::class, 'resetpassword'])
-            ->name('resetpassword');
+        Route::post('resetdebtorpassword', [UsrDebtorController::class, 'updatepassword']);
     });
 });
