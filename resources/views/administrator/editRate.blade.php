@@ -52,11 +52,7 @@
                 <hr>
 
                 <div class="adminlist-box-close">
-                    <form action="{{ route('showrate', $editRate->id) }}" method="GET">
-                        @csrf
-
-                        <button type="submit">FERMER</button>
-                    </form>
+                    <a href="{{ route('allrate') }}" class="">FERMER</a>
                 </div>
             </div>
             <!-- /.form-box -->

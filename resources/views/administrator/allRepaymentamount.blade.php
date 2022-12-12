@@ -9,8 +9,19 @@
 <div class="card">
     <div class="card-body">
         <h4 class="card-title">Grille</h4>
+
+        <p class="showdocument-box-success">
+                    @if (session()->get('success'))
+                <div class="alert alert-success">{{ session()->get('success') }}</div>
+                @endif
+                </p>
+
         <a href="{{ route('dashboard') }}" class="btn btn-danger btn-lg float-right" style="margin: 15px;">Retour</a>
+        @if (Auth::user()->role == "SuperAdmin")
         <a href="{{ route ('createrepaymentamountsup') }}" class="btn btn-primary btn-lg float-right" style="margin: 15px;">Nouveau</a>
+        @else
+        <a href="#" class="" disabled="disabled">Nouveau</a>
+        @endif
         <div class="table-responsive">
             <table class="table header-border">
                 <thead>
@@ -34,14 +45,14 @@
                             @if (Auth::user()->role == "SuperAdmin")
                             <a href="{{ route('editrepaymentamountsup', $repaymentamounts->id) }}" class="">MODIFIER</a>
                             @else
-                            <a href="{{ route('editrepaymentamountsup', $repaymentamounts->id) }}" class="" disabled="disabled">MODIFIER</a>
+                            <a href="#" class="" disabled="disabled">MODIFIER</a>
                             @endif
                         </td>
                         <td>
                             @if (Auth::user()->role == "SuperAdmin")
                             <a href="{{ route('destroyrepaymentamountsup', $repaymentamounts->id) }}" class="">SUPPRIMER</a>
                             @else
-                            <a href="{{ route('destroyrepaymentamountsup', $repaymentamounts->id) }}" class="" disabled="disabled">SUPPRIMER</a>
+                            <a href="#" class="" disabled="disabled">SUPPRIMER</a>
                             @endif
                         </td>
                     </tr>

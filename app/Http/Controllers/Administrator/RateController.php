@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
 use App\Models\Loan\Rate;
+use App\Models\Loan\Loan;
 use App\Http\Requests\StoreRateRequest;
 use App\Http\Requests\UpdateRateRequest;
 
@@ -11,7 +12,7 @@ class RateController extends Controller
 {
     public function index()
     {
-        $allRate = Rate::select('id', 'value', 'validity')->orderBy('validity', 'desc')->get();
+        $allRate = Rate::orderBy('validity', 'desc')->get();
 
         return view('administrator.allRate', compact('allRate'));
     }
@@ -31,19 +32,12 @@ class RateController extends Controller
             'description' => $request->description,
         ]);
 
-        return back()->with('success', 'Taux enregistré avec succès ! :-)');
-    }
-
-    public function show($id)
-    {
-        $showRate = Rate::select('id', 'value', 'validity', 'description')->findOrFail($id);
-
-        return view('administrator.showRate', compact('showRate'));
+        return redirect()->route('allrate')->with('success', 'Taux enregistré avec succès ! :-)');
     }
 
     public function edit($id)
     {
-        $editRate = Rate::select('id', 'value', 'validity', 'description')->findOrFail($id);
+        $editRate = Rate::find($id);
 
         return view('administrator.editRate', compact('editRate'));
     }
@@ -58,12 +52,17 @@ class RateController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('showrate', $id)->with('success', 'Taux modifié avec succès ! :-)');
+        return redirect()->route('allrate')->with('success', 'Taux modifié avec succès ! :-)');
     }
 
     public function destroy($id)
     {
-        $singleRate = Rate::findOrFail($id);
+        $singleRate = Rate::find($id);
+
+        if (Loan::whete('id_rate', $singleRate->id)->exists()) {
+            return back()->with('success', 'Ce taux est déjà appliqué à un prêt.');
+        }
+
         $singleRate->delete();
 
         return redirect()->route('allrate')->with('success', 'Taux supprimé avec succès ! :-)');

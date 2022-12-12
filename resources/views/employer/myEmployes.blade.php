@@ -11,23 +11,44 @@
                 <h1 class="">Mes employés</h1>
                 </p><br />
 
-                <ol class="">
-                    @forelse ($myEmployes as $employes)
-                    <li><a href="{{ route('showemploye', $employes->id) }}" class="">{{ $employes->firstname }} {{ $employes->lastname }}</a></li>
+                <p class="myemployesbox-success">
+                    @if (session()->get('success'))
+                <div class="alert alert-success">{{ session()->get('success') }}</div><br />
+                @endif
+                </p>
+
+                <a href="{{ route('dashboard') }} " class="btn btn-danger btn-lg float-right" style="margin: 15px;">Retour</a>
+                <div class="table-responsive">
+            <table class="table header-border">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nom & prénom (s)</th>
+                        <th>Email</th>
+                        <th>Téléphone</th>
+                        <th>Matricule</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @forelse ($myEmployes as $employes)
+                <tr>
+                        <td>{{ $loop->index + 1}} </td>
+                        <td>{{ $employes->firstname }} {{ $employes->lastname }}</td>
+                        <td>{{ $employes->email }}</td>
+                        <td>{{ $employes->telephone }}</td>
+                        <td>{{ $employes->matricule }}</td>
+                        <td><a href="{{ route ('myemployeloans', $employes->id) }}">PRÊTS</a></td>
+                        </tr>
                     @empty
-                    <div class="employeslist-box-msg">Il semble que vous n'ayez aucun employé enregistré pour le moment.</div>
+                    <tr>
+                        <td colspan="5"></td>
+                    </tr>
                     @endforelse
-                </ol>
+                </tbody>
+            </table>
+        </div>
 
-                <hr>
-
-                <div class="employeslist-box-close">
-                    <form action="{{ route('dashboard') }}" method="GET">
-                        @csrf
-
-                        <button type="submit">FERMER</button>
-                    </form>
-                </div>
             </div>
         </div>
     </div>

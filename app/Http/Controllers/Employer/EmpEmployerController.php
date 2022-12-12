@@ -4,66 +4,49 @@ namespace App\Http\Controllers\Employer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Debtor\Debtor;
-use App\Http\Requests\UpdateFullnameRequest;
-use App\Http\Requests\UpdateEmailRequest;
-use App\Http\Requests\UpdateTelephoneRequest;
+use App\Http\Requests\UpdateEmployerRequest;
 use App\Http\Requests\UpdatePasswordRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class EmpEmployerController extends Controller
 {
-    public function create($resource)
+    public function index()
     {
-        $id = Auth::user()->id;
+        $serviceindex = Auth::user()->serviceindex;
 
-        $employerProfile = Debtor::where('id', $id)
-            ->select('servicename', 'email', 'telephone')
-            ->first();
+        $myEmployes = Debtor::where('debtorindex', $serviceindex)
+        ->orderBy('firstname', 'ASC')->get();
 
-        return view('employer.' . $resource, compact('employerProfile'));
+        return view('employer.myEmployes', compact('myEmployes'));
     }
 
-    public function resetservicename(UpdateFullnameRequest $request)
+    public function reset($id)
     {
-        $id = Auth::user()->id;
+        $resetEmployer = Debtor::find($id);
 
+        return view('employer.resetEmployer', compact('resetEmployer'));
+    }
+
+    public function resetpassword()
+    {
+        return view('employer.resetPassword');
+    }
+
+    public function update(UpdateEmployerRequest $request, $id)
+    {
         $validatedData = $request->validated();
 
         Debtor::whereId($id)->update([
-            'servicename' => $request->servicename,
-        ]);
-
-        return redirect()->route('myemployerprofile')->with('success', 'Nom de la structure modifiées avec succès! :-)');
-    }
-
-    public function resetemployeremail(UpdateEmailRequest $request)
-    {
-        $id = Auth::user()->id;
-
-        $validatedData = $request->validated();
-
-        Debtor::whereId($id)->update([
+            'servicename' => ucwords(strtolower($request->servicename)),
             'email' => strtolower($request->email),
-        ]);
-
-        return redirect()->route('myemployerprofile')->with('success', 'Email modifiées avec succès! :-)');
-    }
-
-    public function resetemployertelephone(UpdateTelephoneRequest $request)
-    {
-        $id = Auth::user()->id;
-
-        $validatedData = $request->validated();
-
-        Debtor::whereId($id)->update([
             'telephone' => $request->telephone,
         ]);
 
-        return redirect()->route('myemployerprofile')->with('success', 'Numéro de téléphone modifiées avec succès! :-)');
+        return redirect()->route('myprofile')->with('success', 'Informations modifiés avec succès!');
     }
 
-    public function resetemployerpassword(UpdatePasswordRequest $request)
+    public function updatepassword(UpdatePasswordRequest $request)
     {
         $id = Auth::user()->id;
         $message = '';
@@ -81,25 +64,7 @@ class EmpEmployerController extends Controller
             $message = 'Le mot de passe entré est incorrect.';
         }
 
-        return redirect()->route('myemployerprofile')->with('success', $message);
+        return redirect()->route('myprofile')->with('success', $message);
     }
 
-    public function myemployes()
-    {
-        $serviceindex = Auth::user()->serviceindex;
-
-        $myEmployes = Debtor::where('debtorindex', $serviceindex)
-            ->select('id', 'firstname', 'lastname')
-            ->orderBy('firstname', 'ASC')->get();
-
-        return view('employer.myEmployes', compact('myEmployes'));
-    }
-
-    public function show($id)
-    {
-        $showEmploye = Debtor::select('id', 'firstname', 'lastname', 'email', 'telephone', 'matricule')
-            ->find($id);
-
-        return view('employer.showEmploye', compact('showEmploye'));
-    }
 }

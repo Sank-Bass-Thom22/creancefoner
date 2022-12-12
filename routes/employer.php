@@ -10,11 +10,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
     Route::middleware('employer')->group(function () {
-        Route::get('myemployes', [EmpEmployerController::class, 'myemployes'])
+        Route::get('myemployes', [EmpEmployerController::class, 'index'])
             ->name('myemployes');
-
-        Route::get('showemploye/{id}', [EmpEmployerController::class, 'show'])
-            ->name('showemploye');
 
         Route::get('myemployeloans/{id}', [EmpLoanController::class, 'loans'])
             ->name('myemployeloans');
@@ -25,19 +22,14 @@ Route::middleware('auth')->group(function () {
         Route::get('documents', [EmpDocumentController::class, 'show'])
             ->name('documents');
 
-        Route::get('resetemployersaboutinfo/{resource}', [EmpEmployerController::class, 'create'])
-            ->name('resetemployersaboutinfo');
+        Route::get('resetemployer/{id}', [EmpEmployerController::class, 'reset'])
+            ->name('resetemployer');
 
-        Route::post('resetservicename', [EmpEmployerController::class, 'resetservicename'])
-            ->name('resetservicename');
-
-        Route::post('resetemployeremail', [EmpEmployerController::class, 'resetemployeremail'])
-            ->name('resetemployeremail');
-
-        Route::post('resetemployertelephone', [EmpEmployerController::class, 'resetemployertelephone'])
-            ->name('resetemployertelephone');
-
-        Route::post('resetemployerpassword', [EmpEmployerController::class, 'resetemployerpassword'])
+        Route::get('resetemployerpassword', [EmpEmployerController::class, 'resetpassword'])
             ->name('resetemployerpassword');
+
+        Route::post('resetemployer/{id}', [EmpEmployerController::class, 'update']);
+
+        Route::post('resetemployerpassword', [EmpEmployerController::class, 'updatepassword']);
     });
 });

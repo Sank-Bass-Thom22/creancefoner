@@ -51,11 +51,7 @@
                 <hr>
 
                 <div class="employer-box-close">
-                    <form action="{{ route('myemployerprofile') }}" method="GET">
-                        @csrf
-
-                        <button type="submit">FERMER</button>
-                    </form>
+                    <a href="{{ route('myprofile') }}" class="">FERMER</a>
                 </div>
             </div>
             <!-- /.form-box -->

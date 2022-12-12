@@ -5,62 +5,47 @@
 
 
 
-    <div class="loans-box">
-        <div class="card">
-            <div class="card-body loans-card-body">
-                <p class="loans-box-msg">
-                <h1 class="">Détail des prêts contractés</h1>
-                </p><br />
+<div class="loans-box">
+    <div class="card">
+        <div class="card-body loans-card-body">
+            <p class="loans-box-msg">
+            <h1 class="">Détail des prêts contractés</h1>
+            </p><br />
 
-                <section class="main">
-                    <div class="">
-                        <table>
+            <section class="main">
+                <a href="{{ route('myemployes') }} " class="btn btn-danger btn-lg float-right" style="margin: 15px;">Retour</a>
+                <a href="{{ route ('myemployerepayments', $id) }}" class="btn btn-primary btn-lg float-right" style="margin: 15px;">Remboursements</a>
+                <div class="table-responsive">
+                    <table class="table header-border">
+                        <thead>
                             <tr>
-                                <th>MONTANT</th>
-                                <th>CONTRACTÉ LE</th>
-                                <th>TAUX DE REMBOURSEMENT</th>
-                                <th>À REMBOURSER AVANT LE</th>
+                                <th>#</th>
+                                <th>Montant</th>
+                                <th>Contracté le</th>
+                                <th>Taux de remboursement</th>
+                                <th>À rembourser avant le</th>
                             </tr>
+                        </thead>
+                        <tbody>
                             @forelse ($employeLoans as $loans)
                             <tr>
+                                <td>{{ $loop->index + 1}} </td>
                                 <td>{{ $loans->amount }} Francs CFA</td>
                                 <td>{{ $loans->startline }}</td>
                                 <td>{{ $loans->value }}%</td>
                                 <td>{{ $loans->deadline }}</td>
                             </tr>
                             @empty
-                        </table><br />
-                        <div class="">Il semble qu'aucun prêt n'est enregistré pour l'instant.</div>
-                        @endforelse
-                        </table>
-                        </p>
-
-                        <hr>
-
-                        <div>
-                            <table>
-                                <tr>
-                                    @if ($countLoans > 0) <td>
-                                        <form method="GET" action="{{ route('myemployerepayments', $id) }}">
-                                            @csrf
-
-                                            <button type="submit">VOIR LES REMBOURSEMENTS</button>
-                                        </form>
-                                    </td>
-                                    @endif
-                                    <td>
-                                        <form method="GET" action="{{ route('showemploye', $id) }}">
-                                            @csrf
-
-                                            <button type="submit">FERMER</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                </section>
-            </div>
+                            <tr>
+                                <td colspan="5"></td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </section>
         </div>
     </div>
+</div>
 
 @endsection

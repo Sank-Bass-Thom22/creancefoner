@@ -9,6 +9,13 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Liste des employeurs</h4>
+
+                                <p class="showdocument-box-success">
+                    @if (session()->get('success'))
+                <div class="alert alert-success">{{ session()->get('success') }}</div>
+                @endif
+                </p>
+
                                 <a href="{{ route('dashboard') }}" class="btn btn-danger btn-lg float-right" style="margin: 15px;">Retour</a>
                                 <a href="{{ route ('registeremployer') }}" class="btn btn-primary btn-lg float-right" style="margin: 15px;" >Nouveau</a>
                                 <div class="table-responsive">
