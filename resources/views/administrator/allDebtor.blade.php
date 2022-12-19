@@ -8,6 +8,14 @@
         <h4 class="card-title">Liste des redevables</h4>
        
 
+        <p class="showdocument-box-success">
+                    @if (session()->get('success'))
+                <div class="alert alert-success">{{ session()->get('success') }}</div>
+                @endif
+                </p>
+
+        <p class="search-box">
+
 
         <form method="POST" action="{{ route ('researchdebtor') }}">
             @csrf

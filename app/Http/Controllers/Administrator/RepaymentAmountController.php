@@ -31,7 +31,7 @@ class RepaymentAmountController extends Controller
             'description' => $request->description,
         ]);
 
-        return back()->with('success', 'Grille enregistrée avec succès ! :-)');
+        return redirect()->route('allrepaymentamount')->with('success', 'Grille enregistrée avec succès ! :-)');
     }
 
     public function edit($id)

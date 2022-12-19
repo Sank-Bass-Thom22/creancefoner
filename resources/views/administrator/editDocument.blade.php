@@ -52,11 +52,7 @@
                 <hr>
 
                 <div class="adminlist-box-close">
-                    <form action="{{ route('showdocument', $editDocument->id) }}" method="GET">
-                        @csrf
-
-                        <button type="submit">FERMER</button>
-                    </form>
+                    <a href="{{ route('alldocument') }}" class="">FERMER</a>
                 </div>
             </div>
             <!-- /.form-box -->

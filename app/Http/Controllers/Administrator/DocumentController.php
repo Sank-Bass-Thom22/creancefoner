@@ -12,7 +12,7 @@ class DocumentController extends Controller
 {
     public function index()
     {
-        $allDocument = Document::select('id', 'title', 'filelink')->orderBy('title', 'ASC')->get();
+        $allDocument = Document::orderBy('title', 'ASC')->get();
 
         return view('administrator.allDocument', compact('allDocument'));
     }
@@ -35,14 +35,7 @@ class DocumentController extends Controller
             'description' => $request->description,
         ]);
 
-        return back()->with('success', 'Document importé avec succès! :-)');
-    }
-
-    public function show($id)
-    {
-        $showDocument = Document::select('id', 'title', 'filelink', 'description')->findOrFail($id);
-
-        return view('administrator.showDocument', compact('showDocument'));
+        return redirect()->route('alldocument')->with('success', 'Document importé avec succès! :-)');
     }
 
     public function edit($id)
@@ -65,7 +58,7 @@ class DocumentController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('showdocument', $id)->with('success', 'Modification effectuée avec succès! :-)');
+        return redirect()->route('alldocument')->with('success', 'Modification effectuée avec succès! :-)');
     }
 
     public function destroy($id)

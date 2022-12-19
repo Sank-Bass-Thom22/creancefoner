@@ -43,8 +43,8 @@ class LoginController extends Controller
         } elseif ($role == 'Employer') {
             return view('employer.profile', compact('userProfile'));
         } else {
-            $serviceProfile = Debtor::where('serviceindex', 'userProfile->debtorindex')->first();
-            return view('debtor.profile', compact(['userProfile', 'serviceProfile']));
+            $service = Debtor::where('serviceindex', $userProfile->debtorindex)->first();
+            return view('debtor.profile', compact(['userProfile', 'service']));
         }
     }
 }

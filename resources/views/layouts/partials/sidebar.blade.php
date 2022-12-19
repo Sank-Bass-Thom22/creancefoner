@@ -13,7 +13,9 @@
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Authentification</span>
                         </a>
                         <ul aria-expanded="false">
+                            @if (Auth::user()->role == 'SuperAdmin')
                             <li><a href="{{ route('alladminsup') }}">Liste des administrateurs</a></li>
+                            @endif
                             <li><a href="{{ route('allemployer') }}">Liste des employeurs</a></li>
                             <li><a href="{{ route('alldebtor') }}">Liste des redevables</a></li>
 

@@ -12,9 +12,9 @@
                     @if ($errors->any())
                 <ul>
                     @foreach ($errors->all() as $error)
-                    <li><strong class="alert alert-danger">{{ $error }}</strong></li>
+                    <li><strong class="alert alert-danger">{{ $error }}</strong></li><br />
                     @endforeach
-                </ul><br />
+                </ul>
                 @endif
                 </p>
 
@@ -73,8 +73,9 @@
                                 <!-- /.col -->
                             </form>
                         </div>
-                    </div>
-             
+                    </div><br />
+
+                    <a href="{{ route('dashboard') }}" class="btn btn-danger btn-lg float-right" style="margin: 15px;">Retour</a>
                 </section>
             </div>
             <!-- /.form-box -->

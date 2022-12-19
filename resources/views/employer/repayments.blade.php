@@ -10,15 +10,18 @@
                 </p><br />
 
                 <section class="main">
-                    <p>
+                    <div class="table-responsive">
                     <h3>Apperçu global</h3>
-                    <table>
+                    <table class="table header-border">
+                    <thead>
                         <tr>
                             <th>DETTE TOTALE</th>
                             <th>TOTAL PAYÉ</th>
                             <th>RESTE À PAYER</th>
                             <th>ÉCHÉANCIER</th>
                         </tr>
+</thead>
+<tbody>
                         <tr>
                             <td>{{ $totalDebt }} Francs CFA</td>
                             <td>{{ $totalPaid }} Francs CFA</td>
@@ -31,38 +34,42 @@
                                 @endif
                             </td>
                         </tr>
+                        <tbody>
                     </table>
-                    </p><br />
+</div><br />
 
-                    <p>
+                    <div class="table-responsive">
                     <h3>Récaputulatif des remboursements</h3>
-                    <table>
+                    <table class="table header-border">
+                        <thead>
                         <tr>
+                            <th>#</th>
                             <th>EFFECTUÉ LE</th>
                             <th>MONTANT</th>
                             <th>MODE DE REMBOURSEMENT</th>
                         </tr>
+                        </thead>
+                        <tbody>
                         @forelse ($employeRepayments as $repayments)
                         <tr>
+                        <td>{{ $loop->index + 1}} </td>
                             <td>{{ $repayments->repaymentdate }}</td>
                             <td>{{ $repayments->amount }} Francs CFA</td>
                             <td>{{ $repayments->repaymentway }}</td>
                         </tr>
                         @empty
-                    </table><br />
-                    <div class="">Il n'y a aucun remboursement pour le moment.</div>
+                    <tr>
+                        <td colspan="4"></td>
+                    </tr>
                     @endforelse
+                    </tbody>
                     </table>
-                    </p>
+</div>
 
                     <hr>
 
                     <div class="employe-box-close">
-                        <form method="GET" action="{{ route('myemployeloans', $id) }}">
-                            @csrf
-
-                            <button type="submit">FERMER</button>
-                        </form>
+                        <a href="{{ route('myemployeloans', $id) }}">FERMER</a>
                     </div>
                 </section>
             </div>
