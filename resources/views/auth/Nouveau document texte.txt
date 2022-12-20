@@ -1,0 +1,21 @@
+                                <form action="{{ route('login') }}" method="POST">
+                                    @csrf
+
+                                    <div class="form-group">
+                                        <input type="email" class="form-control"  id="Email" name="email" placeholder="Adresse E-mail" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" placeholder="Mot de passe" id="Password" name="password" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="checkbox" id="Remember" name="remember" />
+                                        <label for="Remember">
+                                            Se souvenir de moi
+                                        </label>
+
+                                    </div>
+
+                                    <button class="btn login-form__btn submit w-100">Se Connecter</button>
+                                </form>
+                                <p class="mt-5 login-form__footer">Mot de passe oublié ? <a href="{{ route ('forgot-password') }}" class="text-primary">Cliquez</a> ici</p>

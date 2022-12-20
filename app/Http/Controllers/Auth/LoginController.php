@@ -5,18 +5,25 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Debtor\Debtor;
 use App\Http\Requests\LoginRequest;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function show()
+    public function store(Request $request  )
     {
-        return view('auth.login');
-    }
+        $request->validate([
+            'email' => ['required', 'email'],
+        ]);
 
-    public function reset()
-    {
-        return view('auth.forgot-password');
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+
+        return $status == Password::RESET_LINK_SENT
+        ? back()->with('status', __($status))
+        : back()->withInput($request->only('email'))
+        ->withErrors(['email' => __($status)]);
     }
 
     public function authenticate(LoginRequest $request)

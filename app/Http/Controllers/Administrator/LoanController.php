@@ -48,8 +48,7 @@ class LoanController extends Controller
 
         Loan::create([
             'amount' => floatval($request->amount),
-            'startline' => $request->startline,
-            'deadline' => $request->deadline,
+            'academicyear' => $request->academicyear,
             'id_rate' => intval($request->rate),
             'id_debtor' => intval(session()->get('id_debtor')),
         ]);

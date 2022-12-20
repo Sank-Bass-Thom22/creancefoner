@@ -38,12 +38,12 @@
                         <input type="number" class="form-control" id="Amount" name="amount" required />
                     </div>
                     <div class="input-group mb-3">
-                        <label for="Startline">Date de contraction du prêt : </label>
-                        <input type="date" class="form-control" id="Startline" name="startline" required />
-                    </div>
-                    <div class="input-group mb-3">
-                        <label for="Deadline">Date de cloture du prêt : </label>
-                        <input type="date" class="form-control" id="Deadline" name="deadline" required />
+                        <label for="Academicyear">Année académique : </label>
+                        <select id="Academicyear" name="academicyear" required>
+                            @for($year=date('Y'); $year>2000; $year--)
+                            <option value="{{ $year-1 }}-{{ $year }}">{{ $year-1 }}-{{ $year }}</option>
+                            @endfor
+                        </select>
                     </div>
                     <div class="input-group mb-3">
                         <label for="Rate">Taux applicable : </label>
