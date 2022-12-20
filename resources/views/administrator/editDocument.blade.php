@@ -27,33 +27,31 @@
 
                 <form action="{{ route ('updatedocument', $editDocument->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="input-group mb-3">
+                    <div class="form-group ">
                         <label for="Title">Titre du document : </label>
                         <input type="text" class="form-control" id="Title" name="title" value="{{ $editDocument->title }}" required />
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="form-group ">
                         <label for="Document">Selectionner le document : </label>
                         <input type="file" class="form-control" id="Document" name="document" required />
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="form-group ">
                         <label for="Description">Description : </label>
                         <textarea class="form-control" id="Description" name="description" rows.="5" cols="50">
                         {{ $editDocument->description }}
                         </textarea>
                     </div>
 
-                    <!-- /.col -->
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">VALIDER</button>
+                 
+                    <div class="form-group">
+       
+                        <button type="submit" class="btn mb-1 btn-primary">Valider</button>
+
+                        <a href="{{ route ('alldocument') }}" class="btn mb-1 btn-danger">Retour</a>                    
                     </div>
-                    <!-- /.col -->
                 </form>
 
-                <hr>
-
-                <div class="adminlist-box-close">
-                    <a href="{{ route('alldocument') }}" class="">FERMER</a>
-                </div>
+           
             </div>
             <!-- /.form-box -->
         </div>

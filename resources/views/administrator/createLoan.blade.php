@@ -33,21 +33,21 @@
 
                 <form action="{{ route ('storeloan') }}" method="POST">
                     @csrf
-                    <div class="input-group mb-3">
+                    <div class="form-group ">
                         <label for="Amount">Montant du prêt : </label>
                         <input type="number" class="form-control" id="Amount" name="amount" required />
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="form-group ">
                         <label for="Startline">Date de contraction du prêt : </label>
                         <input type="date" class="form-control" id="Startline" name="startline" required />
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="form-group ">
                         <label for="Deadline">Date de cloture du prêt : </label>
                         <input type="date" class="form-control" id="Deadline" name="deadline" required />
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="form-group ">
                         <label for="Rate">Taux applicable : </label>
-                        <select id="Rate" name="rate" required>
+                        <select id="Rate" class="form-control" name="rate" required>
                             @forelse($allRate as $rates)
                             <option value="{{ $rates->id }}">{{ $rates->value }}</option>
                             @empty
@@ -56,34 +56,22 @@
                         </select>
                     </div>
 
-                    <!-- /.col -->
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">VALIDER</button>
+               
+
+                    <div class="form-group">
+       
+                        <button type="submit" class="btn mb-1 btn-primary">Valider</button>
+                        @if (session()->has('now'))
+
+                        <a href="{{ route('createloannow', session()->get('id_debtor')) }}" class="btn mb-1 btn-danger">Retour</a>                    
+                        @else
+
+                        <a href="{{ route('registerdebtor') }}" class="btn mb-1 btn-danger">Retour</a>                    
+                        @endif
+                      
                     </div>
-                    <!-- /.col -->
                 </form>
 
-                <hr>
-
-                <div class="adminlist-box-close">
-                    @if (session()->has('now'))
-
-                    <form action="{{ route('createloannow', session()->get('id_debtor')) }}" method="GET">
-                        @csrf
-
-                        <button type="submit">FERMER</button>
-                    </form>
-
-                    @else
-
-                    <form action="{{ route('registerdebtor') }}" method="GET">
-                        @csrf
-
-                        <button type="submit">FERMER</button>
-                    </form>
-
-                    @endif
-                </div>
             </div>
             <!-- /.form-box -->
         </div>

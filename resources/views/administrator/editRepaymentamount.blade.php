@@ -27,33 +27,34 @@
 
             <form action="{{ route ('updaterepaymentamountsup', $editRepaymentamount->id) }}" method="POST">
                 @csrf
-                <div class="input-group mb-3">
+                <div class="form-group ">
                     <label for="Minamount">Montant minimal : </label>
                     <input type="number" class="form-control" id="Minamount" name="minamount" value="{{ $editRepaymentamount->minamount }}" required />
                 </div>
-                <div class="input-group mb-3">
+                <div class="form-group ">
                     <label for="Maxamount">Montant maximal : </label>
                     <input type="number" class="form-control" id="Maxamount" name="maxamount" value="{{ $editRepaymentamount->maxamount }}" required />
                 </div>
-                <div class="input-group mb-3">
+                <div class="form-group ">
                     <label for="Description">Description : </label>
                     <textarea class="form-control" id="Description" name="description" rows="5" cols="50">
-                    {{ $editRepaymentamount->description }}
+                    {{trim($editRepaymentamount->description)}}
                     </textarea>
                 </div>
 
-                <!-- /.col -->
-                <div class="col-4">
-                    <button type="submit" class="btn btn-primary btn-block">VALIDER</button>
+             
+
+                <div class="form-group">
+       
+                    <button type="submit" class="btn mb-1 btn-primary">Valider</button>
+
+                    <a href="{{ route('allrepaymentamount') }}" class="btn mb-1 btn-danger">Retour</a>                    
                 </div>
-                <!-- /.col -->
+
             </form>
 
-            <hr>
 
-            <div class="adminlist-box-close">
-                <a href="{{ route('allrepaymentamount') }}">FERMER</a>
-            </div>
+           
         </div>
         <!-- /.form-box -->
     </div>

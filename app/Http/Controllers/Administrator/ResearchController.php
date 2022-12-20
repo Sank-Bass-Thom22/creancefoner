@@ -15,7 +15,7 @@ class ResearchController extends Controller
 
         $allDebtor = Debtor::where([['firstname', 'like', $key], ['role', 'Debtor']])
             ->orWhere([['lastname', 'like', $key], ['role', 'Debtor']])
-            ->orderBy('created_at', 'DESC')->get();
+            ->orderBy('created_at', 'DESC')->paginate(10);
 
         $message = 'Il n\'y a aucun redevable enregistré.';
 

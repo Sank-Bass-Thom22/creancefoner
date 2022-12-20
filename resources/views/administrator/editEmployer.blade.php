@@ -48,19 +48,14 @@
                         <a href="{{ route('allemployer') }}" class="btn mb-1 btn-danger">Retour</a> 
                         
                     </div>
+                    
 
 
                 </form>
 
-                <hr>
+           
 
-                <div class="employer-box-close">
-                    <form action="{{ route('allemployer') }}" method="GET">
-                        @csrf
-
-                        <button type="submit">FERMER</button>
-                    </form>
-                </div>
+        
             </div>
             <!-- /.form-box -->
         </div>

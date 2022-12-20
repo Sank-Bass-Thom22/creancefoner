@@ -12,7 +12,7 @@ class RateController extends Controller
 {
     public function index()
     {
-        $allRate = Rate::orderBy('validity', 'desc')->get();
+        $allRate = Rate::orderBy('validity', 'desc')->paginate(10);
 
         return view('administrator.allRate', compact('allRate'));
     }

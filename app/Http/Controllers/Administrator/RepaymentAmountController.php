@@ -11,7 +11,7 @@ class RepaymentAmountController extends Controller
 {
     public function index()
     {
-        $allRepaymentamount = Repaymentamount::get();
+        $allRepaymentamount = Repaymentamount::paginate(10);
 
         return view('administrator.allRepaymentamount', compact('allRepaymentamount'));
     }

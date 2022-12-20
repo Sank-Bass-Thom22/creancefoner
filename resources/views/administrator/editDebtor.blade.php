@@ -71,13 +71,6 @@
 
           
 
-                <div class="admin-box-close">
-                    <form action="{{ route('alldebtor') }}" method="GET">
-                        @csrf
-
-                        <button type="submit">FERMER</button>
-                    </form>
-                </div>
 
             </div>
             <!-- /.form-box -->

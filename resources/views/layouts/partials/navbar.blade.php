@@ -29,11 +29,11 @@
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
-                                            <a href="{{ route('myprofile') }}"><i class="icon-user"></i> <span>Profile</span></a>
+                                            <a href="{{ route('myprofile') }}"><i class="icon-user"></i> <span>Profil</span></a>
                                         </li>
 
 
-                                        <li><a href="{{ route('logout') }}"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                        <li><a href="{{ route('logout') }}"><i class="icon-key"></i> <span>Déconnexion</span></a></li>
                                     </ul>
                                 </div>
                             </div>

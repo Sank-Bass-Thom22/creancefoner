@@ -33,17 +33,17 @@
 
                 <form action="{{ route ('updaterepayment', $debtorRepayment->id) }}" method="POST">
                     @csrf
-                    <div class="input-group mb-3">
+                    <div class="form-group ">
                         <label for="Amount">Montant du remboursement : </label>
                         <input type="number" class="form-control" id="Amount" name="amount" value="{{ $debtorRepayment->amount }}" required />
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="form-group ">
                         <label for="Repaymentdate">Date du remboursement : </label>
                         <input type="date" class="form-control" id="Repaymentdate" name="repaymentdate" value="{{ $debtorRepayment->repaymentdate }}" required />
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="form-group ">
                         <label for="Repaymentway">Méthode de remboursement : </label>
-                        <select id="Repaymentway" name="repaymentway" required>
+                        <select id="Repaymentway" class="form-control" name="repaymentway" required>
                             <option value=""></option>
                             <option value="En espèces">En espèces</option>
                             <option value="Virement banquaire">Par virement banquaire</option>
@@ -51,22 +51,17 @@
                         </select>
                     </div>
 
-                    <!-- /.col -->
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">VALIDER</button>
+            
+
+                    <div class="form-group">
+       
+                        <button type="submit" class="btn mb-1 btn-primary">Valider</button>
+
+                        <a href="{{ route('showrepayment', $debtorRepayment->id_debtor) }}" class="btn mb-1 btn-danger">Retour</a>                    
                     </div>
-                    <!-- /.col -->
                 </form>
 
-                <hr>
-
-                <div class="adminlist-box-close">
-                    <form action="{{ route('showrepayment', $debtorRepayment->id_debtor) }}" method="GET">
-                        @csrf
-
-                        <button type="submit">FERMER</button>
-                    </form>
-                </div>
+         
             </div>
             <!-- /.form-box -->
         </div>

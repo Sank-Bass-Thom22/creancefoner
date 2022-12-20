@@ -18,31 +18,29 @@
                     <form action="{{ route ('updateadminpassword') }}" method="POST">
                         @csrf
 
-                        <div class="input-group mb-3">
+                        <div class="form-group ">
                         <label for="Oldpassword">Mot de passe actuel : </label>
                         <input id="Oldpassword" class="form-control" type="password" name="oldpassword" required />
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="form-group ">
                         <label for="Password">Nouveau mot de passe : </label>
                         <input id="Password" class="form-control" type="password" name="password" required />
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="form-group ">
                         <label for="Password_confirmation">Confirmez le nouveau mot de passe : </label>
                         <input id="Password_confirmation" class="form-control" type="password" name="password_confirmation" required />
                     </div>
 
-                                        <!-- /.col -->
-                                        <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">VALIDER</button>
+                                 
+
+                    <div class="form-group">
+       
+                        <button type="submit" class="btn mb-1 btn-primary">Valider</button>
+
+                        <a href="{{ route ('myprofile') }}" class="btn mb-1 btn-danger">Retour</a>                    
                     </div>
-                    <!-- /.col -->
                     </form>
 
-                    <hr>
-
-                    <div class="">
-                        <a href="{{ route ('myprofile') }}">FERMER</a>
-                    </div>
                 </section>
 
             </div>
