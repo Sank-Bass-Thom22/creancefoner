@@ -17,8 +17,7 @@ class CreateLoansTable extends Migration
             $table->id();
             $table->index('id')->unsigned();
             $table->float('amount');
-            $table->date('startline');
-            $table->date('deadline');
+            $table->string('academicyear');
             $table->unsignedBigInteger('id_rate');
             $table->foreign('id_rate')
                 ->references('id')->on('rates')

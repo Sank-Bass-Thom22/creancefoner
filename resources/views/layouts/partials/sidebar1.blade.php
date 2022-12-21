@@ -11,7 +11,7 @@
                     </a>
 
                     <a href="{{ route('usefuldocuments') }}" aria-expanded="false">
-                            <i class="icon-speedometer menu-icon"></i><span class="nav-text"> Documents utils</span>
+                            <i class="icon-speedometer menu-icon"></i><span class="nav-text"> Documents utiles</span>
                     </a>
                     
 

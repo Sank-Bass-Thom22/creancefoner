@@ -25,8 +25,8 @@ class StoreLoanRequest extends FormRequest
     {
         return [
             'amount' => ['required', 'numeric'],
-            'startline' => ['required', 'date'],
-            'deadline' => ['required', 'date'],
+            'academicyear' => ['required'],
+           
             'rate' => ['required', 'int'],
         ];
     }

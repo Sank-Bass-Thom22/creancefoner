@@ -30,9 +30,9 @@
                     <tr>
                     <th>#</th>
                         <th>Montant</th>
-                        <th>Contracté le</th>
+                        <th>Année académique</th>
                         <th>Taux applicable</th>
-                        <th>Date de cloture</th>
+                        
                         <th colspan="2">Action</th>
                     </tr>
                     </thead>
@@ -41,9 +41,9 @@
                     <tr>
                     <td>{{ $loop->index + 1}} </td>
                         <td>{{ $loans->amount }} Francs CFA</td>
-                        <td>{{ $loans->startline }}</td>
+                        <td>{{ $loans->academicyear }}</td>
                         <td>{{ $loans->value }}%</td>
-                        <td>{{ $loans->deadline }}</td>
+                       
                         <td>
                             <a href="{{ route ('editloan', $loans->id) }}" title="Modifier">
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">

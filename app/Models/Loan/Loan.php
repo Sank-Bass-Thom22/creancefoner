@@ -11,9 +11,10 @@ class Loan extends Model
 
     protected $fillable = [
         'amount',
-        'startline',
-        'deadline',
+        'academicyear',
         'id_rate',
         'id_debtor',
     ];
+
+    
 }

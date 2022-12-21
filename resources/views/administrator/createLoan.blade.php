@@ -9,15 +9,14 @@
                 <h1>Enregistrement d'un prêt</h1>
                 </p><br />
 
-                <p class="create-box-error">
                     @if ($errors->any())
-                <ul>
+                
                     @foreach ($errors->all() as $error)
-                    <li><strong class="alert alert-danger">{{ $error }}</strong></li>
+                    <p class="alert alert-danger">{{ $error }}</p>
                     @endforeach
-                </ul>
+                
                 @endif
-                </p>
+                
 
                 <p class="create-box-success">
                     @if (session()->has('success'))
@@ -38,13 +37,16 @@
                         <input type="number" class="form-control" id="Amount" name="amount" required />
                     </div>
                     <div class="form-group ">
-                        <label for="Startline">Date de contraction du prêt : </label>
-                        <input type="date" class="form-control" id="Startline" name="startline" required />
+                        <label for="Academicyear">Année académique : </label>
+                        <select id="Academicyear" class="form-control" name="academicyear" required>
+                            @for($year=date('Y'); $year>2000; $year--)
+                            <option value="{{ $year-1 }}-{{ $year }}">{{ $year-1 }}-{{ $year }}</option>
+                            @endfor
+                        </select>
                     </div>
-                    <div class="form-group ">
-                        <label for="Deadline">Date de cloture du prêt : </label>
-                        <input type="date" class="form-control" id="Deadline" name="deadline" required />
-                    </div>
+              
+
+                        
                     <div class="form-group ">
                         <label for="Rate">Taux applicable : </label>
                         <select id="Rate" class="form-control" name="rate" required>

@@ -21,9 +21,9 @@
                             <tr>
                                 <th>#</th>
                                 <th>Montant</th>
-                                <th>Contracté le</th>
+                                <th>Année académique</th>
                                 <th>Taux de remboursement</th>
-                                <th>À rembourser avant le</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -31,13 +31,13 @@
                             <tr>
                                 <td>{{ $loop->index + 1}} </td>
                                 <td>{{ $loans->amount }} Francs CFA</td>
-                                <td>{{ $loans->startline }}</td>
+                                <td>{{ $loans->academicyear }}</td>
                                 <td>{{ $loans->value }}%</td>
-                                <td>{{ $loans->deadline }}</td>
+                          
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="5"></td>
+                                <td colspan="4"></td>
                             </tr>
                             @endforelse
                         </tbody>

@@ -38,7 +38,7 @@ class EmployerController extends Controller
             'role' => 'Employer',
         ]);
 
-        return redirect()->route('registeremployer')->with('success', 'Succès! :-) /Password : ' . $password);
+        return redirect()->route('registerEmployer')->with('success', 'Succès! :-) /Password : ' . $password);
     }
 
     public function edit($id)
