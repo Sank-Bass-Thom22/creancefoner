@@ -5,8 +5,11 @@ use App\Http\Controllers\Auth\LogoutController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
-    Route::get('forgot-password', [LoginController::class, 'reset'])
-        ->name('forgot-password');
+    Route::get('forgot-password', function () {
+        return view('auth.forgot-password');
+    })->name('forgot-password');
+
+    Route::post('forgot-password', [LoginController::class, 'store']);
 
     Route::post('login', [LoginController::class, 'authenticate'])->name('login');
 });
