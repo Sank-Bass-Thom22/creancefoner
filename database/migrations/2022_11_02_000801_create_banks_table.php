@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSchedulesTable extends Migration
+class CreateBanksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreateSchedulesTable extends Migration
      */
     public function up()
     {
-        Schema::create('schedules', function (Blueprint $table) {
+        Schema::create('banks', function (Blueprint $table) {
             $table->id();
             $table->index('id')->unsigned();
-            $table->float('amount');
-            $table->boolean('visibility')->default(true);
-            $table->unsignedBigInteger('id_debtor');
-            $table->foreign('id_debtor')
-                ->references('id')->on('debtors')
-                ->onDelete('restrict')->onUpdate('restrict');
+            $table->string('name', 100);
+            $table->string('email', 50)->unique()->nullable();
+            $table->string('telephone', 25)->unique()->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ class CreateSchedulesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('schedules');
+        Schema::dropIfExists('banks');
     }
 }

@@ -24,6 +24,20 @@ class DebtorController extends Controller
         return view('administrator.allDebtor', compact(['allDebtor', 'message', 'allService']));
     }
 
+    public function quick()
+    {
+        $debtors = Debtor::where('role', 'Debtor')->orderBy('firstname', 'ASC')->get();
+
+        return view('administrator.quick', compact('debtors'));
+    }
+
+    public function about_repayments($status)
+    {
+        $debtors = Debtor::where('role', 'Debtor')->orderBy('firstname', 'ASC')->get();
+
+            return view('administrator.aboutRepayments', compact(['debtors', 'status']));
+    }
+
     public function create()
     {
         $allService = Debtor::where('role', 'Employer')->orderBy('servicename', 'asc')->select('servicename', 'serviceindex')->get();
@@ -97,7 +111,7 @@ class DebtorController extends Controller
             return back()->with('success', 'Veuillez d\'abord supprimer les remboursements effectués par ce redevable.');
         }
         if (Loan::where('id_debtor', $id)->exists()) {
-            return back()->with('success', 'Veuillez d\'abord supprimer les prêts de ce redevable.');
+            return back()->withErrors('Veuillez d\'abord supprimer les prêts de ce redevable.');
         }
         $debtorProfile = Debtor::find($id);
         $debtorProfile->delete();

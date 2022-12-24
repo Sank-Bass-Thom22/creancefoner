@@ -5,7 +5,7 @@
 
 <div class="card">
     <div class="card-body">
-        <h4 class="card-title">Liste des employeurs</h4>
+        <h4 class="card-title">Liste des banques</h4>
 
         <p>
             @if ($errors->any())
@@ -17,14 +17,14 @@
         @endif
         </p>
 
-        <p class="showdocument-box-success">
+        <p class="allBank-box-success">
             @if (session()->get('success'))
         <div class="alert alert-success">{{ session()->get('success') }}</div>
         @endif
         </p>
 
         <a href="{{ route('dashboard') }}" class="btn btn-danger btn-lg float-right" style="margin: 15px;">Retour</a>
-        <a href="{{ route ('registeremployer') }}" class="btn btn-primary btn-lg float-right" style="margin: 15px;">Nouveau</a>
+        <a href="{{ route ('createbank') }}" class="btn btn-primary btn-lg float-right" style="margin: 15px;">Nouveau</a>
         <div class="table-responsive">
             <table class="table header-border">
                 <thead>
@@ -33,21 +33,20 @@
                         <th>Désignation</th>
                         <th>Email</th>
                         <th>Téléphone</th>
-                        <th colspan="4">Action</th>
+                        <th>Description</th>
+                        <th colspan="2">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($allEmployer as $employers)
-
+                    @forelse ($allBank as $banks)
                     <tr>
                         <td>{{ $loop->index + 1}} </td>
-                        <td>{{ $employers->servicename }}</td>
-                        <td>{{ $employers->email }} </td>
-                        <td>{{ $employers->telephone }} </td>
-                        <td><a href="{{ route ('editemployer', $employers->id) }}">MODIFIER</a></td>
-                        <td><a href="{{ route ('deleteemployer', $employers->id) }}">SUPPRIMER</a></td>
-                        <td><a href="{{ route('allemployes', $employers->serviceindex) }}">EMPLOYÉS REDEVABLES</a></td>
-                        <td><a href="{{ route('empregenerate', $employers->id) }}">GÉNÉRER UN NOUVEAU MOT DE PASSE</a></td>
+                        <td>{{ $banks->name }}</td>
+                        <td>{{ $banks->email }} </td>
+                        <td>{{ $banks->telephone }} </td>
+                        <td>{{ $banks->description }}</td>
+                        <td><a href="#">MODIFIER</a></td>
+                        <td><a href="#">SUPPRIMER</a></td>
                     </tr>
 
                     @empty

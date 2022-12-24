@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group">
                         <label for="Maxamount">Montant maximal </label>
-                        <input type="number" class="form-control" id="Maxamount" name="maxamount" required />
+                        <input type="number" class="form-control" id="Maxamount" name="maxamount" />
                     </div>
                     <div class="form-group">
                         <label for="Description">Description </label>
@@ -41,14 +41,14 @@
                     </div>
 
                     <div class="form-group">
-       
+
                         <button type="submit" class="btn mb-1 btn-primary">Valider</button>
 
-                        <a href="{{ route('allrepaymentamount') }}" class="btn mb-1 btn-danger">Retour</a>                    
+                        <a href="{{ route('allrepaymentamount') }}" class="btn mb-1 btn-danger">Retour</a>
                     </div>
                 </form>
 
-                
+
             </div>
             <!-- /.form-box -->
         </div>

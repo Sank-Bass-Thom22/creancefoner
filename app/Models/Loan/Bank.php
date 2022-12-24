@@ -2,24 +2,23 @@
 
 namespace App\Models\Loan;
 
+use App\Models\Loan\Repayment;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Repayment extends Model
+class Bank extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'amount',
-        'repaymentdate',
-        'repaymentway',
+        'name',
+        'email',
+        'telephone',
         'description',
-        'id_bank',
-        'id_debtor',
     ];
 
-    public function bank()
+    public function repayments()
     {
-        return $this->belongsTo(Bank::class, 'id_bank');
+        return $this->hasMany(Repayment::class, 'id_bank');
     }
 }

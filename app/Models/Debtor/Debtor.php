@@ -2,6 +2,9 @@
 
 namespace App\Models\Debtor;
 
+use App\Models\Loan\Loan;
+use App\Models\Loan\Repayment;
+use App\Models\Loan\Schedule;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -33,4 +36,19 @@ class Debtor extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function loans()
+    {
+        return $this->hasMany(Loan::class, 'id_debtor');
+    }
+
+    public function repayments()
+    {
+        return $this->hasMany(Repayment::class, 'id_debtor');
+    }
+
+    public function schedule()
+    {
+        return $this->hasOne(Schedule::class, 'id_debtor');
+    }
 }

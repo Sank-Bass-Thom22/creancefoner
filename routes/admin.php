@@ -7,6 +7,7 @@ use App\Http\Controllers\Administrator\RateController;
 use App\Http\Controllers\Administrator\LoanController;
 use App\Http\Controllers\Administrator\RepaymentController;
 use App\Http\Controllers\Administrator\RepaymentamountController;
+use App\Http\Controllers\Administrator\BankController;
 use App\Http\Controllers\Administrator\DocumentController;
 use App\Http\Controllers\Administrator\ScheduleController;
 use App\Http\Controllers\Administrator\ResearchController;
@@ -88,8 +89,8 @@ Route::middleware('auth')->group(function () {
 
         Route::post('registeremployer', [EmployerController::class, 'store']);
 
-        Route::get('showemployer/{id}', [EmployerController::class, 'show'])
-            ->name('showemployer');
+        Route::get('allemployes/{serviceindex}', [EmployerController::class, 'show'])
+            ->name('allemployes');
 
         Route::get('editemployer/{id}', [EmployerController::class, 'edit'])
             ->name('editemployer');
@@ -111,8 +112,8 @@ Route::middleware('auth')->group(function () {
 
         Route::post('registerdebtor', [DebtorController::class, 'store']);
 
-        Route::get('showdebtor/{id}', [DebtorController::class, 'show'])
-            ->name('showdebtor');
+        Route::get('about-repayments/{status}', [DebtorController::class, 'about_repayments'])
+            ->name('about-repayments');
 
         Route::get('editdebtor/{id}', [DebtorController::class, 'edit'])
             ->name('editdebtor');
@@ -215,5 +216,14 @@ Route::middleware('auth')->group(function () {
 
         Route::post('researchdebtor', [ResearchController::class, 'researchdebtor'])
             ->name('researchdebtor');
+
+        Route::get('quick-task', [DebtorController::class, 'quick'])
+            ->name('quick-task');
+
+        Route::get('allbank', [BankController::class, 'index'])
+            ->name('allbank');
+
+        Route::get('createbank', [BankController::class, 'create'])
+            ->name('createbank');
     });
 });

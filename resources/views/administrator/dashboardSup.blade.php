@@ -6,6 +6,10 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="card gradient-1">
                             <div class="card-body">
+                                <p><a href="{{ route('quick-task') }}">Rembourser</a></p>
+                                <p><a href="{{ route('about-repayments', 'Up-to-date') }}">Redevables à jour</a></p>
+                                <p><a href="{{ route('about-repayments', 'Not-up-to-date') }}">Redevables non à jour</a></p>
+                                <p><a href="{{ route('allbank') }}">Liste des banques</a></p>
                                 <h3 class="card-title text-white">Products Sold</h3>
                                 <div class="d-inline-block">
                                     <h2 class="text-white">4565</h2>

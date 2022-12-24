@@ -27,6 +27,8 @@ class UpdateRepaymentRequest extends FormRequest
             'amount' => ['required', 'numeric'],
             'repaymentdate' => ['required', 'date'],
             'repaymentway' => ['required', 'string'],
+            'description' => ['nullable', 'string'],
+            'bank' => ['nullable', 'int'],
         ];
     }
 }

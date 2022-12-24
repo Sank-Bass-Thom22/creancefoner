@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Administrator;
 use App\Http\Controllers\Controller;
 use App\Models\Loan\Loan;
 use App\Models\Loan\Rate;
+use App\Models\Loan\Repayment;
 use App\Models\Debtor\Debtor;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreLoanRequest;
@@ -61,7 +62,7 @@ class LoanController extends Controller
         $showLoan = Loan::where('id_debtor', $id)
             ->join('rates', 'rates.id', '=', 'loans.id_rate')
             ->select('loans.*', 'rates.value')
-            ->orderBy('startline', 'asc')->get();
+            ->orderBy('academicyear', 'asc')->get();
 
         $debtorName = Debtor::where('id', $id)->select('firstname', 'lastname')->first();
         session()->put('fullname', $debtorName->firstname . ' ' . $debtorName->lastname);
@@ -71,7 +72,7 @@ class LoanController extends Controller
 
     public function edit($id)
     {
-        $debtorLoan = Loan::select('id', 'amount', 'startline', 'deadline', 'id_debtor')->find($id);
+        $debtorLoan = Loan::select('id', 'amount', 'academicyear', 'id_debtor')->find($id);
         $allRates = Rate::select('id', 'value')->orderBy('value', 'asc')->get();
 
         return view('administrator.editLoan', compact(['debtorLoan', 'allRates']));
@@ -83,8 +84,7 @@ class LoanController extends Controller
 
         Loan::whereId($id)->update([
             'amount' => floatval($request->amount),
-            'startline' => $request->startline,
-            'deadline' => $request->deadline,
+            'academicyear' => $request->startline,
             'id_rate' => intval($request->rate),
         ]);
 
@@ -97,6 +97,10 @@ class LoanController extends Controller
     {
         $loan = Loan::find($id);
         $id_debtor = Loan::whereId($id)->value('id_debtor');
+
+        if (Repayment::where('id_debtor', $id_debtor)->exists()) {
+            return back()->withErrors('Veuillez d\abord supprimer les remboursements de ce redevable.');
+        }
         $loan->delete();
 
         return redirect()->route('showloan', $id_debtor)->with('success', 'Prêt supprimé avec succès!');
