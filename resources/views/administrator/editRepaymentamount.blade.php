@@ -31,10 +31,7 @@
                     <label for="Minamount">Montant minimal : </label>
                     <input type="number" class="form-control" id="Minamount" name="minamount" value="{{ $editRepaymentamount->minamount }}" required />
                 </div>
-                <div class="form-group ">
-                    <label for="Maxamount">Montant maximal : </label>
-                    <input type="number" class="form-control" id="Maxamount" name="maxamount" value="{{ $editRepaymentamount->maxamount }}" required />
-                </div>
+          
                 <div class="form-group ">
                     <label for="Description">Description : </label>
                     <textarea class="form-control" id="Description" name="description" rows="5" cols="50">

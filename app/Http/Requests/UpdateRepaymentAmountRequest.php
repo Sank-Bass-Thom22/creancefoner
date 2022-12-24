@@ -25,7 +25,6 @@ class UpdateRepaymentAmountRequest extends FormRequest
     {
         return [
             'minamount' => ['required', 'numeric'],
-            'maxamount' => ['required', 'numeric'],
             'description' => ['nullable', 'string'],
         ];
     }

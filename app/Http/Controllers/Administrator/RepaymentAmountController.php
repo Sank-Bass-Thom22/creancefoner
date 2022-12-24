@@ -27,7 +27,6 @@ class RepaymentAmountController extends Controller
 
         Repaymentamount::create([
             'minamount' => floatval($request->minamount),
-            'maxamount' => floatval($request->maxamount),
             'description' => $request->description,
         ]);
 
@@ -36,7 +35,7 @@ class RepaymentAmountController extends Controller
 
     public function edit($id)
     {
-        $editRepaymentamount = Repaymentamount::select('id', 'minamount', 'maxamount', 'description')->findOrFail($id);
+        $editRepaymentamount = Repaymentamount::select('id', 'minamount', 'description')->findOrFail($id);
 
         return view('administrator.editRepaymentamount', compact('editRepaymentamount'));
     }
@@ -47,7 +46,7 @@ class RepaymentAmountController extends Controller
 
         Repaymentamount::whereId($id)->update([
             'minamount' => floatval($request->minamount),
-            'maxamount' => floatval($request->maxamount),
+
             'description' => $request->description,
         ]);
 
@@ -61,4 +60,5 @@ class RepaymentAmountController extends Controller
 
         return redirect()->route('allrepaymentamount')->with('success', 'Grille supprimé avec succès ! :-)');
     }
+    
 }

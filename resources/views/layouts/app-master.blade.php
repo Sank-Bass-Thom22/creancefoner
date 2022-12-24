@@ -56,7 +56,7 @@
                     <b class="logo-abbr"><img src="images/logo.png" alt=""> </b>
                     <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
-                        <img src="images/logo_foner.png" alt="">
+                        <img src="{{asset('images/logo_foner.png')}}" alt="">
                     </span>
                 </a>
             </div>

@@ -13,7 +13,7 @@
                     @if ($errors->any())
                 <ul>
                     @foreach ($errors->all() as $error)
-                    <li><strong class="alert alert-danger">{{ $error }}</strong></li>
+                    <strong class="alert alert-danger">{{ $error }}</strong>
                     @endforeach
                 </ul>
                 @endif
@@ -31,10 +31,7 @@
                         <label for="Minamount">Montant minimal </label>
                         <input type="number" class="form-control" id="Minamount" name="minamount" required />
                     </div>
-                    <div class="form-group">
-                        <label for="Maxamount">Montant maximal </label>
-                        <input type="number" class="form-control" id="Maxamount" name="maxamount" required />
-                    </div>
+                  
                     <div class="form-group">
                         <label for="Description">Description </label>
                         <textarea class="form-control" id="Description" name="description" rows="5" cols="50"></textarea>

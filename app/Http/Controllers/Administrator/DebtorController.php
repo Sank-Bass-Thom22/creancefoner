@@ -41,7 +41,7 @@ class DebtorController extends Controller
             'lastname' => ucwords(strtolower($request->lastname)),
             'email' => $request->email,
             'telephone' => $request->telephone,
-            'matricule' => $request->matricule,
+            'codefoner' => $request->codefoner,
             'debtorindex' => $request->serviceindex,
             'password' => Hash::make($password),
             'role' => 'Debtor',
@@ -74,7 +74,7 @@ class DebtorController extends Controller
             'lastname' => ucwords(strtolower($request->lastname)),
             'email' => strtolower($request->email),
             'telephone' => $request->telephone,
-            'matricule' => $request->matricule,
+            'codefoner' => $request->codefoner,
             'debtorindex' => $request->serviceindex,
         ]);
         return redirect()->route('alldebtor')->with('success', 'Informations modifiées avec succès! :-)');

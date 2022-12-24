@@ -44,8 +44,8 @@
                         <input type="telephone" class="form-control" placeholder="226 " id="Telephone" name="telephone" value="{{ $debtorProfile->telephone }}" required />
                     </div>
                     <div class="form-group ">
-                        <label for="Matricule">Numéro matricule </label>
-                        <input type="text" class="form-control" id="Matricule" name="matricule" value="{{ $debtorProfile->matricule }}" required />
+                        <label for="codefoner">Numéro matricule </label>
+                        <input type="text" class="form-control" id="codefoner" name="codefoner" value="{{ $debtorProfile->matricule }}" required />
                     </div>
                     <div class="form-group ">
                             <label for="Serviceindex">Lieu de travail </label>

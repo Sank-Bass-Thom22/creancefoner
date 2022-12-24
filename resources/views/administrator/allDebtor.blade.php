@@ -67,7 +67,7 @@
                         <td>{{ $debtors->firstname }} {{ $debtors->lastname }}</td>
                         <td>{{ $debtors->email }}</td>
                         <td>{{ $debtors->telephone }}</td>
-                        <td>{{ $debtors->matricule }}</td>
+                        <td>{{ $debtors->codefoner }}</td>
                         <td>
                             @forelse($allService as $services)
                             @if ($services->serviceindex == $debtors->debtorindex)
