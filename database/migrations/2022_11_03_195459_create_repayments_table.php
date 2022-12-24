@@ -20,7 +20,7 @@ class CreateRepaymentsTable extends Migration
             $table->date('repaymentdate');
             $table->string('repaymentway', 255)->nullable();
             $table->text('description')->nullable();
-            $table->unsignedBigInteger('id_bank');
+            $table->unsignedBigInteger('id_bank')->nullable();
             $table->foreign('id_bank')
             ->references('id')->on('banks')
             ->onDelete('restrict')->onUpdate('restrict');

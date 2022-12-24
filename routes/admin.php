@@ -221,6 +221,9 @@ Route::middleware('auth')->group(function () {
         Route::get('quick-task', [DebtorController::class, 'quick'])
             ->name('quick-task');
 
+        Route::post('quickstorerepayment', [RepaymentController::class, 'quick_store'])
+            ->name('quickstorerepayment');
+
         Route::get('allbank', [BankController::class, 'index'])
             ->name('allbank');
 
