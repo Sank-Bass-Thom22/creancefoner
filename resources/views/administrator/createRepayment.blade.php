@@ -46,9 +46,25 @@
                         <select id="Repaymentway" class="form-control" name="repaymentway" required>
                             <option value=""></option>
                             <option value="En espèces">En espèces</option>
-                            <option value="Virement banquaire">Par virement banquaire</option>
                             <option value="Par checque">Par checque</option>
+                            <option value="Par mobile money">Par mobile money</option>
+                            <option value="Virement banquaire">Par virement banquaire</option>
                         </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label for="Bank">Institution banquaire : </label>
+                        <select id="Bank" name="bank">
+                            <option></option>
+                            @forelse ($allBank as $banks)
+                            <option value="{{ $banks->id }}">{{ $banks->name }}</option>
+                            @empty
+                            <p>Aucune banque</p>
+                            @endforelse
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label for="Description">Description : </label>
+                        <textarea class="form-control" id="Description" name="description" rows="5" cols="50"></textarea>
                     </div>
 
           

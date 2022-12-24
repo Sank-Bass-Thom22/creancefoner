@@ -9,6 +9,7 @@ use App\Models\Loan\Repaymentamount;
 use App\Models\Debtor\Debtor;
 use App\Models\Loan\Rate;
 use App\Models\Loan\Schedule;
+use App\Models\Loan\Bank;
 use App\Http\Requests\StoreRepaymentRequest;
 use App\Http\Requests\UpdateRepaymentRequest;
 
@@ -21,11 +22,12 @@ class RepaymentController extends Controller
 
     public function create($id)
     {
+        $allBank = Bank::orderBy('name', 'ASC')->get();
         $debtorName = Debtor::where('id', $id)->select('firstname', 'lastname')->first();
         session()->put('id_debtor', $id);
         session()->put('fullname', $debtorName->firstname . ' ' . $debtorName->lastname);
 
-        return view('administrator.createRepayment');
+        return view('administrator.createRepayment', compact('allBank'));
     }
 
     public function store(StoreRepaymentRequest $request)
@@ -35,12 +37,28 @@ class RepaymentController extends Controller
 
         if (floatval($request->amount) < $minAmount) {
             return back()->withErrors(['amount' => 'Le montant minimal requis est de : ' . $minAmount]);
+        } else {
+            $totalDue = 0;
+            $totalPaid = floatval(Repayment::where('id_debtor', session()->get('id_debtor'))->sum('amount'));
+            $showLoan = Loan::where('id_debtor', session()->get('id_debtor'))
+                ->join('rates', 'loans.id_rate', '=', 'rates.id')
+                ->select('loans.amount', 'rates.value')->get();
+
+            foreach ($showLoan as $loans) {
+                $totalDue += floatval((($loans->amount * $loans->value) / 100) + $loans->amount);
+            }
+
+            if ($request->amount > ($totalDue - $totalPaid)) {
+                return back()->withErrors('Le montant entré est suppérieur au reste à payer.');
+            }
         }
 
         Repayment::create([
             'amount' => floatval($request->amount),
             'repaymentdate' => $request->repaymentdate,
             'repaymentway' => $request->repaymentway,
+            'description' => $request->description,
+            'id_bank' => $request->bank,
             'id_debtor' => intval(session()->get('id_debtor')),
         ]);
 
@@ -86,11 +104,32 @@ class RepaymentController extends Controller
     public function update(UpdateRepaymentRequest $request, $id)
     {
         $validatedData = $request->validated();
+        $minAmount = floatval(Repaymentamount::value('minamount'));
+
+        if (floatval($request->amount) < $minAmount) {
+            return back()->withErrors(['amount' => 'Le montant minimal requis est de : ' . $minAmount]);
+        } else {
+            $totalDue = 0;
+            $totalPaid = floatval(Repayment::where('id_debtor', session()->get('id_debtor'))->sum('amount'));
+            $showLoan = Loan::where('id_debtor', session()->get('id_debtor'))
+                ->join('rates', 'loans.id_rate', '=', 'rates.id')
+                ->select('loans.amount', 'rates.value')->get();
+
+            foreach ($showLoan as $loans) {
+                $totalDue += floatval((($loans->amount * $loans->value) / 100) + $loans->amount);
+            }
+
+            if ($request->amount > ($totalDue - $totalPaid)) {
+                return back()->withErrors('Le montant entré est suppérieur au reste à payer.');
+            }
+        }
 
         Repayment::whereId($id)->update([
             'amount' => floatval($request->amount),
             'repaymentdate' => $request->repaymentdate,
             'repaymentway' => $request->repaymentway,
+            'description' => $request->description,
+            'id_bank' => $request->bank,
         ]);
 
         $id_debtor = Repayment::whereId($id)->value('id_debtor');

@@ -8,6 +8,16 @@
         <h4 class="card-title">Liste des redevables</h4>
        
 
+        <p>
+        @if ($errors->any())
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                       <p class="alert alert-danger">{{ $error }}</p>
+                                        @endforeach
+                                    </ul>
+                                @endif
+        </p>
+
         <p class="showdocument-box-success">
                     @if (session()->get('success'))
                 <div class="alert alert-success">{{ session()->get('success') }}</div>

@@ -13,8 +13,7 @@ class EmployerController extends Controller
 {
     public function index()
     {
-        $allEmployer = Debtor::where('role', 'Employer')->select('id', 'servicename', 'email', 'telephone')
-            ->orderBy('servicename', 'ASC')->paginate(10);
+        $allEmployer = Debtor::where('role', 'Employer')->orderBy('servicename', 'ASC')->get();
 
         return view('administrator.allEmployer', compact('allEmployer'));
     }
@@ -41,9 +40,18 @@ class EmployerController extends Controller
         return redirect()->route('registerEmployer')->with('success', 'Succès! :-) /Password : ' . $password);
     }
 
+    public function show($serviceindex)
+    {
+        $allEmployes = Debtor::where('debtorindex', $serviceindex)
+        ->orderBy('firstname', 'ASC')->get();
+        $employer = Debtor::where('serviceindex', $serviceindex)->first();
+
+        return view('administrator.allEmployes', compact(['allEmployes', 'employer']));
+    }
+
     public function edit($id)
     {
-        $employerProfile = Debtor::select('id', 'servicename', 'email', 'telephone')->find($id);
+        $employerProfile = Debtor::find($id);
 
         return view('administrator.editEmployer', compact('employerProfile'));
     }
@@ -77,7 +85,7 @@ class EmployerController extends Controller
         $employerProfile = Debtor::find($id);
 
         if (Debtor::where('debtorindex', $employerProfile->serviceindex)->exists()) {
-            return back()->with('success', 'Veuillez d\abord supprimé les redevables de ces structure.');
+            return back()->withErrors('Veuillez d\abord supprimé les redevables de ces structure.');
         }
 
         $employerProfile->delete();

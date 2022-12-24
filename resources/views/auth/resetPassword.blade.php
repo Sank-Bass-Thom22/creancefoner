@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Modification-Password</title>
+    <title>Modification mot de passe</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -44,10 +44,6 @@
                     @csrf
 
                     <div class="">
-                        <label for="Oldpassword">Mot de passe actuel : </label>
-                        <input id="Oldpassword" class="" type="password" name="oldpassword" required />
-                    </div>
-                    <div class="">
                         <label for="Password">Nouveau mot de passe : </label>
                         <input id="Password" class="" type="password" name="password" required />
                     </div>
@@ -62,16 +58,6 @@
                     </div>
                     <!-- /.col -->
                 </form>
-
-                <hr>
-
-                <div class="debtor-box-close">
-                    <form action="{{ route('myprofile') }}" method="GET">
-                        @csrf
-
-                        <button type="submit">FERMER</button>
-                    </form>
-                </div>
             </div>
             <!-- /.form-box -->
         </div>

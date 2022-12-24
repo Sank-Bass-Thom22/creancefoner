@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Administrator;
 use App\Http\Controllers\Controller;
 use App\Models\Loan\Loan;
 use App\Models\Loan\Rate;
+use App\Models\Loan\Repayment;
 use App\Models\Debtor\Debtor;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreLoanRequest;
@@ -97,6 +98,10 @@ class LoanController extends Controller
     {
         $loan = Loan::find($id);
         $id_debtor = Loan::whereId($id)->value('id_debtor');
+
+        if (Repayment::where('id_debtor', $id_debtor)->exists()) {
+            return back()->withErrors('Veuillez d\abord supprimer les remboursements de ce redevable.');
+        }
         $loan->delete();
 
         return redirect()->route('showloan', $id_debtor)->with('success', 'Prêt supprimé avec succès!');

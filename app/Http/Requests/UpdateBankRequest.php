@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StoreRepaymentRequest extends FormRequest
+class UpdateBankRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,12 +24,14 @@ class StoreRepaymentRequest extends FormRequest
      */
     public function rules()
     {
+        $email = $this->request->get('email');
+        $telephone = $this->request->get('telephone');
+
         return [
-            'amount' => ['required', 'numeric'],
-            'repaymentdate' => ['required', 'date'],
-            'repaymentway' => ['required', 'string'],
+            'name' => ['required', 'string', 'max:100'],
+            'email' => ['nullable', 'string', 'email', 'max:50', Rule::unique('banks')->ignore($email, 'email')],
+            'telephone' => ['nullable', 'string', 'max:25', Rule::unique('banks')->ignore($telephone, 'telephone')],
             'description' => ['nullable', 'string'],
-            'bank' => ['nullable', 'int'],
         ];
     }
 }

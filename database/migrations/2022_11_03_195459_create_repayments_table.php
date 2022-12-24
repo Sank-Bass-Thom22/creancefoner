@@ -19,10 +19,15 @@ class CreateRepaymentsTable extends Migration
             $table->float('amount');
             $table->date('repaymentdate');
             $table->string('repaymentway', 255)->nullable();
+            $table->text('description')->nullable();
+            $table->unsignedBigInteger('id_bank');
+            $table->foreign('id_bank')
+            ->references('id')->on('banks')
+            ->onDelete('restrict')->onUpdate('restrict');
             $table->unsignedBigInteger('id_debtor');
             $table->foreign('id_debtor')
                 ->references('id')->on('debtors')
-                ->onDelete('cascade')->onUpdate('cascade');
+                ->onDelete('restrict')->onUpdate('restrict');
             $table->timestamps();
         });
     }
