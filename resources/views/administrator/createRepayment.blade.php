@@ -77,11 +77,7 @@
                 <hr>
 
                 <div class="adminlist-box-close">
-                    <form action="{{ route('showrepayment', session()->get('id_debtor')) }}" method="GET">
-                        @csrf
-
-                        <button type="submit">FERMER</button>
-                    </form>
+                    <a href="{{ route('showrepayment', session()->get('id_debtor')) }}">FERMER</a>
                 </div>
             </div>
             <!-- /.form-box -->

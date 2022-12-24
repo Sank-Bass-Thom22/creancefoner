@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Debtor\Debtor;
 use App\Models\Loan\Loan;
 use App\Models\Loan\Repayment;
+use App\Models\Loan\Bank;
 use App\Http\Requests\StoreDebtorRequest;
 use App\Http\Requests\UpdateDebtorRequest;
 use Illuminate\Support\Facades\Hash;
@@ -17,7 +18,7 @@ class DebtorController extends Controller
     {
         $allDebtor = Debtor::where('role', 'Debtor')
             ->orderBy('firstname', 'ASC')->get();
-            $allService = Debtor::where('role', 'Employer')
+        $allService = Debtor::where('role', 'Employer')
             ->orderBy('servicename', 'ASC')->get();
         $message = 'Il n\'y a aucun redevable enregistré.';
 
@@ -26,16 +27,17 @@ class DebtorController extends Controller
 
     public function quick()
     {
-        $debtors = Debtor::where('role', 'Debtor')->orderBy('firstname', 'ASC')->get();
+                $debtors = Debtor::where('role', 'Debtor')->orderBy('firstname', 'ASC')->get();
+                $allBank = Bank::orderBy('name', 'ASC')->get();
 
-        return view('administrator.quick', compact('debtors'));
+        return view('administrator.quick', compact(['debtors', 'allBank']));
     }
 
     public function about_repayments($status)
     {
         $debtors = Debtor::where('role', 'Debtor')->orderBy('firstname', 'ASC')->get();
 
-            return view('administrator.aboutRepayments', compact(['debtors', 'status']));
+        return view('administrator.aboutRepayments', compact(['debtors', 'status']));
     }
 
     public function create()

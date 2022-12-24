@@ -65,6 +65,41 @@ class RepaymentController extends Controller
         return redirect()->route('showrepayment', session()->get('id_debtor'))->with('success', 'Remboursement enregistré avec succès! :-)');
     }
 
+    public function quick_store(StoreRepaymentRequest $request)
+    {
+        $validatedData = $request->validated();
+        $minAmount = floatval(Repaymentamount::value('minamount'));
+
+        if (floatval($request->amount) < $minAmount) {
+            return back()->withErrors(['amount' => 'Le montant minimal requis est de : ' . $minAmount]);
+        } else {
+            $totalDue = 0;
+            $totalPaid = floatval(Repayment::where('id_debtor', $request->debtor)->sum('amount'));
+            $showLoan = Loan::where('id_debtor', $request->debtor)
+                ->join('rates', 'loans.id_rate', '=', 'rates.id')
+                ->select('loans.amount', 'rates.value')->get();
+
+            foreach ($showLoan as $loans) {
+                $totalDue += floatval((($loans->amount * $loans->value) / 100) + $loans->amount);
+            }
+
+            if ($request->amount > ($totalDue - $totalPaid)) {
+                return back()->withErrors('Le montant entré est suppérieur au reste à payer.');
+            }
+        }
+
+        Repayment::create([
+            'amount' => floatval($request->amount),
+            'repaymentdate' => $request->repaymentdate,
+            'repaymentway' => $request->repaymentway,
+            'description' => $request->description,
+            'id_bank' => $request->bank,
+            'id_debtor' => $request->debtor,
+        ]);
+
+        return redirect()->route('quick-task')->with('success', 'Remboursement enregistré avec succès!');
+    }
+
     public function show($id)
     {
         $totalDue = 0;

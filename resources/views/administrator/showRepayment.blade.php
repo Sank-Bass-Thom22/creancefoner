@@ -87,35 +87,19 @@
                     <table>
                         <tr>
                             @if ($totalPaid < $totalDue && session()->get('schedule') > 0) <td>
-                                    <form action="{{ route ('createrepayment', $id) }}" method="GET">
-                                        @csrf
-
-                                        <button type="submit">REMBOURSER</button>
-                                    </form>
+                                    <a href="{{ route ('createrepayment', $id) }}">REMBOURSER</a>
                                 </td>
                                 <td>
-                                    <form action="{{ route ('editschedule', session()->get('id_schedule')) }}" method="GET">
-                                        @csrf
-
-                                        <button type="submit">MODIFIER L'ÉCHÉANCIER</button>
-                                    </form>
+                                    <a href="{{ route ('editschedule', session()->get('id_schedule')) }}">MODIFIER L'ÉCHÉANCIER</a>
                                 </td>
                                 @else
                                 @if ($totalPaid < $totalDue) <td>
-                                    <form action="{{ route ('createschedule', $id) }}" method="GET">
-                                        @csrf
-
-                                        <button type="submit">DÉFINIR UN ÉCHÉANCIER</button>
-                                    </form>
+                                    <a href="{{ route ('createschedule', $id) }}">DÉFINIR UN ÉCHÉANCIER</a>
                                     </td>
                                     @endif
                                     @endif
                                     <td>
-                                        <form action="{{ route('showloan', $id) }}" method="GET">
-                                            @csrf
-
-                                            <button type="submit">FERMER</button>
-                                        </form>
+                                        <a href="{{ route('showloan', $id) }}">FERMER</a>
                                     </td>
                         </tr>
                     </table>
