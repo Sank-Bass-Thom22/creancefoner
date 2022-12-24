@@ -28,7 +28,7 @@ class StoreDebtorRequest extends FormRequest
             'lastname' => ['required', 'string', 'max:25'],
             'email' => ['required', 'string', 'email', 'max:50', 'unique:debtors'],
             'telephone' => ['required', 'string', 'max:25', 'unique:debtors'],
-            'matricule' => ['required', 'string', 'max:10', 'unique:debtors'],
+            'codefoner' => ['required', 'string', 'max:40', 'unique:debtors'],
             'role' => ['nullable', 'string', 'max:11'],
             'debtorindex' => ['nullable', 'string', 'max:255'],
         ];

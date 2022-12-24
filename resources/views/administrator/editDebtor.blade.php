@@ -11,11 +11,11 @@
 
                 <p class="updatefullname-box-error">
                     @if ($errors->any())
-                <ul>
+               
                     @foreach ($errors->all() as $error)
                     <strong class="alert alert-danger">{{ $error }}</strong>
                     @endforeach
-                </ul><br />
+                <br />
                 @endif
                 </p>
 
@@ -44,7 +44,7 @@
                         <input type="telephone" class="form-control" placeholder="226 " id="Telephone" name="telephone" value="{{ $debtorProfile->telephone }}" required />
                     </div>
                     <div class="form-group ">
-                        <label for="codefoner">Numéro matricule </label>
+                        <label for="codefoner">Code Foner </label>
                         <input type="text" class="form-control" id="codefoner" name="codefoner" value="{{ $debtorProfile->matricule }}" required />
                     </div>
                     <div class="form-group ">

@@ -87,7 +87,8 @@ Route::middleware('auth')->group(function () {
         Route::get('registeremployer', [EmployerController::class, 'create'])
             ->name('registeremployer');
 
-        Route::post('registeremployer', [EmployerController::class, 'store']);
+        Route::post('registeremployer', [EmployerController::class, 'store'])
+        ->name('registeremployer');
 
         Route::get('allemployes/{serviceindex}', [EmployerController::class, 'show'])
             ->name('allemployes');
