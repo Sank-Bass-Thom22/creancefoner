@@ -21,7 +21,7 @@ class Debtor extends Authenticatable
         'servicename',
         'email',
         'telephone',
-        'matricule',
+        'codefoner',
         'role',
         'serviceindex',
         'debtorindex',

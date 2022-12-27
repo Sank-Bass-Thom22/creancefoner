@@ -45,7 +45,7 @@
                     </div>
                     <div class="form-group ">
                         <label for="codefoner">Code Foner </label>
-                        <input type="text" class="form-control" id="codefoner" name="codefoner" value="{{ $debtorProfile->matricule }}" required />
+                        <input type="text" class="form-control" id="codefoner" name="codefoner" value="{{ $debtorProfile->codefoner }}" required />
                     </div>
                     <div class="form-group ">
                             <label for="Serviceindex">Lieu de travail </label>

@@ -58,7 +58,7 @@
 
                         @if ($administratorProfile->id == Auth::user()->id)
                  
-                            <a href="{{ route('myadminprofile') }}" class="btn mb-1 btn-danger">Retour</a> 
+                            <a href="{{ route('myprofile') }}" class="btn mb-1 btn-danger">Retour</a> 
                         @else
                     
                             <a href="{{ route('alladminsup') }}" class="btn mb-1 btn-danger">Retour</a> 

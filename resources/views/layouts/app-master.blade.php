@@ -22,7 +22,10 @@
     <link rel="stylesheet" href="{{asset('plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css')}}">
     <!-- Custom Stylesheet -->
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
-
+    
+    @livewireStyles
+    
+ 
 </head>
 
 <body>
@@ -113,6 +116,10 @@
     <!--**********************************
         Scripts
     ***********************************-->
+
+    @livewireScripts
+
+
     <script src="{{asset('plugins/common/common.min.js')}}"></script>
     <script src="{{asset('js/custom.min.js')}}"></script>
     <script src="{{asset('js/settings.js')}}"></script>
@@ -138,7 +145,7 @@
     <script src="{{asset('./plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js')}}"></script>
 
     <script src="{{asset('./js/dashboard/dashboard-1.js')}}"></script>
-
+   
 </body>
 
 </html>

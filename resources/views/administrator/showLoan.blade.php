@@ -50,7 +50,7 @@
                     @forelse($showLoan as $loans)
                     <tr>
                     <td>{{ $loop->index + 1}} </td>
-                        <td>{{ $loans->amount }} Francs CFA</td>
+                        <td> @money($loans->amount) Francs CFA</td>
                         <td>{{ $loans->academicyear }}</td>
                         <td>{{ $loans->value }}%</td>
                        

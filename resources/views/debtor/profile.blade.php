@@ -22,7 +22,7 @@
                         Nom : {{ $userProfile->lastname }}<br />
                         Adresse E-mail : {{ $userProfile->email }}<br />
                         Numéro de téléphone : +226 {{ $userProfile->telephone }}<br />
-                        Numéro matricule : {{ $userProfile->matricule }}
+                        Code Foner : {{ $userProfile->codefoner }}
                         <div>
                             <a href="{{ route('resetdebtor', $userProfile->id) }}" class="">MODIFIER</a>
                         </div><br />

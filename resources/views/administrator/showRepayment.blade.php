@@ -40,12 +40,12 @@
                         <th>ÉCHÉANCIER</th>
                     </tr>
                     <tr>
-                        <td>{{ $totalDue }} Francs CFA</td>
-                        <td>{{ $totalPaid }} Francs CFA</td>
-                        <td>{{ $totalDue - $totalPaid }} Francs CFA</td>
+                        <td>@money($totalDue ) Francs CFA</td>
+                        <td>@money($totalPaid ) Francs CFA</td>
+                        <td>@money($totalDue - $totalPaid ) Francs CFA</td>
                         <td>
                             @if (session()->get('schedule') > 0)
-                                <div class="">{{ session()->get('schedule') }} Francs par mois</div>
+                                <div class="">@money(session()->get('schedule')) Francs par mois</div>
                             @else
                                 <div class="">Veuillez définir un échéancier!</div>
                             @endif
@@ -68,8 +68,8 @@
                     @forelse($showRepayment as $repayments)
                     <tr>
                         <td>{{ $loop->index + 1 }}</td>
-                        <td>{{ $repayments->repaymentdate }}</td>
-                        <td>{{ $repayments->amount }} Francs CFA</td>
+                        <td> {{date('d-m-Y', strtotime($repayments->repaymentdate)) }}</td>
+                        <td> @money($repayments->amount)  Francs CFA</td>
                         <td>{{ $repayments->repaymentway }}</td>
                         <td>
                             <a href="{{ route ('editrepayment', $repayments->id) }}" title="Modifier">

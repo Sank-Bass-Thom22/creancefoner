@@ -23,7 +23,7 @@
 
                     <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Système</span>
+                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Configuration</span>
                         </a>
                         <ul aria-expanded="false">
                               <li><a href="{{ route('alldocument') }}">Gestion des documents</a></li>
@@ -44,14 +44,14 @@
                 
                     <li><a href="{{ route('alldebtor') }}">  <i class="icon-speedometer menu-icon"></i>Gestion des redevables</a></li>
                 
+                    <li><a href="{{ route('quick-task') }}">  <i class="icon-speedometer menu-icon"></i>Paiement rapide</a></li>
+                
 
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-graph menu-icon"></i> <span class="nav-text">Reporting</span>
                         </a>
-                        <ul aria-expanded="false">
-                              <li><a href="{{ route('allrepaymentamount') }}"> Etat des paiements par période </a></li>
-                        </ul>
+                       
                     </li>
 
 

@@ -48,7 +48,7 @@
 
                     <tr>
                         <td>{{ $loop->index + 1}} </td>
-                        <td>{{ $repaymentamounts->minamount }} Francs CFA</td>
+                        <td>@money($repaymentamounts->minamount) Francs CFA</td>
                         <td>{{ $repaymentamounts->description }}</td>
                         <td>
                             @if (Auth::user()->role == "SuperAdmin")

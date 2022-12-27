@@ -26,7 +26,7 @@
                         <th>Nom & prénom (s)</th>
                         <th>Email</th>
                         <th>Téléphone</th>
-                        <th>Matricule</th>
+                        <th>Code Foner</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -37,7 +37,7 @@
                         <td>{{ $employes->firstname }} {{ $employes->lastname }}</td>
                         <td>{{ $employes->email }}</td>
                         <td>{{ $employes->telephone }}</td>
-                        <td>{{ $employes->matricule }}</td>
+                        <td>{{ $employes->codefoner }}</td>
                         <td><a href="{{ route ('myemployeloans', $employes->id) }}">PRÊTS</a></td>
                         </tr>
                     @empty

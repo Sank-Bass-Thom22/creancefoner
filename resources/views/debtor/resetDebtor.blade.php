@@ -43,8 +43,8 @@
                     <input type="telephone" class="form-control" placeholder="226 " id="Telephone" name="telephone" value="{{ $resetDebtor->telephone }}" required />
                 </div>
                 <div class="input-group mb-3">
-                    <label for="Matricule">Numéro matricule : </label>
-                    <input type="text" class="form-control" id="Matricule" name="matricule" value="{{ $resetDebtor->matricule }}" required />
+                    <label for="codefoner">Code Foner </label>
+                    <input type="text" class="form-control" id="codefoner" name="codefoner" value="{{ $resetDebtor->codefoner }}" required />
                 </div>
                 <div class="input-group mb-3">
                     <input type="hidden" id="Serviceindex" name="serviceindex" value="{{ $resetDebtor->debtorindex }}" />

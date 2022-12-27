@@ -23,6 +23,8 @@
     <!-- Custom Stylesheet -->
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
 
+    @livewireStyles
+
 </head>
 
 <body>
@@ -143,6 +145,8 @@
 
     <script src="{{asset('./js/dashboard/dashboard-1.js')}}"></script>
 
+    @livewireScripts
+    
 </body>
 
 </html>

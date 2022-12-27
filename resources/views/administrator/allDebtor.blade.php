@@ -64,7 +64,7 @@
                         <th>Nom & prénom (s)</th>
                         <th>Email</th>
                         <th>Téléphone</th>
-                        <th>Matricule</th>
+                        <th>Code Foner</th>
                         <th>Service</th>
                         <th >Action</th>
                     </tr>

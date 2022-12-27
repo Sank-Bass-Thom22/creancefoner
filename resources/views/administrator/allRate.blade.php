@@ -48,7 +48,7 @@
                     <tr>
                         <td>{{ $loop->index + 1}} </td>
                         <td>{{ $rates->value }}%</td>
-                        <td>{{ $rates->validity }}</td>
+                        <td>{{date('d-m-Y', strtotime($rates->validity)) }}</td>
                         <td>{{ $rates->description }}</td>
                         <td>
                             @if (Auth::user()->role == "SuperAdmin")

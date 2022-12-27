@@ -25,12 +25,31 @@ class RepaymentAmountController extends Controller
     {
         $validatedData = $request->validated();
 
+       $nbre= Repaymentamount::count();
+
+      if ($nbre==0) {
         Repaymentamount::create([
             'minamount' => floatval($request->minamount),
             'description' => $request->description,
         ]);
 
-        return redirect()->route('allrepaymentamount')->with('success', 'Grille enregistrée avec succès ! :-)');
+        return redirect()->route('allrepaymentamount')->with('success', 'Grille enregistrée avec succès !');
+    
+      }else {
+      
+
+        Repaymentamount::first()->update([
+            'minamount' => floatval($request->minamount),
+            'description' => $request->description,
+        ]);
+
+        return redirect()->route('allrepaymentamount')->with('success', 'Grille modifié avec succès !');
+      }
+        
+    
+        
+    
+    
     }
 
     public function edit($id)
@@ -50,7 +69,7 @@ class RepaymentAmountController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('allrepaymentamount')->with('success', 'Grille modifié avec succès ! :-)');
+        return redirect()->route('allrepaymentamount')->with('success', 'Grille modifié avec succès ! ');
     }
 
     public function destroy($id)
