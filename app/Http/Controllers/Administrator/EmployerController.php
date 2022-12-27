@@ -73,10 +73,11 @@ class EmployerController extends Controller
     {
         $newPassword = Str::random(8);
 
+       
         Debtor::whereId($id)->update([
             'password' => Hash::make($newPassword),
         ]);
-
+     
         return redirect()->route('allemployer')->with('success', 'Succès! Le nouveau mot de passe est : ' . $newPassword);
     }
 
