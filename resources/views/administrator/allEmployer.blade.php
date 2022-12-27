@@ -7,17 +7,17 @@
     <div class="card-body">
                                 <h4 class="card-title">Liste des employeurs</h4>
 
-                                <p>
-        @if ($errors->any())
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                       <p class="alert alert-danger">{{ $error }}</p>
-                                        @endforeach
-                                    </ul>
-                                @endif
-        </p>
+                                
+                                    @if ($errors->any())
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                        <p class="alert alert-danger">{{ $error }}</p>
+                                            @endforeach
+                                        </ul>
+                                    @endif
+                            
 
-        <p class="showdocument-box-success">
+                <p class="showdocument-box-success">
                     @if (session()->get('success'))
                 <div class="alert alert-success">{{ session()->get('success') }}</div>
                 @endif
