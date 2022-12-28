@@ -11,11 +11,11 @@
 
                 <p class="updatefullname-box-error">
                     @if ($errors->any())
-                <ul>
+               
                     @foreach ($errors->all() as $error)
                     <strong class="alert alert-danger">{{ $error }}</strong>
                     @endforeach
-                </ul><br />
+                <br />
                 @endif
                 </p>
 
@@ -27,55 +27,50 @@
 
                 <form action="{{ route('updatedebtor', $debtorProfile->id) }}" method="POST">
                     @csrf
-                    <div class="input-group mb-3">
-                        <label for="Firstname">Prénom : </label>
+                    <div class="form-group ">
+                        <label for="Firstname">Prénom </label>
                         <input type="text" class="form-control" id="Firstname" name="firstname" value="{{ $debtorProfile->firstname }}" required />
                     </div>
-                    <div class="input-group mb-3">
-                        <label for="Lastname">Nom : </label>
+                    <div class="form-group ">
+                        <label for="Lastname">Nom </label>
                         <input type="text" class="form-control" id="Lastname" name="lastname" value="{{ $debtorProfile->lastname }}" required />
                     </div>
-                    <div class="input-group mb-3">
-                        <label for="Email">Adresse E-mail : </label>
+                    <div class="form-group ">
+                        <label for="Email">Adresse E-mail </label>
                         <input type="email" class="form-control" id="Email" name="email" value="{{ $debtorProfile->email }}" required />
                     </div>
-                    <div class="input-group mb-3">
-                        <label for="Telephone">Numéro de téléphone : </label>
+                    <div class="form-group ">
+                        <label for="Telephone">Numéro de téléphone  </label>
                         <input type="telephone" class="form-control" placeholder="226 " id="Telephone" name="telephone" value="{{ $debtorProfile->telephone }}" required />
                     </div>
-                    <div class="input-group mb-3">
-                        <label for="Matricule">Numéro matricule : </label>
-                        <input type="text" class="form-control" id="Matricule" name="matricule" value="{{ $debtorProfile->matricule }}" required />
+                    <div class="form-group ">
+                        <label for="codefoner">Code Foner </label>
+                        <input type="text" class="form-control" id="codefoner" name="codefoner" value="{{ $debtorProfile->codefoner }}" required />
                     </div>
-                    <div class="input-group mb-3">
-                            <label for="Serviceindex">Lieu de travail : </label>
-                            <select id="Serviceindex" name="serviceindex" required>
+                    <div class="form-group ">
+                            <label for="Serviceindex">Lieu de travail </label>
+                            <select id="Serviceindex" class="form-control" name="serviceindex" required>
                                 <option></option>
                                 @forelse($allServices as $services)
                                 <option value="{{ $services->serviceindex }}">{{ $services->servicename }}</option>
                                 @empty
-                            </select><br />
-                            <div class="">Aucune structure enregistrÃ©e! ðŸ˜ž </div>
+                            </select><br/>
+                            <div class="">Aucune structure enregistrée! </div>
                             @endforelse
                             </select>
                         </div>
 
-                    <!-- /.col -->
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">VALIDER</button>
-                    </div>
-                    <!-- /.col -->
+                        <div class="form-group">
+       
+                            <button type="submit" class="btn mb-1 btn-primary">Valider</button>
+                        
+                            <a href="{{ route('alldebtor') }}" class="btn mb-1 btn-danger">Retour</a> 
+                            
+                        </div>
                 </form>
 
-                <hr>
+          
 
-                <div class="admin-box-close">
-                    <form action="{{ route('alldebtor') }}" method="GET">
-                        @csrf
-
-                        <button type="submit">FERMER</button>
-                    </form>
-                </div>
 
             </div>
             <!-- /.form-box -->

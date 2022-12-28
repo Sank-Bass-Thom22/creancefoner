@@ -16,15 +16,15 @@
 
 
             <a href="{{ route('dashboard') }} " class="btn btn-danger btn-lg float-right" style="margin: 15px;">Retour</a>
-            <a href="{{ route('myrepayments') }}" class="btn btn-danger btn-lg float-right" style="margin: 15px;">Remboursements</a>
+            <a href="{{ route('myrepayments') }}" class="btn btn-info btn-lg float-right" style="margin: 15px;">Etat des rembourssement</a>
             <table class="table header-border">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>MONTANT</th>
-                        <th>CONTRACTÉ LE</th>
+                        <th>Année académique</th>
                         <th>TAUX DE REMBOURSEMENT</th>
-                        <th>À REMBOURSER AVANT LE</th>
+                
                     </tr>
                 </thead>
                 <tbody>
@@ -32,9 +32,9 @@
                     <tr>
                         <td>{{ $loop->index + 1}} </td>
                         <td>{{ $loans->amount }} Francs CFA</td>
-                        <td>{{ $loans->startline }}</td>
+                        <td>{{ $loans->academicyear }}</td>
                         <td>{{ $loans->value }}%</td>
-                        <td>{{ $loans->deadline }}</td>
+                       
                     </tr>
                     @empty
                     <tr>

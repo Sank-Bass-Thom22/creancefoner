@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
-use App\Models\Loan\RepaymentAmount;
+use App\Models\Loan\Repaymentamount;
 use App\Http\Requests\StoreRepaymentAmountRequest;
 use App\Http\Requests\UpdateRepaymentAmountRequest;
 
@@ -11,7 +11,7 @@ class RepaymentAmountController extends Controller
 {
     public function index()
     {
-        $allRepaymentamount = Repaymentamount::get();
+        $allRepaymentamount = Repaymentamount::paginate(10);
 
         return view('administrator.allRepaymentamount', compact('allRepaymentamount'));
     }
@@ -25,18 +25,36 @@ class RepaymentAmountController extends Controller
     {
         $validatedData = $request->validated();
 
+       $nbre= Repaymentamount::count();
+
+      if ($nbre==0) {
         Repaymentamount::create([
             'minamount' => floatval($request->minamount),
-            'maxamount' => floatval($request->maxamount),
             'description' => $request->description,
         ]);
 
-        return redirect()->route('allrepaymentamount')->with('success', 'Grille enregistrée avec succès ! :-)');
+        return redirect()->route('allrepaymentamount')->with('success', 'Grille enregistrée avec succès !');
+    
+      }else {
+      
+
+        Repaymentamount::first()->update([
+            'minamount' => floatval($request->minamount),
+            'description' => $request->description,
+        ]);
+
+        return redirect()->route('allrepaymentamount')->with('success', 'Grille modifié avec succès !');
+      }
+        
+    
+        
+    
+    
     }
 
     public function edit($id)
     {
-        $editRepaymentamount = Repaymentamount::select('id', 'minamount', 'maxamount', 'description')->findOrFail($id);
+        $editRepaymentamount = Repaymentamount::select('id', 'minamount', 'description')->findOrFail($id);
 
         return view('administrator.editRepaymentamount', compact('editRepaymentamount'));
     }
@@ -47,11 +65,11 @@ class RepaymentAmountController extends Controller
 
         Repaymentamount::whereId($id)->update([
             'minamount' => floatval($request->minamount),
-            'maxamount' => floatval($request->maxamount),
+
             'description' => $request->description,
         ]);
 
-        return redirect()->route('allrepaymentamount')->with('success', 'Grille modifié avec succès ! :-)');
+        return redirect()->route('allrepaymentamount')->with('success', 'Grille modifié avec succès ! ');
     }
 
     public function destroy($id)
@@ -61,4 +79,5 @@ class RepaymentAmountController extends Controller
 
         return redirect()->route('allrepaymentamount')->with('success', 'Grille supprimé avec succès ! :-)');
     }
+    
 }

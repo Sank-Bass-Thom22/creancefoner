@@ -33,27 +33,20 @@
 
                 <form action="{{ route ('updateschedule', $debtorSchedule->id) }}" method="POST">
                     @csrf
-                    <div class="input-group mb-3">
+                    <div class="form-group ">
                         <label for="Amount">Montant de l'échéancier : </label>
                         <input type="number" class="form-control" id="Amount" name="amount" value="{{ $debtorSchedule->amount }}" required />
                     </div>
 
-                    <!-- /.col -->
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">VALIDER</button>
+                    <div class="form-group">
+       
+                        <button type="submit" class="btn mb-1 btn-primary">Valider</button>
+
+                        <a href="{{ route('showrepayment', $debtorSchedule->id_debtor) }}" class="btn mb-1 btn-danger">Retour</a>                    
                     </div>
-                    <!-- /.col -->
                 </form>
 
-                <hr>
 
-                <div class="adminlist-box-close">
-                    <form action="{{ route('showrepayment', $debtorSchedule->id_debtor) }}" method="GET">
-                        @csrf
-
-                        <button type="submit">FERMER</button>
-                    </form>
-                </div>
             </div>
             <!-- /.form-box -->
         </div>

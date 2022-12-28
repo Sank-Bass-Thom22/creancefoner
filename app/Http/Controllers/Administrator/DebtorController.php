@@ -17,8 +17,8 @@ class DebtorController extends Controller
     public function index()
     {
         $allDebtor = Debtor::where('role', 'Debtor')
-            ->orderBy('firstname', 'ASC')->get();
-        $allService = Debtor::where('role', 'Employer')
+            ->orderBy('firstname', 'ASC')->paginate(10);
+            $allService = Debtor::where('role', 'Employer')
             ->orderBy('servicename', 'ASC')->get();
         $message = 'Il n\'y a aucun redevable enregistré.';
 
@@ -57,7 +57,7 @@ class DebtorController extends Controller
             'lastname' => ucwords(strtolower($request->lastname)),
             'email' => $request->email,
             'telephone' => $request->telephone,
-            'matricule' => $request->matricule,
+            'codefoner' => $request->codefoner,
             'debtorindex' => $request->serviceindex,
             'password' => Hash::make($password),
             'role' => 'Debtor',
@@ -90,7 +90,7 @@ class DebtorController extends Controller
             'lastname' => ucwords(strtolower($request->lastname)),
             'email' => strtolower($request->email),
             'telephone' => $request->telephone,
-            'matricule' => $request->matricule,
+            'codefoner' => $request->codefoner,
             'debtorindex' => $request->serviceindex,
         ]);
         return redirect()->route('alldebtor')->with('success', 'Informations modifiées avec succès! :-)');

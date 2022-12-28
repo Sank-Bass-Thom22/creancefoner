@@ -2,9 +2,10 @@
 
 @section('content')
 
+
 <div class="card">
     <div class="card-body">
-        <h4 class="card-title">Documents utils</h4>
+        <h4 class="card-title">Documents utiles</h4>
 
         <a href="{{ route('dashboard') }}" class="btn btn-danger btn-lg float-right" style="margin: 15px;">Retour</a>
         <table class="table header-border">

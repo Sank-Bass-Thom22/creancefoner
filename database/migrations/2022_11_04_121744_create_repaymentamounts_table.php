@@ -17,7 +17,6 @@ class CreateRepaymentamountsTable extends Migration
             $table->id();
             $table->index('id')->unsigned();
             $table->float('minamount');
-            $table->float('maxamount');
             $table->text('description')->nullable();
             $table->timestamps();
         });

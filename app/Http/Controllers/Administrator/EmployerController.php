@@ -13,14 +13,14 @@ class EmployerController extends Controller
 {
     public function index()
     {
-        $allEmployer = Debtor::where('role', 'Employer')->orderBy('servicename', 'ASC')->get();
+        $allEmployer = Debtor::where('role', 'Employer')->orderBy('servicename', 'ASC')->paginate(10);
 
         return view('administrator.allEmployer', compact('allEmployer'));
     }
 
     public function create()
     {
-        return view('administrator.registeremployer');
+        return view('administrator.registerEmployer');
     }
 
     public function store(StoreEmployerRequest $request)
@@ -37,7 +37,7 @@ class EmployerController extends Controller
             'role' => 'Employer',
         ]);
 
-        return redirect()->route('registeremployer')->with('success', 'Succès! :-) /Password : ' . $password);
+        return redirect()->route('registerEmployer')->with('success', 'Succès! :-) /Password : ' . $password);
     }
 
     public function show($serviceindex)
@@ -73,10 +73,11 @@ class EmployerController extends Controller
     {
         $newPassword = Str::random(8);
 
+       
         Debtor::whereId($id)->update([
             'password' => Hash::make($newPassword),
         ]);
-
+     
         return redirect()->route('allemployer')->with('success', 'Succès! Le nouveau mot de passe est : ' . $newPassword);
     }
 

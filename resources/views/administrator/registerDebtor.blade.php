@@ -11,11 +11,11 @@
 
                 <p class="register-box-error">
                     @if ($errors->any())
-                <ul>
+              
                     @foreach ($errors->all() as $error)
-                    <li><strong class="alert alert-danger">{{ $error }}</strong></li>
+                   <strong class="alert alert-danger">{{ $error }}</strong>
                     @endforeach
-                </ul><br />
+                <br />
                 @endif
                 </p>
 
@@ -44,8 +44,8 @@
                         <input type="telephone" class="form-control" placeholder="226 " id="Telephone" name="telephone" required />
                     </div>
                     <div class="form-group">
-                        <label for="Matricule">Numéro matricule  </label>
-                        <input type="text" class="form-control" id="Matricule" name="matricule" required />
+                        <label for="codefoner">Code Foner  </label>
+                        <input type="text" class="form-control" id="codefoner" name="codefoner" required />
                     </div>
 
                     <div class="form-group">

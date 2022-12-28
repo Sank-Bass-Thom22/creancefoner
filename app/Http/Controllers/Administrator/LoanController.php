@@ -84,7 +84,8 @@ class LoanController extends Controller
 
         Loan::whereId($id)->update([
             'amount' => floatval($request->amount),
-            'academicyear' => $request->startline,
+            'academicyear' => $request->academicyear,
+          
             'id_rate' => intval($request->rate),
         ]);
 

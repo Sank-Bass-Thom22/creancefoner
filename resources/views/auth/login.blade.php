@@ -41,16 +41,19 @@
                     <div class="form-input-content">
                         <div class="card login-form mb-0">
                             <div class="card-body pt-5">
-                            @if ($errors->any())
+                              
+                                <center>
+                                    <img src="{{asset('images/logo.jpg')}}" alt="" class="img-fluid mb-4">
+                                </center>
+                                <a class="text-center" href=""> <h4>Connexion</h4></a>
+
+                                @if ($errors->any())
                                     <ul>
                                         @foreach ($errors->all() as $error)
                                        <p class="alert alert-danger">{{ $error }}</p>
                                         @endforeach
                                     </ul>
                                 @endif
-                                <a class="text-center" href="index.html"> <h4>Connexion</h4></a>
-
-
 
 
                                 <form action="{{ route('login') }}" method="POST">
@@ -74,6 +77,8 @@
                                     <button class="btn login-form__btn submit w-100">Se Connecter</button>
                                 </form>
                                 <p class="mt-5 login-form__footer">Mot de passe oublié ? <a href="{{ route ('forgot-password') }}" class="text-primary">Cliquez</a> ici</p>
+                           <br>
+                           <center><small>All Rights Reserved by FONER. Designed and Developed by  <a href="https://www.begotech.com">Begotech Begotech</a> </small> </center>
                             </div>
                         </div>
                     </div>

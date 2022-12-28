@@ -67,8 +67,13 @@ class UsrScheduleController extends Controller
                         $mounths -= 12;
                         $years++;
                     }
-
-                    $message = 'Avec ' . floatval($request->amount) . ' Francs par mois, cela vous prendra : ' . $years . ' ans ' . $mounths . ' mois pour être à jour.';
+                    
+                    $dateFin         = date('d-m-Y', strtotime('+'.$years.' year' ));
+                    $dateDepartTimestamp = strtotime($dateFin);
+                   
+                    $dateFin1         = date('M-Y', strtotime('+'.$mounths.' month', $dateDepartTimestamp ));
+                  
+                    $message = 'Avec ' . floatval($request->amount) . ' Francs par mois, cela vous prendra : ' . $years . ' ans ' . $mounths . ' mois pour être à jour. (Date probable de fin : '.$dateFin1.' )';
                 }
             } else {
                 $message = 'Vous n\'avez aucun prêt enregistré pour le moment.';

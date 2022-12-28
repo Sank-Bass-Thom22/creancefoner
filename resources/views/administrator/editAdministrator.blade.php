@@ -27,24 +27,24 @@
 
                 <form action="{{ route('updateadministrator', $administratorProfile->id) }}" method="POST">
                     @csrf
-                    <div class="input-group mb-3">
-                        <label for="Firstname">Prénom : </label>
+                    <div class="form-group">
+                        <label for="Firstname">Prénom  </label>
                         <input type="text" class="form-control" id="Firstname" name="firstname" value="{{ $administratorProfile->firstname }}" required />
                     </div>
-                    <div class="input-group mb-3">
-                        <label for="Lastname">Nom : </label>
+                    <div class="form-group">
+                        <label for="Lastname">Nom  </label>
                         <input type="text" class="form-control" id="Lastname" name="lastname" value="{{ $administratorProfile->lastname }}" required />
                     </div>
-                    <div class="input-group mb-3">
-                        <label for="Email">Adresse E-mail : </label>
+                    <div class="form-group">
+                        <label for="Email">Adresse E-mail  </label>
                         <input type="email" class="form-control" id="Email" name="email" value="{{ $administratorProfile->email }}" required />
                     </div>
-                    <div class="input-group mb-3">
-                        <label for="Telephone">Numéro de téléphone : </label>
+                    <div class="form-group">
+                        <label for="Telephone">Numéro de téléphone </label>
                         <input type="telephone" class="form-control" placeholder="226 " id="Telephone" name="telephone" value="{{ $administratorProfile->telephone }}" required />
                     </div>
-                    <div class="input-group mb-3">
-                        <label for="Role">Niveau d'administration : </label>
+                    <div class="form-group">
+                        <label for="Role">Niveau d'administration </label>
                         <select class="form-control" id="Role" name="role" required>
                             <option></option>
                             <option value="SimpleAdmin">Simple</option>
@@ -52,30 +52,28 @@
                         </select>
                     </div>
 
-                    <!-- /.col -->
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">VALIDER</button>
+                    <div class="form-group">
+       
+                        <button type="submit" class="btn mb-1 btn-primary">Valider</button>
+
+                        @if ($administratorProfile->id == Auth::user()->id)
+                 
+                            <a href="{{ route('myprofile') }}" class="btn mb-1 btn-danger">Retour</a> 
+                        @else
+                    
+                            <a href="{{ route('alladminsup') }}" class="btn mb-1 btn-danger">Retour</a> 
+                        @endif
+
+
+                                          
                     </div>
-                    <!-- /.col -->
                 </form>
 
-                <hr>
 
-                <div class="admin-box-close">
-                    @if ($administratorProfile->id == Auth::user()->id)
-                    <form action="{{ route('myadminprofile') }}" method="GET">
-                        @csrf
 
-                        <button type="submit">FERMER</button>
-                    </form>
-                    @else
-                    <form action="{{ route('alladminsup') }}" method="GET">
-                        @csrf
 
-                        <button type="submit">FERMER</button>
-                    </form>
-                    @endif
-                </div>
+            
+
             </div>
             <!-- /.form-box -->
         </div>

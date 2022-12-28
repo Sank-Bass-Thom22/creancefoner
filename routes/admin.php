@@ -1,17 +1,18 @@
 <?php
 
-use App\Http\Controllers\Administrator\AdministratorController;
-use App\Http\Controllers\Administrator\EmployerController;
-use App\Http\Controllers\Administrator\DebtorController;
-use App\Http\Controllers\Administrator\RateController;
-use App\Http\Controllers\Administrator\LoanController;
-use App\Http\Controllers\Administrator\RepaymentController;
-use App\Http\Controllers\Administrator\RepaymentamountController;
-use App\Http\Controllers\Administrator\BankController;
-use App\Http\Controllers\Administrator\DocumentController;
-use App\Http\Controllers\Administrator\ScheduleController;
-use App\Http\Controllers\Administrator\ResearchController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Administrator\BankController;
+use App\Http\Controllers\Administrator\LoanController;
+use App\Http\Controllers\Administrator\RateController;
+use App\Http\Controllers\Administrator\DebtorController;
+use App\Http\Controllers\Administrator\DocumentController;
+
+use App\Http\Controllers\Administrator\EmployerController;
+use App\Http\Controllers\Administrator\ResearchController;
+use App\Http\Controllers\Administrator\ScheduleController;
+use App\Http\Controllers\Administrator\RepaymentController;
+use App\Http\Controllers\Administrator\AdministratorController;
+use App\Http\Controllers\Administrator\RepaymentAmountController;
 
 Route::middleware('auth')->group(function () {
     Route::middleware('superadmin')->group(function () {
@@ -47,19 +48,19 @@ Route::middleware('auth')->group(function () {
         Route::post('dest.royratesup/{id}', [RateController::class, 'destroy'])
             ->name('destroyratesup');
 
-        Route::get('createrepaymentamountsup', [RepaymentamountController::class, 'create'])
+        Route::get('createrepaymentamountsup', [RepaymentAmountController::class, 'create'])
             ->name('createrepaymentamountsup');
 
-        Route::post('storerepaymentamountsup', [RepaymentamountController::class, 'store'])
+        Route::post('storerepaymentamountsup', [RepaymentAmountController::class, 'store'])
             ->name('storerepaymentamountsup');
 
-        Route::get('editrepaymentamountsup/{id}', [RepaymentamountController::class, 'edit'])
+        Route::get('editrepaymentamountsup/{id}', [RepaymentAmountController::class, 'edit'])
             ->name('editrepaymentamountsup');
 
-        Route::post('updaterepaymentamountsup/{id}', [RepaymentamountController::class, 'update'])
+        Route::post('updaterepaymentamountsup/{id}', [RepaymentAmountController::class, 'update'])
             ->name('updaterepaymentamountsup');
 
-        Route::get('destroyrepaymentamountsup/{id}', [RepaymentamountController::class, 'destroy'])
+        Route::get('destroyrepaymentamountsup/{id}', [RepaymentAmountController::class, 'destroy'])
             ->name('destroyrepaymentamountsup');
     });
 });
@@ -87,7 +88,8 @@ Route::middleware('auth')->group(function () {
         Route::get('registeremployer', [EmployerController::class, 'create'])
             ->name('registeremployer');
 
-        Route::post('registeremployer', [EmployerController::class, 'store']);
+        Route::post('registeremployer', [EmployerController::class, 'store'])
+        ->name('registeremployer');
 
         Route::get('allemployes/{serviceindex}', [EmployerController::class, 'show'])
             ->name('allemployes');
@@ -133,10 +135,10 @@ Route::middleware('auth')->group(function () {
         Route::get('showrate/{id}', [RateController::class, 'show'])
             ->name('showrate');
 
-        Route::get('allrepaymentamount', [RepaymentamountController::class, 'index'])
+        Route::get('allrepaymentamount', [RepaymentAmountController::class, 'index'])
             ->name('allrepaymentamount');
 
-        Route::get('showrepaymentamount/{id}', [RepaymentamountController::class, 'show'])
+        Route::get('showrepaymentamount/{id}', [RepaymentAmountController::class, 'show'])
             ->name('showrepaymentamount');
 
         Route::get('alldocument', [DocumentController::class, 'index'])

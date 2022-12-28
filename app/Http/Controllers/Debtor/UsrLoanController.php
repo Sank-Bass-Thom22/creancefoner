@@ -16,7 +16,7 @@ class UsrLoanController extends Controller
         $debtorLoans = Loan::where('id_debtor', $id)
             ->join('rates', 'rates.id', '=', 'loans.id_rate')
             ->select('loans.*', 'rates.value')
-            ->orderBy('startline', 'asc')->get();
+            ->orderBy('academicyear', 'asc')->get();
         $countLoans = Loan::where('id_debtor', $id)->count();
 
         return view('debtor.loans', compact(['debtorLoans', 'countLoans']));

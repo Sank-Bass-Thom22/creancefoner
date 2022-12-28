@@ -22,7 +22,7 @@ class CreateRepaymentsTable extends Migration
             $table->text('description')->nullable();
             $table->unsignedBigInteger('id_bank')->nullable();
             $table->foreign('id_bank')
-            ->references('id')->on('banks')
+            ->references('id')->on('banks')->nullable()
             ->onDelete('restrict')->onUpdate('restrict');
             $table->unsignedBigInteger('id_debtor');
             $table->foreign('id_debtor')

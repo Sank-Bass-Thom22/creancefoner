@@ -33,21 +33,22 @@
 
                 <form action="{{ route ('updateloan', $debtorLoan->id) }}" method="POST">
                     @csrf
-                    <div class="input-group mb-3">
+                    <div class="form-group ">
                         <label for="Amount">Montant du prêt : </label>
                         <input type="number" class="form-control" id="Amount" name="amount" value="{{ $debtorLoan->amount }}" required />
                     </div>
-                    <div class="input-group mb-3">
-                        <label for="Startline">Date de contraction du prêt : </label>
-                        <input type="date" class="form-control" id="Startline" name="startline" value="{{ $debtorLoan->startline }}" required />
+                    <div class="form-group ">
+                        <label for="Academicyear">Année académique : </label>
+                        <select id="Academicyear" class="form-control" name="academicyear" required>
+                            @for($year=date('Y'); $year>2000; $year--)
+                            <option value="{{ $year-1 }}-{{ $year }}">{{ $year-1 }}-{{ $year }}</option>
+                            @endfor
+                        </select>
                     </div>
-                    <div class="input-group mb-3">
-                        <label for="Deadline">Date de cloture du prêt : </label>
-                        <input type="date" class="form-control" id="Deadline" name="deadline" value="{{ $debtorLoan->deadline }}" required />
-                    </div>
-                    <div class="input-group mb-3">
+                   
+                    <div class="form-group ">
                         <label for="Rate">Taux applicable : </label>
-                        <select id="Rate" name="rate" required>
+                        <select id="Rate" name="rate" class="form-control" required>
                             @forelse ($allRates as $rates)
                             <option value="{{ $rates->id }}">{{ $rates->value }}</option>
                             @empty
@@ -57,22 +58,16 @@
                         </select>
                     </div>
 
-                    <!-- /.col -->
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">VALIDER</button>
+              
+
+                    <div class="form-group">
+       
+                        <button type="submit" class="btn mb-1 btn-primary">Valider</button>
+
+                        <a href="{{ route('showloan', $debtorLoan->id_debtor) }}" class="btn mb-1 btn-danger">Retour</a>                    
                     </div>
-                    <!-- /.col -->
                 </form>
 
-                <hr>
-
-                <div class="adminlist-box-close">
-                    <form action="{{ route('showloan', $debtorLoan->id_debtor) }}" method="GET">
-                        @csrf
-
-                        <button type="submit">FERMER</button>
-                    </form>
-                </div>
             </div>
             <!-- /.form-box -->
         </div>

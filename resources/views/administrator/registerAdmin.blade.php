@@ -27,22 +27,24 @@
 
                 <form action="{{ route ('registeradminsup') }}" method="POST">
                     @csrf
-                    <div class="form-group">
-                        <label for="Firstname">Prénom </label>
-                        <input type="text" class="form-control" id="Firstname" name="firstname" required />
-                    </div>
+                    
                     <div class="form-group">
                         <label for="Lastname">Nom </label>
                         <input type="text" class="form-control" id="Lastname" name="lastname" required />
                     </div>
                     <div class="form-group">
-                        <label for="Email">Adresse E-mail </label>
-                        <input type="email" class="form-control" id="Email" name="email" required />
+                        <label for="Firstname">Prénom </label>
+                        <input type="text" class="form-control" id="Firstname" name="firstname" required />
                     </div>
                     <div class="form-group">
                         <label for="Telephone">Numéro de téléphone </label>
                         <input type="telephone" class="form-control" placeholder="226 " id="Telephone" name="telephone" required />
                     </div>
+                    <div class="form-group">
+                        <label for="Email">Adresse E-mail </label>
+                        <input type="email" class="form-control" id="Email" name="email" required />
+                    </div>
+                   
                     <div class="form-group">
                         <label for="Role">Niveau d'administration </label>
                         <select class="form-control" id="Role" name="role">

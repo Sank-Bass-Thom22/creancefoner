@@ -12,7 +12,7 @@ class DocumentController extends Controller
 {
     public function index()
     {
-        $allDocument = Document::orderBy('title', 'ASC')->get();
+        $allDocument = Document::orderBy('title', 'ASC')->paginate(10);
 
         return view('administrator.allDocument', compact('allDocument'));
     }

@@ -27,33 +27,33 @@
 
                 <form action="{{ route ('updateratesup', $editRate->id) }}" method="POST">
                     @csrf
-                    <div class="input-group mb-3">
+                    <div class="form-group ">
                         <label for="Value">Valeur du taux : </label>
                         <input type="taux" class="form-control" id="Value" name="value" value="{{ $editRate->value }}" required />
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="form-group ">
                         <label for="Validity">Taux valide jusqu'en : </label>
                         <input type="date" class="form-control" id="Validity" name="validity" value="{{ $editRate->validity }}" required />
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="form-group ">
                         <label for="Description">Description : </label>
                         <textarea class="form-control" id="Description" name="description" rows="5" cols="50">
                         {{ $editRate->description }}
                         </textarea>
                     </div>
 
-                    <!-- /.col -->
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">VALIDER</button>
+                 
+                    <div class="form-group">
+       
+                        <button type="submit" class="btn mb-1 btn-primary">Valider</button>
+
+                        <a href="{{ route('allrate') }}" class="btn mb-1 btn-danger">Retour</a>                    
                     </div>
-                    <!-- /.col -->
+
                 </form>
 
-                <hr>
-
-                <div class="adminlist-box-close">
-                    <a href="{{ route('allrate') }}" class="">FERMER</a>
-                </div>
+           
+              
             </div>
             <!-- /.form-box -->
         </div>

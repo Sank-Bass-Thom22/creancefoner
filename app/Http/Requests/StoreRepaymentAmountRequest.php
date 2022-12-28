@@ -25,7 +25,6 @@ class StoreRepaymentAmountRequest extends FormRequest
     {
         return [
             'minamount' => ['required', 'numeric'],
-            'maxamount' => ['nullable', 'numeric'],
             'description' => ['nullable', 'string'],
         ];
     }
