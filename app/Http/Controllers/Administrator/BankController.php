@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Administrator;
 
 use App\Models\Loan\Bank;
+use App\Models\Loan\Repayment;
 use App\Http\Requests\StoreBankRequest;
 use App\Http\Requests\UpdateBankRequest;
 use App\Http\Controllers\Controller;
@@ -23,26 +24,48 @@ class BankController extends Controller
 
     public function store(StoreBankRequest $request)
     {
-        //
+        $validatedData = $request->validated();
+
+        Bank::create([
+            'name' => ucwords(strtolower($request->name)),
+            'email' => strtolower($request->email),
+            'telephone' => $request->telephone,
+            'description' => $request->description,
+        ]);
+
+        return back()->with('success', 'Banque enregistrée avec succès!');
     }
 
-    public function show(Bank $bank)
+    public function edit($id)
     {
-        //
+        $editBank = Bank::find($id);
+
+        return view('administrator.editBank', compact('editBank'));
     }
 
-    public function edit(Bank $bank)
+    public function update(UpdateBankRequest $request, $id)
     {
-        //
+        $validatedData = $request->validated();
+
+        Bank::whereId($id)->update([
+            'name' => ucwords(strtolower($request->name)),
+            'email' => strtolower($request->email),
+            'telephone' => $request->telephone,
+            'description' => $request->description,
+        ]);
+
+        return redirect()->route('allbank')->with('success', 'Informations modifiées avec succès!');
     }
 
-    public function update(UpdateBankRequest $request, Bank $bank)
+    public function destroy($id)
     {
-        //
-    }
+        if (Repayment::where('id_bank', $id)->exists()) {
+            return back()->withErrors('Impossible de supprimer cette banque car elle est déjà utilisée pour un remboursement');
+        }
 
-    public function destroy(Bank $bank)
-    {
-        //
+        $bank = Bank::find($id);
+        $bank->delete();
+
+        return back()->with('success', 'Banque supprimé avec succès!');
     }
 }

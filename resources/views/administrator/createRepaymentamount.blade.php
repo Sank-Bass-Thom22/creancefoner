@@ -41,7 +41,6 @@
                     </div>
 
                     <div class="form-group">
-
                         <button type="submit" class="btn mb-1 btn-primary">Valider</button>
 
                         <a href="{{ route('allrepaymentamount') }}" class="btn mb-1 btn-danger">Retour</a>

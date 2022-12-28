@@ -228,5 +228,17 @@ Route::middleware('auth')->group(function () {
 
         Route::get('createbank', [BankController::class, 'create'])
             ->name('createbank');
+
+        Route::post('storebank', [BankController::class, 'store'])
+            ->name('storebank');
+
+        Route::get('editbank/{id}', [BankController::class, 'edit'])
+            ->name('editbank');
+
+        Route::post('updatebank/{id}', [BankController::class, 'update'])
+            ->name('updatebank');
+
+        Route::get('destroybank/{id}', [BankController::class, 'destroy'])
+            ->name('destroybank');
     });
 });

@@ -45,21 +45,14 @@
                         <td>{{ $banks->email }} </td>
                         <td>{{ $banks->telephone }} </td>
                         <td>{{ $banks->description }}</td>
-                        <td><a href="#">MODIFIER</a></td>
-                        <td><a href="#">SUPPRIMER</a></td>
+                        <td><a href="{{ route('editbank', $banks->id) }}">MODIFIER</a></td>
+                        <td><a href="{{ route('destroybank', $banks->id) }}">SUPPRIMER</a></td>
                     </tr>
-
                     @empty
                     <tr>
                         <td colspan="5"></td>
-
                     </tr>
-
                     @endforelse
-
-
-
-
                 </tbody>
             </table>
         </div>

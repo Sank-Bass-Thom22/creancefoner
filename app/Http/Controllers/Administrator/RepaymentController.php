@@ -53,6 +53,10 @@ class RepaymentController extends Controller
             }
         }
 
+        if (Schedule::where('id_debtor', session()->get('id_debtor'))->doesntExist()) {
+            return back()->withErrors('Veuillez d\'abord définir un échéancier de remboursement');
+        }
+
         Repayment::create([
             'amount' => floatval($request->amount),
             'repaymentdate' => $request->repaymentdate,
@@ -86,6 +90,10 @@ class RepaymentController extends Controller
             if ($request->amount > ($totalDue - $totalPaid)) {
                 return back()->withErrors('Le montant entré est suppérieur au reste à payer.');
             }
+        }
+
+        if (Schedule::where('id_debtor', session()->get('id_debtor'))->doesntExist()) {
+            return back()->withErrors('Veuillez d\abord définir un échéancier de remboursement');
         }
 
         Repayment::create([
