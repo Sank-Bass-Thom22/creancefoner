@@ -16,7 +16,7 @@
 
 
             <a href="{{ route('dashboard') }} " class="btn btn-danger btn-lg float-right" style="margin: 15px;">Retour</a>
-            <a href="{{ route('myrepayments') }}" class="btn btn-danger btn-lg float-right" style="margin: 15px;">Remboursements</a>
+            <a href="{{ route('myrepayments') }}" class="btn btn-info btn-lg float-right" style="margin: 15px;">Etat des rembourssement</a>
             <table class="table header-border">
                 <thead>
                     <tr>

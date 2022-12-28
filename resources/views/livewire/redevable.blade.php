@@ -11,7 +11,7 @@
                             @foreach ($debtors as $debtor)
                                 <option value="{{ $debtor->id}}">
    
-                                    {{ $debtor->firstname }} {{ $debtor->lastname }}
+                                    {{ $debtor->firstname }} {{ $debtor->lastname }} - {{ $debtor->telephone }}
                                 </option>
                         
                             @endforeach
@@ -29,7 +29,7 @@
 
                     @foreach ($redevable->loans as $loan)
                     @php
-                        $totalDue+= $loan->amount
+                        $totalDue+= $loan->amount+($loan->amount*$loan->rate->value/100)
                     @endphp
                     
                     @endforeach

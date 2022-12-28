@@ -20,7 +20,7 @@ class EmployerController extends Controller
 
     public function create()
     {
-        return view('administrator.registeremployer');
+        return view('administrator.registerEmployer');
     }
 
     public function store(StoreEmployerRequest $request)

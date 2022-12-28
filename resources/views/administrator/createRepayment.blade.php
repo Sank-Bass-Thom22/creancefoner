@@ -39,7 +39,7 @@
                     </div>
                     <div class="form-group ">
                         <label for="Repaymentdate">Date du remboursement : </label>
-                        <input type="date" class="form-control" id="Repaymentdate" name="repaymentdate" required />
+                        <input type="date" class="form-control" id="Repaymentdate" name="repaymentdate" value='{{date("Y-m-d")}}' required />
                     </div>
 
                     <livewire:mode /> 

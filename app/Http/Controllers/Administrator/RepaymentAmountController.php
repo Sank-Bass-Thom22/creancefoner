@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
-use App\Models\Loan\RepaymentAmount;
+use App\Models\Loan\Repaymentamount;
 use App\Http\Requests\StoreRepaymentAmountRequest;
 use App\Http\Requests\UpdateRepaymentAmountRequest;
 
