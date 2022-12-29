@@ -46,8 +46,11 @@ Route::middleware('auth')->group(function () {
         Route::post('resetdebtor/{id}', [UsrDebtorController::class, 'update']);
 
         Route::get('resetdebtorpassword', [UsrDebtorController::class, 'resetpassword'])
-        ->name('resetdebtorpassword');
+            ->name('resetdebtorpassword');
 
         Route::post('resetdebtorpassword', [UsrDebtorController::class, 'updatepassword']);
+
+        Route::get('deb-repporting', [UsrDebtorController::class, 'repporting'])
+            ->name('deb-repporting');
     });
 });

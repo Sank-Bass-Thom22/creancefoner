@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Debtor;
 
 use App\Http\Controllers\Controller;
 use App\Models\Debtor\Debtor;
+use App\Models\Loan\Loan;
+use App\Models\Loan\Rate;
 use App\Http\Requests\UpdateDebtorRequest;
 use App\Http\Requests\UpdatePasswordRequest;
 use Illuminate\Support\Facades\Auth;
@@ -58,5 +60,28 @@ class UsrDebtorController extends Controller
         }
 
         return redirect()->route('myprofile')->with('success', $message);
+    }
+
+    public function repporting()
+    {
+        $id = Auth::user()->id;
+        $totalDue = 0;
+        $totalPaid = 0;
+        $totalInterest = 0;
+        $totalLoan = 0;
+
+        $allLoan = Loan::where('id_debtor', $id)
+        ->join('rates', 'rates.id', '=', 'loans.id_rate')
+        ->select('loans.amount', 'rates.value');
+
+        foreach ($allLoan as $loans) {
+            $totalDue += floatval((($loans->amount * $loans->value) / 100) + $loans->amount);
+        }
+
+        $totalPaid = floatval(Repayment::where('id_debtor', $id)->sum('amount'));
+        $totalLoan = floatval(Loan::where('id_debtor', $id)->sum(amount));
+        $totalInterest = ($totalDue - $totalLoan);
+
+        return view('debtor.dashboard', compact(['totalLoan', 'totalInterest', 'totalPaid']));
     }
 }

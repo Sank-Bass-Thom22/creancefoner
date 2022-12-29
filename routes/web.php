@@ -29,10 +29,12 @@ Route::get('dashboard', function () {
             return view('administrator.dashboardSim');
             break;
         case 'Employer':
-            return view('employer.dashboard');
+            // return view('employer.dashboard');
+            return redirect()->route('emp-repporting');
             break;
         case 'Debtor':
-            return view('debtor.dashboard');
+            // return view('debtor.dashboard');
+            return redirect()->route('deb-repporting');
         default:
             return view('auth.login');
     }

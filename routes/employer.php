@@ -31,5 +31,8 @@ Route::middleware('auth')->group(function () {
         Route::post('resetemployer/{id}', [EmpEmployerController::class, 'update']);
 
         Route::post('resetemployerpassword', [EmpEmployerController::class, 'updatepassword']);
+
+        Route::get('emp-repporting', [EmpEmployerController::class, 'repporting'])
+            ->name('emp-repporting');
     });
 });
