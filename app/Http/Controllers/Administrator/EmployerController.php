@@ -30,9 +30,14 @@ class EmployerController extends Controller
 
         Debtor::create([
             'servicename' => $request->servicename,
-            'email' => $request->email,
+            'email' => strtolower($request->email),
             'telephone' => $request->telephone,
             'password' => Hash::make($password),
+            'servicelocation' => $request->servicelocation,
+            'firstname' => ucwords(strtolower($request->firstname)),
+            'lastname' => ucwords(strtolower($request->lastname)),
+            'emailDRH' => strtolower($request->emailDRH),
+            'telephoneDRH' => $request->telephoneDRH,
             'serviceindex' => (string) Str::uuid(),
             'role' => 'Employer',
         ]);
@@ -43,7 +48,7 @@ class EmployerController extends Controller
     public function show($serviceindex)
     {
         $allEmployes = Debtor::where('debtorindex', $serviceindex)
-        ->orderBy('firstname', 'ASC')->get();
+            ->orderBy('firstname', 'ASC')->get();
         $employer = Debtor::where('serviceindex', $serviceindex)->first();
 
         return view('administrator.allEmployes', compact(['allEmployes', 'employer']));
@@ -61,9 +66,14 @@ class EmployerController extends Controller
         $validatedData = $request->validated();
 
         Debtor::whereId($id)->update([
-            'servicename' => ucwords(strtolower($request->servicename)),
+            'servicename' => $request->servicename,
             'email' => strtolower($request->email),
             'telephone' => $request->telephone,
+            'servicelocation' => $request->servicelocation,
+            'firstname' => ucwords(strtolower($request->firstname)),
+            'lastname' => ucwords(strtolower($request->lastname)),
+            'emailDRH' => strtolower($request->emailDRH),
+            'telephoneDRH' => $request->telephoneDRH,
         ]);
 
         return redirect()->route('allemployer')->with('success', 'Informations modifiées avec succès! :-)');
@@ -73,11 +83,11 @@ class EmployerController extends Controller
     {
         $newPassword = Str::random(8);
 
-       
+
         Debtor::whereId($id)->update([
             'password' => Hash::make($newPassword),
         ]);
-     
+
         return redirect()->route('allemployer')->with('success', 'Succès! Le nouveau mot de passe est : ' . $newPassword);
     }
 

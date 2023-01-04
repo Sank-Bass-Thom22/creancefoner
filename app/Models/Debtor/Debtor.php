@@ -26,6 +26,9 @@ class Debtor extends Authenticatable
         'serviceindex',
         'debtorindex',
         'password',
+        'servicelocation',
+        'emailDRH',
+        'telephoneDRH',
     ];
 
     protected $hidden = [

@@ -13,10 +13,10 @@
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Authentification</span>
                         </a>
                         <ul aria-expanded="false">
-                            @if (Auth::user()->role == 'SuperAdmin') 
+                            @if (Auth::user()->role == 'SuperAdmin')
                             <li><a href="{{ route('alladminsup') }}">Gestion des administrateurs</a></li>
                             @endif
-                           
+
 
                         </ul>
                     </li>
@@ -31,6 +31,9 @@
                         <ul aria-expanded="false">
                                 <li><a href="{{ route('allrate') }}">Gestion des taux</a></li>
                         </ul>
+                        <ul aria-expanded="false">
+                            <li><a href="{{ route ('allbank') }}">Gestion des banques</a></li>
+                        </ul>
 
                         <ul aria-expanded="false">
                               <li><a href="{{ route('allrepaymentamount') }}">Voir la grille</a></li>
@@ -41,17 +44,17 @@
 
                     <li><a href="{{ route('allemployer') }}">  <i class="icon-speedometer menu-icon"></i>Gestion des employeurs</a></li>
 
-                
+
                     <li><a href="{{ route('alldebtor') }}">  <i class="icon-speedometer menu-icon"></i>Gestion des redevables</a></li>
-                
+
                     <li><a href="{{ route('quick-task') }}">  <i class="icon-speedometer menu-icon"></i>Paiement rapide</a></li>
-                
+
 
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-graph menu-icon"></i> <span class="nav-text">Reporting</span>
                         </a>
-                       
+
                     </li>
 
 

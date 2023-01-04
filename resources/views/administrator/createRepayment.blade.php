@@ -42,21 +42,21 @@
                         <input type="date" class="form-control" id="Repaymentdate" name="repaymentdate" value='{{date("Y-m-d")}}' required />
                     </div>
 
-                    <livewire:mode /> 
+                    <livewire:mode />
 
-          
+
 
                     <div class="form-group">
-                        
+
                         <button type="submit" class="btn mb-1 btn-primary">Valider</button>
 
-                        <a href="{{ route('showrepayment', session()->get('id_debtor')) }}" class="btn mb-1 btn-danger">Retour</a>                    
+                        <a href="{{ route('showrepayment', session()->get('id_debtor')) }}" class="btn mb-1 btn-danger">Retour</a>
                     </div>
                 </form>
 
-              
+
             </div>
-            
+
         </div>
         <!-- /.card -->
     </div>

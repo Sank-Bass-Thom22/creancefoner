@@ -27,6 +27,11 @@ class StoreEmployerRequest extends FormRequest
             'servicename' => ['required', 'string', 'max:50'],
             'email' => ['required', 'string', 'email', 'max:50', 'unique:debtors'],
             'telephone' => ['required', 'string', 'max:25', 'unique:debtors'],
+            'servicelocation => ['nullable', 'string', 'max:255'],
+            'firstname' => ['nullable', 'string', 'max:50'],
+            'lastname' => ['nullable', 'string', 'max:25'],
+            'emailDRH' => ['nullable', 'string', 'max:50', 'unique:debtors'],
+            'telephoneDRH' => ['nullable', 'string', 'max:25', 'unique:debtors'],
         ];
     }
 }

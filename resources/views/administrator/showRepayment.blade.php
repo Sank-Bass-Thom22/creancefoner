@@ -89,7 +89,7 @@
                     @empty
 
                     <tr>
-                        <th colspan="5">Aucun remboursement enregistré pour le moment! 😞</th>
+                        <td colspan="5">Aucun remboursement enregistré pour le moment! 😞</td>
                     </tr>
 
                     @endforelse
@@ -100,23 +100,23 @@
 
 
                 <div class="form-group">
-       
-                       
-                        @if ($totalPaid < $totalDue && session()->get('schedule') > 0) 
-                            <a href="{{ route ('createrepayment', $id) }}" class="btn mb-1 btn-info">REMBOURSER</a>                    
-                            <a href="{{ route ('editschedule', session()->get('id_schedule')) }}" class="btn mb-1 btn-primary">MODIFIER L'ÉCHÉANCIER</a>                    
+
+
+                        @if ($totalPaid < $totalDue && session()->get('schedule') > 0)
+                            <a href="{{ route ('createrepayment', $id) }}" class="btn mb-1 btn-info">REMBOURSER</a>
+                            <a href="{{ route ('editschedule', session()->get('id_schedule')) }}" class="btn mb-1 btn-primary">MODIFIER L'ÉCHÉANCIER</a>
 
                         @else
                             @if ($totalPaid < $totalDue)
-                                <a href="{{ route ('createschedule', $id) }}" class="btn mb-1 btn-warning">DÉFINIR UN ÉCHÉANCIER</a> 
+                                <a href="{{ route ('createschedule', $id) }}" class="btn mb-1 btn-warning">DÉFINIR UN ÉCHÉANCIER</a>
                             @endif
 
                         @endif
-                        <a href="{{ route('showloan', $id) }}" class="btn mb-1 btn-danger">Retour</a> 
+                        <a href="{{ route('showloan', $id) }}" class="btn mb-1 btn-danger">Retour</a>
 
-                       
+
                 </div>
-                
+
             </div>
         </div>
     </div>

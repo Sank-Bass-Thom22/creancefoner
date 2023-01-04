@@ -39,6 +39,26 @@
                         <label for="Telephone">Numéro de téléphone  </label>
                         <input type="telephone" class="form-control" placeholder="226 " id="Telephone" name="telephone" required />
                     </div>
+                    <div class="form-group">
+                        <label for="Servicelocation">Situation géographique : </label>
+                        <input type="text" id="Servicelocation" class="form-control" name="servicelocation" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Firstname">Prénom DRH : </label>
+                        <input type="text" id="Firstname" class="form-control" name="firstname" /()>
+                    </div>
+                    <div class="form-group">
+                        <label for="Lastname">Nom DRH : </label>
+                        <input type="text" id="Lastname" class="form-control" name="lastname" />
+                    </div>
+                    <div class="form-group">
+                        <label for="EmailDRH">Adresse E-mail DRH : </label>
+                        <input type="email" class="form-control" id="EmailDRH" name="emailDRH" />
+                    </div>
+                    <div class="form-group">
+                        <label for="TelephoneDRH">Téléphone DRH : </label>
+                        <input type="telephone" class="form-control" placeholder="226 " id="TelephoneDRH" name="telephoneDRH" />
+                    </div>
 
                     <div class="form-group">
 

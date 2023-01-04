@@ -1,0 +1,22 @@
+
+{
+
+
+
+
+
+
+$allLoan = Loan::where('id_debtor', $id)
+->join('rates', 'rates.id', '=', 'loans.id_rate')
+->select('loans.amount', 'rates.value');
+
+foreach ($allLoan as $loans) {
+
+}
+
+$totalPaid = floatval(Repayment::where('id_debtor', $id)->sum('amount'));
+$totalLoan = floatval(Loan::where('id_debtor', $id)->sum(amount));
+$totalInterest = ($totalDue - $totalLoan);
+
+h
+}

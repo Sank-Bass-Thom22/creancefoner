@@ -34,21 +34,21 @@
                         <label for="Repaymentdate">Date du remboursement : </label>
                         <input type="date" class="form-control" id="Repaymentdate" name="repaymentdate" value='{{date("Y-m-d")}}' required />
                     </div>
-                    
+
                     <livewire:mode />
                    <br>
 
                     <div class="form-group">
-                        
+
                         <button type="submit" class="btn mb-1 btn-primary">Valider</button>
-                    
-                        <a href="{{ route('dashboard') }}" class="btn mb-1 btn-danger">Retour</a> 
-                        
+
+                        <a href="{{ route('dashboard') }}" class="btn mb-1 btn-danger">Retour</a>
+
                     </div>
                 </form>
 
-              
+
             </div>
         </div>
- 
+
 @endsection

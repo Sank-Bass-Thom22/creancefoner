@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Employer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Debtor\Debtor;
+use App\Models\Loan\Loan;
+use App\Models\Loan\Repayment;
+use App\Models\Loan\Rate;
 use App\Http\Requests\UpdateEmployerRequest;
 use App\Http\Requests\UpdatePasswordRequest;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +19,7 @@ class EmpEmployerController extends Controller
         $serviceindex = Auth::user()->serviceindex;
 
         $myEmployes = Debtor::where('debtorindex', $serviceindex)
-        ->orderBy('firstname', 'ASC')->get();
+            ->orderBy('firstname', 'ASC')->get();
 
         return view('employer.myEmployes', compact('myEmployes'));
     }
@@ -67,4 +70,30 @@ class EmpEmployerController extends Controller
         return redirect()->route('myprofile')->with('success', $message);
     }
 
+    public function repporting()
+    {
+        $serviceindex = Auth::user()->serviceindex;
+        $totalDue = 0;
+        $totalPaid = 0;
+        $totalInterest = 0;
+        $totalLoan = 0;
+
+        $allDebtor = Debtor::where('debtorindex', $serviceindex)->get();
+
+        foreach ($allDebtor as $debtors) {
+            foreach ($debtors->loans as $loans) {
+                $value = Rate::whereId($loans->id_rate)->value('value');
+                $totalDue += floatval((($loans->amount * $value) / 100) + $loans->amount);
+                $totalLoan += floatval($loans->amount);
+            }
+
+            foreach ($debtors->repayments as $repayments) {
+                $totalPaid += floatval($repayments->amount);
+            }
+        }
+
+        $totalInterest = ($totalDue - $totalLoan);
+
+        return view('employer.dashboard', compact(['totalLoan', 'totalInterest', 'totalPaid']));
+    }
 }

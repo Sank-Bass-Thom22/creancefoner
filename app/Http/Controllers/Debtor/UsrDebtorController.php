@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Debtor\Debtor;
 use App\Models\Loan\Loan;
 use App\Models\Loan\Rate;
+use App\Models\Loan\Repayment;
 use App\Http\Requests\UpdateDebtorRequest;
 use App\Http\Requests\UpdatePasswordRequest;
 use Illuminate\Support\Facades\Auth;
@@ -70,16 +71,18 @@ class UsrDebtorController extends Controller
         $totalInterest = 0;
         $totalLoan = 0;
 
-        $allLoan = Loan::where('id_debtor', $id)
-        ->join('rates', 'rates.id', '=', 'loans.id_rate')
-        ->select('loans.amount', 'rates.value');
+        $debtors = Debtor::find($id);
 
-        foreach ($allLoan as $loans) {
-            $totalDue += floatval((($loans->amount * $loans->value) / 100) + $loans->amount);
+        foreach ($debtors->loans as $loans) {
+            $value = Rate::whereId($loans->id_rate)->value('value');
+            $totalDue += floatval((($loans->amount * $value) / 100) + $loans->amount);
+            $totalLoan += floatval($loans->amount);
         }
 
-        $totalPaid = floatval(Repayment::where('id_debtor', $id)->sum('amount'));
-        $totalLoan = floatval(Loan::where('id_debtor', $id)->sum(amount));
+        foreach ($debtors->repayments as $repayments) {
+            $totalPaid += floatval($repayments->amount);
+        }
+
         $totalInterest = ($totalDue - $totalLoan);
 
         return view('debtor.dashboard', compact(['totalLoan', 'totalInterest', 'totalPaid']));
