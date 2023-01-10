@@ -47,7 +47,7 @@
                                                 <td> <a href="/storage/{{ $documents->filelink }}" class="" download="">Télécharger</a>  </td>
                                                 <td> {{ $documents->description }} </td>
                                               
-                                                @if (Auth::user()->role === "SuperAdmin")
+
                                                 <td> 
                                                     <a href="{{ route ('editdocument', $documents->id) }}" class="" title="Modifier">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -62,7 +62,7 @@
                                                         </svg>
                                                     </a>
                                                 </td>
-                                                @endif
+                                              
                                         
                                              
 

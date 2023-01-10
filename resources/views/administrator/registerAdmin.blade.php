@@ -45,13 +45,19 @@
                         <input type="email" class="form-control" id="Email" name="email" required />
                     </div>
                    
-                    <div class="form-group">
-                        <label for="Role">Niveau d'administration </label>
-                        <select class="form-control" id="Role" name="role">
-                            <option value="SimpleAdmin" selected>Simple</option>
-                            <option value="SuperAdmin">Super</option>
-                        </select>
-                    </div>
+                    <div class="mb-3">
+                    <label for="role" class="form-label">Role</label>
+                    <select class="form-control" 
+                        name="role" required>
+                        <option value="">Choisir role</option>
+                        @foreach($roles as $role)
+                            <option value="{{ $role->id }}" >{{ $role->name }}</option>
+                        @endforeach
+                    </select>
+                    @if ($errors->has('role'))
+                        <span class="text-danger text-left">{{ $errors->first('role') }}</span>
+                    @endif
+                </div>
 
                     <div class="form-group">
        

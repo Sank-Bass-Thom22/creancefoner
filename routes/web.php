@@ -36,7 +36,7 @@ Route::get('dashboard', function () {
             // return view('debtor.dashboard');
             return redirect()->route('deb-repporting');
         default:
-            return view('auth.login');
+             return view('administrator.dashboardSim');
     }
 })->middleware(['auth'])->name('dashboard');
 

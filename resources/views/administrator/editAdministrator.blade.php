@@ -43,13 +43,21 @@
                         <label for="Telephone">Numéro de téléphone </label>
                         <input type="telephone" class="form-control" placeholder="226 " id="Telephone" name="telephone" value="{{ $administratorProfile->telephone }}" required />
                     </div>
-                    <div class="form-group">
-                        <label for="Role">Niveau d'administration </label>
-                        <select class="form-control" id="Role" name="role" required>
-                            <option></option>
-                            <option value="SimpleAdmin">Simple</option>
-                            <option value="SuperAdmin">Super</option>
+                    <div class="mb-3">
+                        <label for="role" class="form-label">Role</label>
+                        <select class="form-control" 
+                            name="role" required>
+                            <option value="">Choisir role</option>
+                            @foreach($roles as $role)
+                                <option value="{{ $role->id }}"
+                                    {{ in_array($role->name, $userRole) 
+                                        ? 'selected'
+                                        : '' }}>{{ $role->name }}</option>
+                            @endforeach
                         </select>
+                        @if ($errors->has('role'))
+                            <span class="text-danger text-left">{{ $errors->first('role') }}</span>
+                        @endif
                     </div>
 
                     <div class="form-group">

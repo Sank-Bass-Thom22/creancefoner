@@ -13,9 +13,10 @@
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Authentification</span>
                         </a>
                         <ul aria-expanded="false">
-                            @if (Auth::user()->role == 'SuperAdmin')
+                           
+                            <li><a href="{{ route('roles.index') }}">Gestion des Rôles</a></li>
                             <li><a href="{{ route('alladminsup') }}">Gestion des administrateurs</a></li>
-                            @endif
+                           
 
 
                         </ul>
