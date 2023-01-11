@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html class="h-100" lang="en">
 
@@ -6,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Créance FONER  - Connexion</title>
+    <title>Créance FONER - Connexion</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/images/favicon.png')}}">
     <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
@@ -41,18 +40,20 @@
                     <div class="form-input-content">
                         <div class="card login-form mb-0">
                             <div class="card-body pt-5">
-                              
+
                                 <center>
                                     <img src="{{asset('images/logo.jpg')}}" alt="" class="img-fluid mb-4">
                                 </center>
-                                <a class="text-center" href=""> <h4>Connexion</h4></a>
+                                <a class="text-center" href="">
+                                    <h4>Connexion</h4>
+                                </a>
 
                                 @if ($errors->any())
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                       <p class="alert alert-danger">{{ $error }}</p>
-                                        @endforeach
-                                    </ul>
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                    <p class="alert alert-danger">{{ $error }}</p>
+                                    @endforeach
+                                </ul>
                                 @endif
 
 
@@ -60,7 +61,7 @@
                                     @csrf
 
                                     <div class="form-group">
-                                        <input type="email" class="form-control"  id="Email" name="email" placeholder="Adresse E-mail" required>
+                                        <input type="email" class="form-control" id="Email" name="email" placeholder="Adresse E-mail" required>
                                     </div>
                                     <div class="form-group">
                                         <input type="password" class="form-control" placeholder="Mot de passe" id="Password" name="password" required>
@@ -77,8 +78,8 @@
                                     <button class="btn login-form__btn submit w-100">Se Connecter</button>
                                 </form>
                                 <p class="mt-5 login-form__footer">Mot de passe oublié ? <a href="{{ route ('forgot-password') }}" class="text-primary">Cliquez</a> ici</p>
-                           <br>
-                           <center><small>All Rights Reserved by FONER. Designed and Developed by  <a href="https://www.begotech.com">Begotech Begotech</a> </small> </center>
+                                <br>
+                                <center><small>All Rights Reserved by FONER. Designed and Developed by <a href="https://www.begotech.com">Begotech Begotech</a> </small> </center>
                             </div>
                         </div>
                     </div>
@@ -102,9 +103,5 @@
     <script src="{{asset('js/gleek.js')}}"></script>
     <script src="{{asset('js/styleSwitcher.js')}}"></script>
 </body>
+
 </html>
-
-
-
-
-

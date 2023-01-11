@@ -33,24 +33,23 @@ class RepaymentController extends Controller
     public function store(StoreRepaymentRequest $request)
     {
         $validatedData = $request->validated();
+        $totalDue = 0;
         $minAmount = floatval(Repaymentamount::value('minamount'));
+        $totalPaid = floatval(Repayment::where('id_debtor', session()->get('id_debtor'))->sum('amount'));
+        $showLoan = Loan::where('id_debtor', session()->get('id_debtor'))
+            ->join('rates', 'loans.id_rate', '=', 'rates.id')
+            ->select('loans.amount', 'rates.value')->get();
 
-        if (floatval($request->amount) < $minAmount) {
+        foreach ($showLoan as $loans) {
+            $totalDue += floatval((($loans->amount * $loans->value) / 100) + $loans->amount);
+        }
+
+        if (floatval($request->amount) < $minAmount && floatval($request->amount) != ($totalDue - $totalPaid)) {
             return back()->withErrors(['amount' => 'Le montant minimal requis est de : ' . $minAmount]);
-        } else {
-            $totalDue = 0;
-            $totalPaid = floatval(Repayment::where('id_debtor', session()->get('id_debtor'))->sum('amount'));
-            $showLoan = Loan::where('id_debtor', session()->get('id_debtor'))
-                ->join('rates', 'loans.id_rate', '=', 'rates.id')
-                ->select('loans.amount', 'rates.value')->get();
+        }
 
-            foreach ($showLoan as $loans) {
-                $totalDue += floatval((($loans->amount * $loans->value) / 100) + $loans->amount);
-            }
-
-            if ($request->amount > ($totalDue - $totalPaid)) {
-                return back()->withErrors('Le montant entré est suppérieur au reste à payer.');
-            }
+        if ($request->amount > ($totalDue - $totalPaid)) {
+            return back()->withErrors('Le montant entré est suppérieur au reste à payer.');
         }
 
         if (Schedule::where('id_debtor', session()->get('id_debtor'))->doesntExist()) {
@@ -73,23 +72,22 @@ class RepaymentController extends Controller
     {
         $validatedData = $request->validated();
         $minAmount = floatval(Repaymentamount::value('minamount'));
+        $totalDue = 0;
+        $totalPaid = floatval(Repayment::where('id_debtor', $request->debtor)->sum('amount'));
+        $showLoan = Loan::where('id_debtor', $request->debtor)
+            ->join('rates', 'loans.id_rate', '=', 'rates.id')
+            ->select('loans.amount', 'rates.value')->get();
 
-        if (floatval($request->amount) < $minAmount) {
+        foreach ($showLoan as $loans) {
+            $totalDue += floatval((($loans->amount * $loans->value) / 100) + $loans->amount);
+        }
+
+        if (floatval($request->amount) < $minAmount && floatval($request->amount) != ($totalDue - $totalPaid)) {
             return back()->withErrors(['amount' => 'Le montant minimal requis est de : ' . $minAmount]);
-        } else {
-            $totalDue = 0;
-            $totalPaid = floatval(Repayment::where('id_debtor', $request->debtor)->sum('amount'));
-            $showLoan = Loan::where('id_debtor', $request->debtor)
-                ->join('rates', 'loans.id_rate', '=', 'rates.id')
-                ->select('loans.amount', 'rates.value')->get();
+        }
 
-            foreach ($showLoan as $loans) {
-                $totalDue += floatval((($loans->amount * $loans->value) / 100) + $loans->amount);
-            }
-
-            if ($request->amount > ($totalDue - $totalPaid)) {
-                return back()->withErrors('Le montant entré est suppérieur au reste à payer.');
-            }
+        if ($request->amount > ($totalDue - $totalPaid)) {
+            return back()->withErrors('Le montant entré est suppérieur au reste à payer.');
         }
 
         if (Schedule::where('id_debtor', session()->get('id_debtor'))->doesntExist()) {
@@ -111,7 +109,6 @@ class RepaymentController extends Controller
     public function show($id)
     {
         $totalDue = 0;
-        $totalPaid = 0;
         $showRepayment = Repayment::where('id_debtor', $id)->orderBy('repaymentdate', 'desc')->get();
         $totalPaid = floatval(Repayment::where('id_debtor', $id)->sum('amount'));
 
@@ -148,23 +145,23 @@ class RepaymentController extends Controller
     {
         $validatedData = $request->validated();
         $minAmount = floatval(Repaymentamount::value('minamount'));
+        $totalDue = 0;
+        $totalPaid = floatval(Repayment::where([['id', '<>', $id], ['id_debtor', '=', session()->get('id_debtor')]])
+            ->sum('amount'));
+        $showLoan = Loan::where('id_debtor', session()->get('id_debtor'))
+            ->join('rates', 'loans.id_rate', '=', 'rates.id')
+            ->select('loans.amount', 'rates.value')->get();
 
-        if (floatval($request->amount) < $minAmount) {
+        foreach ($showLoan as $loans) {
+            $totalDue += floatval((($loans->amount * $loans->value) / 100) + $loans->amount);
+        }
+
+        if (floatval($request->amount) < $minAmount && floatval($request->amount) != ($totalDue - $totalPaid)) {
             return back()->withErrors(['amount' => 'Le montant minimal requis est de : ' . $minAmount]);
-        } else {
-            $totalDue = 0;
-            $totalPaid = floatval(Repayment::where('id_debtor', session()->get('id_debtor'))->sum('amount'));
-            $showLoan = Loan::where('id_debtor', session()->get('id_debtor'))
-                ->join('rates', 'loans.id_rate', '=', 'rates.id')
-                ->select('loans.amount', 'rates.value')->get();
+        }
 
-            foreach ($showLoan as $loans) {
-                $totalDue += floatval((($loans->amount * $loans->value) / 100) + $loans->amount);
-            }
-
-            if ($request->amount > ($totalDue - $totalPaid)) {
-                return back()->withErrors('Le montant entré est suppérieur au reste à payer.');
-            }
+        if ($request->amount > ($totalDue - $totalPaid)) {
+            return back()->withErrors('Le montant entré est suppérieur au reste à payer.');
         }
 
         Repayment::whereId($id)->update([

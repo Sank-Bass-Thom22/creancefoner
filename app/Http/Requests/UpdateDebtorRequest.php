@@ -33,7 +33,7 @@ class UpdateDebtorRequest extends FormRequest
             'email' => ['required', 'string', 'email', 'max:50', Rule::unique('debtors')->ignore($email, 'email')],
             'telephone' => ['required', 'string', 'max:25', Rule::unique('debtors')->ignore($telephone, 'telephone')],
             'codefoner' => ['required', 'string', 'max:40'],
-            'serviceindex' => ['required', 'string', 'max:255'],
+            'serviceindex' => ['nullable', 'string', 'max:255'],
         ];
     }
 }

@@ -18,7 +18,7 @@ class DebtorController extends Controller
     {
         $allDebtor = Debtor::where('role', 'Debtor')
             ->orderBy('firstname', 'ASC')->paginate(10);
-            $allService = Debtor::where('role', 'Employer')
+        $allService = Debtor::where('role', 'Employer')
             ->orderBy('servicename', 'ASC')->get();
         $message = 'Il n\'y a aucun redevable enregistré.';
 
@@ -27,8 +27,8 @@ class DebtorController extends Controller
 
     public function quick()
     {
-                $debtors = Debtor::where('role', 'Debtor')->orderBy('firstname', 'ASC')->get();
-                $allBank = Bank::orderBy('name', 'ASC')->get();
+        $debtors = Debtor::where('role', 'Debtor')->orderBy('firstname', 'ASC')->get();
+        $allBank = Bank::orderBy('name', 'ASC')->get();
 
         return view('administrator.quick', compact(['debtors', 'allBank']));
     }
@@ -51,6 +51,11 @@ class DebtorController extends Controller
     {
         $credentialsValidated = $request->validated();
         $password = Str::random(8);
+        if (empty($request->debtorcollected)) {
+            $debtorCollected = false;
+        } else {
+            $debtorCollected = true;
+        }
 
         $id_debtor = Debtor::insertGetId([
             'firstname' => ucwords(strtolower($request->firstname)),
@@ -59,6 +64,7 @@ class DebtorController extends Controller
             'telephone' => $request->telephone,
             'codefoner' => $request->codefoner,
             'debtorindex' => $request->serviceindex,
+            'debtorcollected' => $debtorCollected,
             'password' => Hash::make($password),
             'role' => 'Debtor',
         ]);
@@ -84,6 +90,11 @@ class DebtorController extends Controller
     public function update(UpdateDebtorRequest $request, $id)
     {
         $validatedData = $request->validated();
+        if (empty($request->debtorcollected)) {
+            $debtorCollected = false;
+        } else {
+            $debtorCollected = true;
+        }
 
         Debtor::whereId($id)->update([
             'firstname' => ucwords(strtolower($request->firstname)),
@@ -92,7 +103,9 @@ class DebtorController extends Controller
             'telephone' => $request->telephone,
             'codefoner' => $request->codefoner,
             'debtorindex' => $request->serviceindex,
+            'debtorcollected' => $debtorCollected,
         ]);
+
         return redirect()->route('alldebtor')->with('success', 'Informations modifiées avec succès! :-)');
     }
 
