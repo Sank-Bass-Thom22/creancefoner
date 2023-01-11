@@ -32,6 +32,10 @@
                     </tr>
                 </thead>
                 <tbody>
+                            @php
+                                $total=0;
+                                
+                            @endphp
                 @forelse ($myEmployes as $employes)
                 <tr>
                         <td>{{ $loop->index + 1}} </td>
@@ -50,9 +54,12 @@
                             @endphp
                             
                             @endforeach
-                             @money($totalDue) Francs CFA
 
-
+                            
+                            @money($totalDue) Francs CFA
+                            @php
+                            $total+=$totalDue;
+                            @endphp
                         </td>
                         <td>
                             <a href="{{ route ('myemployeloans', $employes->id) }}">
@@ -66,9 +73,15 @@
                         </tr>
                     @empty
                     <tr>
-                        <td colspan="5"></td>
+                        <td colspan="7"></td>
                     </tr>
                     @endforelse
+
+                    <tr>
+                        <td colspan="5">Total</td>
+                        <td >  @money($total) Francs CFA</td>
+                        <td ></td>
+                    </tr>
                 </tbody>
             </table>
         </div>

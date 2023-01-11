@@ -36,7 +36,7 @@
                     <hr>
 
                     <div class="">
-                        <a href="{{ route('dashboard') }}">FERMER</a>
+                        <a href="{{ route('dashboard') }}" class="btn btn-danger">Retour</a>
                     </div>
                 </section>
             </div>

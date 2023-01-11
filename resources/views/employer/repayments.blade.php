@@ -69,7 +69,7 @@
                     <hr>
 
                     <div class="employe-box-close">
-                        <a href="{{ route('myemployeloans', $id) }}">FERMER</a>
+                        <a href="{{ route('myemployeloans', $id) }}" class="btn btn-danger">Retour</a>
                     </div>
                 </section>
             </div>

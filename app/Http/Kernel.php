@@ -68,5 +68,8 @@ class Kernel extends HttpKernel
         // 'simpleadmin' => \App\Http\Middleware\SimpleAdmin::class,
         'employer' => \App\Http\Middleware\Employer::class,
         'debtor' => \App\Http\Middleware\Debtor::class,
+        'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+        'permission' => \App\Http\Middleware\PermissionMiddleware::class,
+        'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
     ];
 }

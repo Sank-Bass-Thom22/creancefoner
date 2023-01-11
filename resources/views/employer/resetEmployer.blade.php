@@ -50,7 +50,7 @@
                 <hr>
 
                 <div class="employer-box-close">
-                    <a href="{{ route('myprofile') }}" class="">FERMER</a>
+                    <a href="{{ route('myprofile') }}" class="btn btn-danger">Retour</a>
                 </div>
             </div>
             <!-- /.form-box -->

@@ -1,12 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RolesController;
+use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\Administrator\BankController;
 use App\Http\Controllers\Administrator\LoanController;
 use App\Http\Controllers\Administrator\RateController;
+
 use App\Http\Controllers\Administrator\DebtorController;
 use App\Http\Controllers\Administrator\DocumentController;
-
 use App\Http\Controllers\Administrator\EmployerController;
 use App\Http\Controllers\Administrator\ResearchController;
 use App\Http\Controllers\Administrator\ScheduleController;
@@ -14,8 +16,8 @@ use App\Http\Controllers\Administrator\RepaymentController;
 use App\Http\Controllers\Administrator\AdministratorController;
 use App\Http\Controllers\Administrator\RepaymentAmountController;
 
-Route::middleware('auth')->group(function () {
-    Route::middleware('superadmin')->group(function () {
+//Route::group(['middleware' => ['auth', 'permission']], function() {
+ 
         Route::get('alladminsup', [AdministratorController::class, 'index'])
             ->name('alladminsup');
 
@@ -62,11 +64,9 @@ Route::middleware('auth')->group(function () {
 
         Route::get('destroyrepaymentamountsup/{id}', [RepaymentAmountController::class, 'destroy'])
             ->name('destroyrepaymentamountsup');
-    });
-});
 
-Route::middleware('auth')->group(function () {
-    Route::middleware('superandsimple')->group(function () {
+  
+
         Route::get('editadministrator/{id}', [AdministratorController::class, 'edit'])
             ->name('editadministrator');
 
@@ -242,5 +242,14 @@ Route::middleware('auth')->group(function () {
 
         Route::get('destroybank/{id}', [BankController::class, 'destroy'])
             ->name('destroybank');
-    });
-});
+
+
+
+            Route::resource('roles', RolesController::class);
+            Route::resource('permissions', PermissionsController::class);
+    
+   // });
+
+
+
+

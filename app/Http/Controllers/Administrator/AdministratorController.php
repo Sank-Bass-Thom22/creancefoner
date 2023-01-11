@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Administrator;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 use App\Models\Debtor\Debtor;
+use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Requests\StoreAdministratorRequest;
 use App\Http\Requests\UpdateAdministratorRequest;
-use App\Http\Requests\UpdatePasswordRequest;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 
 class AdministratorController extends Controller
 {
@@ -17,7 +18,7 @@ class AdministratorController extends Controller
     {
         $currentAdminId = Auth::user()->id;
 
-        $allAdministrator = Debtor::whereIn('role', ['SuperAdmin', 'SimpleAdmin'])
+        $allAdministrator = Debtor::whereNotIn('role', ['Employer', 'Debtor'])
             ->where('id', '<>', $currentAdminId)
             ->orderBy('firstname', 'ASC')->paginate(10);
 
@@ -26,7 +27,9 @@ class AdministratorController extends Controller
 
     public function create()
     {
-        return view('administrator.registerAdmin');
+      
+        $roles = Role::latest()->get();
+        return view('administrator.registerAdmin', compact('roles'));
     }
 
     public function store(StoreAdministratorRequest $request)
@@ -34,14 +37,17 @@ class AdministratorController extends Controller
         $credentialsValidated = $request->validated();
         $password = Str::random(8);
 
-        Debtor::create([
+        $user= Debtor::create([
             'firstname' => ucwords(strtolower($request->firstname)),
             'lastname' => ucwords(strtolower($request->lastname)),
             'email' => strtolower($request->email),
             'telephone' => $request->telephone,
             'password' => Hash::make($password),
-            'role' => $request->role,
         ]);
+
+
+        $user->assignRole([$request->role]);
+       
 
         return redirect()->route('registeradminsup')->with('success', 'Succès! :-) /Password : ' . $password);
     }
@@ -55,7 +61,13 @@ class AdministratorController extends Controller
     {
         $administratorProfile = Debtor::find($id);
 
-        return view('administrator.editAdministrator', compact('administratorProfile'));
+        return view('administrator.editAdministrator', [
+            'administratorProfile' => $administratorProfile,
+            'userRole' => $administratorProfile->roles->pluck('name')->toArray(),
+            'roles' => Role::latest()->get()
+        ]);
+
+       
     }
 
     public function update(UpdateAdministratorRequest $request, $id)
@@ -67,8 +79,11 @@ class AdministratorController extends Controller
             'lastname' => ucwords(strtolower($request->lastname)),
             'email' => strtolower($request->email),
             'telephone' => $request->telephone,
-            'role' => $request->role,
         ]);
+
+        $user=Debtor::whereId($id)->first();
+
+        $user->syncRoles($request->role);
 
         if ($id == Auth::user()->id) {
             return redirect()->route('myprofile')->with('success', 'Informations modifiées avec succès! :-)');
@@ -106,7 +121,7 @@ class AdministratorController extends Controller
             'password' => Hash::make($newPassword),
         ]);
 
-        return redirect()->route('showadminsup', $id)->with('success', 'Succès! Le nouveau mot de passe est : ' . $newPassword);
+        return redirect()->route('alladminsup', $id)->with('success', 'Succès! Le nouveau mot de passe est : ' . $newPassword);
     }
 
     public function destroy($id)

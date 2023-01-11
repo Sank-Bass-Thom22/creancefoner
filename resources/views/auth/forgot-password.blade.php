@@ -28,6 +28,9 @@
         Preloader end
     ********************-->
 
+
+
+
     <div class="login-form-bg h-100">
         <div class="container h-100">
             <div class="row justify-content-center h-100">
@@ -35,36 +38,46 @@
                     <div class="form-input-content">
                         <div class="card login-form mb-0">
                             <div class="card-body pt-5">
-                            @if ($errors->any())
+                              
+                                <center>
+                                    <img src="{{asset('images/logo.jpg')}}" alt="" class="img-fluid mb-4">
+                                </center>
+                                <a class="text-center" href=""> <h4>Réinitialisation mot de passe</h4></a>
+
+                                @if ($errors->any())
                                     <ul>
                                         @foreach ($errors->all() as $error)
                                        <p class="alert alert-danger">{{ $error }}</p>
                                         @endforeach
                                     </ul>
                                 @endif
-                                <a class="text-center" href="index.html"> <h4>Réinitialisation mot de passe</h4></a>
 
-        <form method="POST" action="{{ route('forgot-password') }}">
-            @csrf
 
-            <!-- Email Address -->
-            <div class="form-group">
-                <label for="email">Adresse email : </label>
+                                <form method="POST" action="{{ route('forgot-password') }}">
+                                    @csrf
 
-                <input id="email" class="form-control" type="email" name="email" required autofocus />
-            </div>
+                                    <!-- Email Address -->
+                                    <div class="form-group">
+                                        <label for="email">Adresse email </label>
 
-            <div class="flex items-center justify-end mt-4">
-                <button type="submit">Lien de réinitialisation</button>
-            </div>
-        </form>
-        </div>
+                                        <input id="email" class="form-control" type="email" name="email" required autofocus />
+                                    </div>
+
+                                    <div class="flex items-center justify-end mt-4">
+                                        <button type="submit" class="btn btn-primary">Lien de réinitialisation</button>
+                                    </div>
+                                </form>
+                                <p class="mt-5 login-form__footer">Se connecter ? <a href="{{ route ('dashboard') }}" class="text-primary">Cliquez</a> ici</p>
+                           <br>
+                           <center><small>All Rights Reserved by FONER. Designed and Developed by  <a href="https://www.begotech.com">Begotech Begotech</a> </small> </center>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!--**********************************
         Scripts

@@ -92,7 +92,8 @@
             <div class="container-fluid mt-3">
 
             @yield('content')
-
+           
+            
             </div>
             <!-- #/ container -->
         </div>
@@ -146,6 +147,7 @@
 
     <script src="{{asset('./js/dashboard/dashboard-1.js')}}"></script>
 
+    @yield('scripts')
 </body>
 
 </html>

@@ -18,10 +18,10 @@
                                 </p>
 
                                 <p class="showdocument-box-success">
-                    @if (session()->get('success'))
-                <div class="alert alert-success">{{ session()->get('success') }}</div>
-                @endif
-                </p>
+                                    @if (session()->get('success'))
+                                <div class="alert alert-success">{{ session()->get('success') }}</div>
+                                @endif
+                                </p>
 
                                 <a href="{{ route('dashboard') }}" class="btn btn-danger btn-lg float-right" style="margin: 15px;">Retour</a>
                                 <a href="{{ route ('registeradminsup') }}" class="btn btn-primary btn-lg float-right" style="margin: 15px;" >Nouveau</a>
@@ -33,7 +33,7 @@
                                                 <th>Nom & prénom (s)</th>
                                                 <th>Email</th>
                                                 <th>Téléphone</th>
-                                                <th>Responsabilité</th>
+                                                 <th>Rôle</th>
                                                 <th >Action</th>
                                             </tr>
                                         </thead>
@@ -45,9 +45,13 @@
                                                 <td>{{ $administrators->firstname }} {{ $administrators->lastname }}</td>
                                                 <td>{{ $administrators->email }}  </td>
                                                 <td>{{ $administrators->telephone }} </td>
-                                                <td>{{ $administrators->role }}</td>
                                                 <td>
-                                                @if (Auth::user()->role === "SuperAdmin")
+                                                @foreach($administrators->roles as $role)
+                                                   {{ $role->name }}
+                                                @endforeach
+                                                </td>
+                                                <td>
+                                              
                                                 <a href="{{ route ('editadministrator', $administrators->id) }}" title="Modifier">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -66,7 +70,6 @@
                                                     </svg>
                                                 
                                                 </a>
-                                                @endif
                                                 </td>
 
                                             </tr>
