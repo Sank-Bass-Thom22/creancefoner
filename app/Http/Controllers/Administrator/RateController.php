@@ -12,7 +12,7 @@ class RateController extends Controller
 {
     public function index()
     {
-        $allRate = Rate::orderBy('validity', 'desc')->paginate(10);
+        $allRate = Rate::orderBy('id', 'DESC')->paginate(10);
 
         return view('administrator.allRate', compact('allRate'));
     }
@@ -26,10 +26,13 @@ class RateController extends Controller
     {
         $validatedData = $request->validated();
 
+        if (Rate::where('validity', $request->validity)->exists()) {
+            return back()->withErrors('La validité choisie est déjà enregistré avec un autre taux. Veuillez choisir une autre validité.');
+        }
+
         Rate::create([
             'value' => floatval($request->value),
             'validity' => $request->validity,
-            'description' => $request->description,
         ]);
 
         return redirect()->route('allrate')->with('success', 'Taux enregistré avec succès ! :-)');
@@ -45,11 +48,13 @@ class RateController extends Controller
     public function update(UpdateRateRequest $request, $id)
     {
         $validatedData = $request->validated();
+        if (Rate::where([['id', '<>', $id], ['validity', $request->validity]])->exists()) {
+            return back()->withErrors('La validité choisie est déjà enregistré avec un autre taux. Veuillez choisir une autre validité.');
+        }
 
         Rate::whereId($id)->update([
             'value' => floatval($request->value),
             'validity' => $request->validity,
-            'description' => $request->description,
         ]);
 
         return redirect()->route('allrate')->with('success', 'Taux modifié avec succès ! :-)');
@@ -59,7 +64,7 @@ class RateController extends Controller
     {
         $singleRate = Rate::find($id);
 
-        if (Loan::whete('id_rate', $singleRate->id)->exists()) {
+        if (Loan::where('id_rate', $singleRate->id)->exists()) {
             return back()->with('success', 'Ce taux est déjà appliqué à un prêt.');
         }
 

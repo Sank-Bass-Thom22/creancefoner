@@ -26,8 +26,8 @@ class UpdateLoanRequest extends FormRequest
         return [
             'amount' => ['required', 'numeric'],
             'academicyear' => ['required'],
-           
-            'rate' => ['required', 'int'],
+
+            // 'rate' => ['required', 'int'],
         ];
     }
 }

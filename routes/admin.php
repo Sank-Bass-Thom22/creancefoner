@@ -17,7 +17,7 @@ use App\Http\Controllers\Administrator\AdministratorController;
 use App\Http\Controllers\Administrator\RepaymentAmountController;
 
 //Route::group(['middleware' => ['auth', 'permission']], function() {
- 
+
         Route::get('alladminsup', [AdministratorController::class, 'index'])
             ->name('alladminsup');
 
@@ -47,7 +47,7 @@ use App\Http\Controllers\Administrator\RepaymentAmountController;
         Route::post('updateratesup/{id}', [RateController::class, 'update'])
             ->name('updateratesup');
 
-        Route::post('dest.royratesup/{id}', [RateController::class, 'destroy'])
+        Route::get('dest.royratesup/{id}', [RateController::class, 'destroy'])
             ->name('destroyratesup');
 
         Route::get('createrepaymentamountsup', [RepaymentAmountController::class, 'create'])
@@ -65,7 +65,7 @@ use App\Http\Controllers\Administrator\RepaymentAmountController;
         Route::get('destroyrepaymentamountsup/{id}', [RepaymentAmountController::class, 'destroy'])
             ->name('destroyrepaymentamountsup');
 
-  
+
 
         Route::get('editadministrator/{id}', [AdministratorController::class, 'edit'])
             ->name('editadministrator');
@@ -247,7 +247,7 @@ use App\Http\Controllers\Administrator\RepaymentAmountController;
 
             Route::resource('roles', RolesController::class);
             Route::resource('permissions', PermissionsController::class);
-    
+
    // });
 
 

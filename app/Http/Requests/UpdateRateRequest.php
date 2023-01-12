@@ -25,8 +25,7 @@ class UpdateRateRequest extends FormRequest
     {
         return [
             'value' => ['required', 'numeric'],
-            'validity' => ['required', 'date'],
-            'description' => ['nullable', 'string'],
+            'validity' => ['nullable', 'string'],
         ];
     }
 }

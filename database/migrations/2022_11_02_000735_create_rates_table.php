@@ -17,8 +17,7 @@ class CreateRatesTable extends Migration
             $table->id();
             $table->index('id')->unsigned();
             $table->float('value');
-            $table->date('validity');
-            $table->text('description')->nullable();
+            $table->string('validity')->nullable();
             $table->timestamps();
         });
     }

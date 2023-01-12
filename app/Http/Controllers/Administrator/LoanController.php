@@ -46,12 +46,17 @@ class LoanController extends Controller
     public function store(StoreLoanRequest $request)
     {
         $validatedData = $request->validated();
+        $rate = Rate::where('validity', '<=', $request->academicyear)
+        ->orWhere('validity', '=', '')
+        ->select('id')
+        ->orderBy('id', 'DESC')
+        ->first();
 
         Loan::create([
             'amount' => floatval($request->amount),
             'academicyear' => $request->academicyear,
-            'id_rate' => intval($request->rate),
-            'id_debtor' => intval(session()->get('id_debtor')),
+            'id_rate' => $rate->id,
+            'id_debtor' => session()->get('id_debtor'),
         ]);
 
         return redirect()->route('createloan')->with('success', 'Prêt enregistré avec succès ! :-)');
@@ -81,12 +86,16 @@ class LoanController extends Controller
     public function update(UpdateLoanRequest $request, $id)
     {
         $validatedData = $request->validated();
+        $rate = Rate::where('validity', '<=', $request->academicyear)
+        ->orWhere('validity', '=', '')
+        ->select('id')
+        ->orderBy('id', 'DESC')
+        ->first();
 
         Loan::whereId($id)->update([
             'amount' => floatval($request->amount),
             'academicyear' => $request->academicyear,
-          
-            'id_rate' => intval($request->rate),
+            'id_rate' => $rate->id,
         ]);
 
         $id_debtor = Loan::whereId($id)->value('id_debtor');

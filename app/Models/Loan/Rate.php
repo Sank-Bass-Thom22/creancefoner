@@ -13,7 +13,6 @@ class Rate extends Model
     protected $fillable = [
         'value',
         'validity',
-        'description',
     ];
 
     public function loans()

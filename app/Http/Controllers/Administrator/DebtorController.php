@@ -51,11 +51,7 @@ class DebtorController extends Controller
     {
         $credentialsValidated = $request->validated();
         $password = Str::random(8);
-        if (empty($request->debtorcollected)) {
-            $debtorCollected = false;
-        } else {
-            $debtorCollected = true;
-        }
+        $request->debtorcollected == null ? $debtorCollected = false : $debtorCollected = true;
 
         $id_debtor = Debtor::insertGetId([
             'firstname' => ucwords(strtolower($request->firstname)),
@@ -90,11 +86,7 @@ class DebtorController extends Controller
     public function update(UpdateDebtorRequest $request, $id)
     {
         $validatedData = $request->validated();
-        if (empty($request->debtorcollected)) {
-            $debtorCollected = false;
-        } else {
-            $debtorCollected = true;
-        }
+        $request->debtorcollected == null ? $debtorCollected = false : $debtorCollected = true;
 
         Debtor::whereId($id)->update([
             'firstname' => ucwords(strtolower($request->firstname)),
