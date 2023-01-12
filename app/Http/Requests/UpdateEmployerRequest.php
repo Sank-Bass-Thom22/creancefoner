@@ -33,7 +33,7 @@ class UpdateEmployerRequest extends FormRequest
             'servicename' => ['required', 'string', 'max:50'],
             'email' => ['required', 'string', 'email', 'max:50', Rule::unique('debtors')->ignore($email, 'email')],
             'telephone' => ['required', 'string', 'max:25', Rule::unique('debtors')->ignore($telephone, 'telephone')],
-            'servicelocation => ['nullable', 'string', 'max:255'],
+            'servicelocation' => ['nullable', 'string', 'max:255'],
             'firstname' => ['nullable', 'string', 'max:50'],
             'lastname' => ['nullable', 'string', 'max:25'],
             'emailDRH' => ['nullable', 'string', 'email', 'max:50', Rule::unique('debtors')->ignore($emailDRH, 'emailDRH')],
