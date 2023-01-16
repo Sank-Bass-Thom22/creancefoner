@@ -49,7 +49,7 @@
                 </div>
                 <div class="form-group ">
                     <label for="Serviceindex">Lieu de travail </label>
-                    <select id="Serviceindex" class="form-control" name="serviceindex">
+                    <select id="Serviceindex" class="form-control selectpicker"  data-live-search="true" name="serviceindex">
                         <option></option>
                         @forelse($allServices as $services)
                         <option value="{{ $services->serviceindex }}">{{ $services->servicename }}</option>
@@ -62,7 +62,7 @@
                 <div class="form-group">
                     <input type="checkbox" id="Debtorcollected" name="debtorcollected" />
                     <label for="Debtorcollected">
-                        Redevable mis en recouvrement
+                        En recouvrement
                     </label>
                 </div>
 

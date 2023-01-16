@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Administrator;
 
-use App\Http\Controllers\Controller;
 use App\Models\Loan\Loan;
 use App\Models\Loan\Rate;
-use App\Models\Loan\Repayment;
-use App\Models\Debtor\Debtor;
 use Illuminate\Http\Request;
+use App\Models\Debtor\Debtor;
+use App\Models\Loan\Repayment;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreLoanRequest;
 use App\Http\Requests\UpdateLoanRequest;
 
@@ -45,11 +46,12 @@ class LoanController extends Controller
 
     public function store(StoreLoanRequest $request)
     {
+       
         $validatedData = $request->validated();
-        $rate = Rate::where('validity', '<=', $request->academicyear)
+        $rate = Rate::where(DB::raw('substr(validity, 0, 4)'), '<=', substr($request->academicyear,0,4))
         ->orWhere('validity', '=', '')
         ->select('id')
-        ->orderBy('id', 'DESC')
+        ->orderBy(DB::raw('substr(validity, 0, 4)'), 'DESC')
         ->first();
 
         Loan::create([
@@ -86,10 +88,11 @@ class LoanController extends Controller
     public function update(UpdateLoanRequest $request, $id)
     {
         $validatedData = $request->validated();
-        $rate = Rate::where('validity', '<=', $request->academicyear)
+       
+        $rate = Rate::where(DB::raw('substr(validity, 0, 4)'), '<=', substr($request->academicyear,0,4))
         ->orWhere('validity', '=', '')
         ->select('id')
-        ->orderBy('id', 'DESC')
+        ->orderBy(DB::raw('substr(validity, 0, 4)'), 'DESC')
         ->first();
 
         Loan::whereId($id)->update([
