@@ -46,16 +46,31 @@ class LoanController extends Controller
     public function store(StoreLoanRequest $request)
     {
         $validatedData = $request->validated();
-        $rate = Rate::where('validity', '<=', $request->academicyear)
-        ->orWhere('validity', '=', '')
-        ->select('id')
-        ->orderBy('id', 'DESC')
-        ->first();
+        $defaultRate = 0;
+        $rate = 0;
+        $allRate = Rate::orderBy('validity', 'DESC')->get();
+
+        foreach ($allRate as $rates) {
+            $ratevar1 = intval(substr($request->academicyear, 0, 4));
+            $ratevar2 = intval(substr($rates->validity, 0, 4));
+
+            if ($ratevar2 == 0) {
+                $defaultRate = $rates->id;
+            } else {
+                if ($ratevar1 <= $ratevar2) {
+                    $rate = $rates->id;
+                }
+            }
+        }
+
+        if ($rate == 0) {
+            $rate = $defaultRate;
+        }
 
         Loan::create([
             'amount' => floatval($request->amount),
             'academicyear' => $request->academicyear,
-            'id_rate' => $rate->id,
+            'id_rate' => $rate,
             'id_debtor' => session()->get('id_debtor'),
         ]);
 
@@ -87,10 +102,10 @@ class LoanController extends Controller
     {
         $validatedData = $request->validated();
         $rate = Rate::where('validity', '<=', $request->academicyear)
-        ->orWhere('validity', '=', '')
-        ->select('id')
-        ->orderBy('id', 'DESC')
-        ->first();
+            ->orWhere('validity', '=', '')
+            ->select('id')
+            ->orderBy('id', 'DESC')
+            ->first();
 
         Loan::whereId($id)->update([
             'amount' => floatval($request->amount),

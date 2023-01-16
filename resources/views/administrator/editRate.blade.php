@@ -34,7 +34,8 @@
                 <div class="form-group ">
                     <label for="Validity">Taux valide jusqu'en : </label>
                     <select id="Validity" class="form-control" name="validity">
-                        <option value="{{ $editRate->validity }}">{{ $editRate->validity }}</option>
+                        <option value=""></option>
+                        <option value="{{ $editRate->validity }}" selected>{{ $editRate->validity }}</option>
                         @for($year=date('Y'); $year>2000; $year--)
                         <option value="{{ $year-1 }}-{{ $year }}">{{ $year-1 }}-{{ $year }}</option>
                         @endfor
