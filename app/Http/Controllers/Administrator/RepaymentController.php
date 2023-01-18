@@ -43,14 +43,15 @@ class RepaymentController extends Controller
         foreach ($showLoan as $loans) {
             $totalDue += floatval((($loans->amount * $loans->value) / 100) + $loans->amount);
         }
+        if ($request->amount > ($totalDue - $totalPaid)) {
+            return back()->withErrors('Le montant entré est suppérieur au reste à payer.');
+        }
 
         if (floatval($request->amount) < $minAmount && floatval($request->amount) != ($totalDue - $totalPaid)) {
             return back()->withErrors(['amount' => 'Le montant minimal requis est de : ' . $minAmount]);
         }
 
-        if ($request->amount > ($totalDue - $totalPaid)) {
-            return back()->withErrors('Le montant entré est suppérieur au reste à payer.');
-        }
+
 
         if (Schedule::where('id_debtor', session()->get('id_debtor'))->doesntExist()) {
             return back()->withErrors('Veuillez d\'abord définir un échéancier de remboursement');

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Administrator;
 
-use App\Http\Controllers\Controller;
 use App\Models\Loan\Loan;
 use App\Models\Loan\Rate;
-use App\Models\Loan\Repayment;
-use App\Models\Debtor\Debtor;
 use Illuminate\Http\Request;
+use App\Models\Debtor\Debtor;
+use App\Models\Loan\Repayment;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreLoanRequest;
 use App\Http\Requests\UpdateLoanRequest;
 
@@ -45,27 +46,13 @@ class LoanController extends Controller
 
     public function store(StoreLoanRequest $request)
     {
+       
         $validatedData = $request->validated();
-        $defaultRate = 0;
-        $rate = 0;
-        $allRate = Rate::orderBy('validity', 'DESC')->get();
-
-        foreach ($allRate as $rates) {
-            $ratevar1 = intval(substr($request->academicyear, 0, 4));
-            $ratevar2 = intval(substr($rates->validity, 0, 4));
-
-            if ($ratevar2 == 0) {
-                $defaultRate = $rates->id;
-            } else {
-                if ($ratevar1 <= $ratevar2) {
-                    $rate = $rates->id;
-                }
-            }
-        }
-
-        if ($rate == 0) {
-            $rate = $defaultRate;
-        }
+        $rate = Rate::where(DB::raw('substr(validity, 0, 4)'), '<=', substr($request->academicyear,0,4))
+        ->orWhere('validity', '=', '')
+        ->select('id')
+        ->orderBy(DB::raw('substr(validity, 0, 4)'), 'DESC')
+        ->first();
 
         Loan::create([
             'amount' => floatval($request->amount),
@@ -101,11 +88,12 @@ class LoanController extends Controller
     public function update(UpdateLoanRequest $request, $id)
     {
         $validatedData = $request->validated();
-        $rate = Rate::where('validity', '<=', $request->academicyear)
-            ->orWhere('validity', '=', '')
-            ->select('id')
-            ->orderBy('id', 'DESC')
-            ->first();
+       
+        $rate = Rate::where(DB::raw('substr(validity, 0, 4)'), '<=', substr($request->academicyear,0,4))
+        ->orWhere('validity', '=', '')
+        ->select('id')
+        ->orderBy(DB::raw('substr(validity, 0, 4)'), 'DESC')
+        ->first();
 
         Loan::whereId($id)->update([
             'amount' => floatval($request->amount),
