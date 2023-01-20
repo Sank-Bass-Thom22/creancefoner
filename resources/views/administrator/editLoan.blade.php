@@ -40,6 +40,7 @@
                 <div class="form-group ">
                     <label for="Academicyear">Année académique : </label>
                     <select id="Academicyear" class="form-control" name="academicyear" required>
+                        <option value="{{ $debtorLoan->academicyear }}">{{ $debtorLoan->academicyear }}</option>
                         @for($year=date('Y'); $year>2000; $year--)
                         <option value="{{ $year-1 }}-{{ $year }}">{{ $year-1 }}-{{ $year }}</option>
                         @endfor

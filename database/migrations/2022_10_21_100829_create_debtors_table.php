@@ -23,7 +23,7 @@ class CreateDebtorsTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('telephone', 25)->unique();
             $table->string('codefoner', 40)->unique()->nullable();
-            $table->string('role', 11);
+            $table->string('role', 10)->nullable();
             $table->string('serviceindex')->nullable();
             $table->string('debtorindex')->nullable();
             $table->string('password')->nullable();

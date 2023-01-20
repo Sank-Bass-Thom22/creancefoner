@@ -6,7 +6,6 @@ use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\Administrator\BankController;
 use App\Http\Controllers\Administrator\LoanController;
 use App\Http\Controllers\Administrator\RateController;
-
 use App\Http\Controllers\Administrator\DebtorController;
 use App\Http\Controllers\Administrator\DocumentController;
 use App\Http\Controllers\Administrator\EmployerController;
@@ -16,8 +15,9 @@ use App\Http\Controllers\Administrator\RepaymentController;
 use App\Http\Controllers\Administrator\AdministratorController;
 use App\Http\Controllers\Administrator\RepaymentAmountController;
 
-//Route::group(['middleware' => ['auth', 'permission']], function() {
+// Route::group(['middleware' => ['auth', 'permission']], function() {
 
+    Route::middleware('auth')->group(function () {
         Route::get('alladminsup', [AdministratorController::class, 'index'])
             ->name('alladminsup');
 
@@ -64,8 +64,6 @@ use App\Http\Controllers\Administrator\RepaymentAmountController;
 
         Route::get('destroyrepaymentamountsup/{id}', [RepaymentAmountController::class, 'destroy'])
             ->name('destroyrepaymentamountsup');
-
-
 
         Route::get('editadministrator/{id}', [AdministratorController::class, 'edit'])
             ->name('editadministrator');
@@ -248,7 +246,7 @@ use App\Http\Controllers\Administrator\RepaymentAmountController;
             Route::resource('roles', RolesController::class);
             Route::resource('permissions', PermissionsController::class);
 
-   // });
+    });
 
 
 

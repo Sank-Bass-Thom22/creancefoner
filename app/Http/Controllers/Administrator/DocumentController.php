@@ -25,6 +25,7 @@ class DocumentController extends Controller
     public function store(StoreDocumentRequest $request)
     {
         $validatedData = $request->validated();
+        // dd($request->document);
 
         $filename = $request->document->getClientOriginalName();
         $filelink = $request->document->storeAs('USEFUL-DOCUMENTS', $filename, 'public');

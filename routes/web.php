@@ -22,12 +22,6 @@ Route::get('dashboard', function () {
     $role = Auth::user()->role;
 
     switch ($role) {
-        case 'SuperAdmin':
-            return view('administrator.dashboardSup');
-            break;
-        case 'SimpleAdmin':
-            return view('administrator.dashboardSim');
-            break;
         case 'Employer':
             // return view('employer.dashboard');
             return redirect()->route('emp-repporting');
@@ -36,7 +30,7 @@ Route::get('dashboard', function () {
             // return view('debtor.dashboard');
             return redirect()->route('deb-repporting');
         default:
-             return view('administrator.dashboardSim');
+             return view('administrator.dashboard');
     }
 })->middleware(['auth'])->name('dashboard');
 

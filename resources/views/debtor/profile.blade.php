@@ -36,11 +36,15 @@
 
                     <p>
                     <h2>Service</h2>
+                    @if ($service != null)
                     <ul>
                         Nom de la structure : {{ $service->servicename }}<br />
                         Adresse E-mail : {{ $service->email }}<br />
-                        Numéro de téléphone : +226 {{ $service->telephone }}
+                        Numéro de téléphone : {{ $service->telephone }}
                     </ul>
+                    @else
+                    <div>Aucune structure enregistrée</div>
+                    @endif
                     </p>
 
                     <hr>

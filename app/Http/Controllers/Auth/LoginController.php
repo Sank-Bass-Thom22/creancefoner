@@ -45,13 +45,13 @@ class LoginController extends Controller
 
         $userProfile = Debtor::find($id);
 
-        if ($role == 'SuperAdmin' or $role == 'SimpleAdmin') {
-            return view('administrator.profile', compact('userProfile'));
-        } elseif ($role == 'Employer') {
+        if ($role == 'Employer') {
             return view('employer.profile', compact('userProfile'));
-        } else {
-            $service = Debtor::where('serviceindex', $userProfile->debtorindex)->first();
+        } elseif ($role == 'Debtor') {
+            $service = Debtor::where([['role', 'Employer'], ['serviceindex', $userProfile->debtorindex]])->first();
             return view('debtor.profile', compact(['userProfile', 'service']));
+        } else {
+            return view('administrator.profile', compact('userProfile'));
         }
     }
 }

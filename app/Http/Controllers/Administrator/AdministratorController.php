@@ -27,7 +27,7 @@ class AdministratorController extends Controller
 
     public function create()
     {
-      
+
         $roles = Role::latest()->get();
         return view('administrator.registerAdmin', compact('roles'));
     }
@@ -37,7 +37,7 @@ class AdministratorController extends Controller
         $credentialsValidated = $request->validated();
         $password = Str::random(8);
 
-        $user= Debtor::create([
+        $user = Debtor::create([
             'firstname' => ucwords(strtolower($request->firstname)),
             'lastname' => ucwords(strtolower($request->lastname)),
             'email' => strtolower($request->email),
@@ -47,7 +47,7 @@ class AdministratorController extends Controller
 
 
         $user->assignRole([$request->role]);
-       
+
 
         return redirect()->route('registeradminsup')->with('success', 'Succès! :-) /Password : ' . $password);
     }
@@ -66,8 +66,6 @@ class AdministratorController extends Controller
             'userRole' => $administratorProfile->roles->pluck('name')->toArray(),
             'roles' => Role::latest()->get()
         ]);
-
-       
     }
 
     public function update(UpdateAdministratorRequest $request, $id)
@@ -81,7 +79,7 @@ class AdministratorController extends Controller
             'telephone' => $request->telephone,
         ]);
 
-        $user=Debtor::whereId($id)->first();
+        $user = Debtor::whereId($id)->first();
 
         $user->syncRoles($request->role);
 

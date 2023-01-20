@@ -21,7 +21,7 @@ class AdminSeeder extends Seeder
             'email' => 'admin@foner.com',
             'telephone' => '+226 00-00-00-00',
             'password' => Hash::make('security'),
-            'role' => 'SuperAdmin',
+            // 'role' => 'SuperAdmin',
         ]);
     }
 }

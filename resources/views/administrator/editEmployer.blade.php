@@ -37,44 +37,36 @@
                 </div>
                 <div class="form-group">
                     <label for="Telephone">Numéro de téléphone </label>
-                    <input type="telephone" class="form-control" placeholder="226 " id="Telephone" name="telephone" value="{{ $employerProfile->telephone }}" required />
+                    <input type="telephone" class="form-control" id="Telephone" name="telephone" value="{{ $employerProfile->telephone }}" required />
                 </div>
                 <div class="form-group">
                     <label for="Servicelocation">Situation géographique : </label>
-                    <input type="text" id="Servicelocation" class="form-control" name="servicelocation" />
+                    <input type="text" id="Servicelocation" class="form-control" name="servicelocation" value="{{ $employerProfile->servicelocation }}" />
                 </div>
                 <div class="form-group">
                     <label for="Firstname">Prénom DRH : </label>
-                    <input type="text" id="Firstname" class="form-control" name="firstname" /()>
+                    <input type="text" id="Firstname" class="form-control" name="firstname" value="{{ $employerProfile->firstname }}" />
                 </div>
                 <div class="form-group">
                     <label for="Lastname">Nom DRH : </label>
-                    <input type="text" id="Lastname" class="form-control" name="lastname" />
+                    <input type="text" id="Lastname" class="form-control" name="lastname" value="{{ $employerProfile->lastname }}" />
                 </div>
                 <div class="form-group">
                     <label for="EmailDRH">Adresse E-mail DRH : </label>
-                    <input type="email" class="form-control" id="EmailDRH" name="emailDRH" />
+                    <input type="email" class="form-control" id="EmailDRH" name="emailDRH" value="{{ $employerProfile->emailDRH }}" />
                 </div>
                 <div class="form-group">
                     <label for="TelephoneDRH">Téléphone DRH : </label>
-                    <input type="telephone" class="form-control" placeholder="226 " id="TelephoneDRH" name="telephoneDRH" />
+                    <input type="telephone" class="form-control" id="TelephoneDRH" name="telephoneDRH" value="{{ $employerProfile->telephoneDRH }}" />
                 </div>
 
 
                 <div class="form-group">
-
                     <button type="submit" class="btn mb-1 btn-primary">Valider</button>
 
                     <a href="{{ route('allemployer') }}" class="btn mb-1 btn-danger">Retour</a>
-
                 </div>
-
-
-
             </form>
-
-
-
 
         </div>
         <!-- /.form-box -->

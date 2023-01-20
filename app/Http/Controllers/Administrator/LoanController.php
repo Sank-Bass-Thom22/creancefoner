@@ -46,13 +46,35 @@ class LoanController extends Controller
 
     public function store(StoreLoanRequest $request)
     {
-       
+
         $validatedData = $request->validated();
-        $rate = Rate::where(DB::raw('substr(validity, 0, 4)'), '<=', substr($request->academicyear,0,4))
+        $defaultRate = 0;
+        $rate = 0;
+
+        $allRate = Rate::select('id', 'validity')->get();
+
+        foreach ($allRate as $rates) {
+            // dd(intval(substr($rates->validity, 0, 4)));
+            if (intval(substr($rates->validity, 0, 4)) == 0) {
+                $defaultRate = $rates->id;
+            } else {
+                if (intval(substr($request->academicyear, 0, 4)) <= intval(substr($rates->validity, 0, 4))) {
+                    $rate = $rates->id;
+                }
+            }
+        }
+
+        if ($rate == 0) {
+            $rate = $defaultRate;
+        }
+
+        /* *****
+        $rate = Rate::where(DB::raw('substr(validity, 0, 4)'), '<=', substr($request->academicyear, 0, 4))
         ->orWhere('validity', '=', '')
         ->select('id')
         ->orderBy(DB::raw('substr(validity, 0, 4)'), 'DESC')
         ->first();
+        */
 
         Loan::create([
             'amount' => floatval($request->amount),
@@ -88,17 +110,38 @@ class LoanController extends Controller
     public function update(UpdateLoanRequest $request, $id)
     {
         $validatedData = $request->validated();
-       
-        $rate = Rate::where(DB::raw('substr(validity, 0, 4)'), '<=', substr($request->academicyear,0,4))
-        ->orWhere('validity', '=', '')
-        ->select('id')
-        ->orderBy(DB::raw('substr(validity, 0, 4)'), 'DESC')
-        ->first();
+        $defaultRate = 0;
+        $rate = 0;
+
+        $allRate = Rate::select('id', 'validity')->get();
+
+        foreach ($allRate as $rates) {
+            if (intval(substr($rates->validity, 0, 4)) == 0) {
+                $defaultRate = $rates->id;
+            } else {
+                if (intval(substr($request->academicyear, 0, 4)) <= intval(substr($rates->validity, 0, 4))) {
+                    $rate = $rates->id;
+                }
+            }
+        }
+
+        if ($rate == 0) {
+            $rate = $defaultRate;
+        }
+
+
+        /* -----
+        $rate = Rate::where(DB::raw('substr(validity, 0, 4)'), '<=', intval(substr($request->academicyear, 0, 4)))
+            ->orWhere('validity', '=', '')
+            ->select('id')
+            ->orderBy(DB::raw('substr(validity, 0, 4)'), 'ASC')
+            ->first();
+            */
 
         Loan::whereId($id)->update([
             'amount' => floatval($request->amount),
             'academicyear' => $request->academicyear,
-            'id_rate' => $rate->id,
+            'id_rate' => $rate,
         ]);
 
         $id_debtor = Loan::whereId($id)->value('id_debtor');
